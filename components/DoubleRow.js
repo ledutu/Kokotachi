@@ -25,8 +25,8 @@ export default class DoubleRow extends Component {
                     button="Xem thêm"
                 />
 
-                <View style={{ marginTop: 60, flexDirection: 'column' }}>
-                    <View style={{ flexDirection: 'row' }}>
+                <View style={{ marginTop: 60, flexDirection: 'row' }}>
+                    <View style={{ flexDirection: 'column' }}>
                         {
                             this.props.data.slice(0, centerData).map(item => {
                                 return (
@@ -38,8 +38,8 @@ export default class DoubleRow extends Component {
                             })
                         }
                     </View>
-                    <View style={{ flexDirection: 'row' }}>
-                        {
+                    <View style={{ flexDirection: 'column' }}>
+                        {   
                             this.props.data.slice(centerData).map(item => {
                                 return (
                                     <DoubleItemInRow

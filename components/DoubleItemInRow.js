@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingVertical: 10,
-        alignItems: 'center'
+        alignItems: 'center',
     },
     textButton: {
         color: 'white',
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
         paddingVertical: 8,
         paddingHorizontal: 10,
         borderRadius: 40,
-        width: 85,
+        width: 75,
     },
 
     datePosting:

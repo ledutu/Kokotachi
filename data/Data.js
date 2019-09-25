@@ -183,28 +183,28 @@ const EventData = [
         image: 'https://eventon.jp/uploads/2019/06/97b112487e8b1a8ddfdff107c6ea6653.jpg',
         title: "SPECIAL WORKSHOP NGÀY 7/9! TỔ CHỨC HỘI THẢO ĐẶC BIỆT PEET (BE BOP CREW)",
         datePosting: "07 Tháng 9, 2019",
-        button: 'Nhà thờ'
+        button: 'Sự kiện'
     },
     {
         id: 1,
-        image: '../kokotachi_image/noimage.jpg',
-        title: "TIỆC HALLOWEEN",
-        datePosting: "27 Tháng 10, 2019",
-        button: 'Nhà thờ'
-    },
-    {
-        id: 2,
         image: 'https://eventon.jp/uploads/2019/07/d6e80c553e86e82e3f2577f97e967580.JPG',
         title: "SỰ KIỆN \"TRÒ CHƠI THỰC TẾ・TRÒ CHƠI TRỰC TUYẾN\" ĐƯỢC TỔ CHỨC TẠI THÀNH PHỐ YOKOHAMA, TỈNH KANAGAWA",
         datePosting: "21 Tháng 7, 2019",
-        button: 'Nhà thờ'
+        button: 'Sự kiện'
+    },
+    {
+        id: 2,
+        image: 'https://kokotachi.com/images/noimage.jpg',
+        title: "TIỆC HALLOWEEN",
+        datePosting: "27 Tháng 10, 2019",
+        button: 'Sự kiện'
     },
     {
         id: 3,
         image: 'https://eventon.jp/uploads/2019/06/e3c886aeb1793f196bf31df72a764446.jpeg',
         title: "CỘNG ĐỒNG KOEN MÙA HÈ NÀY 2019",
         datePosting: "22 Tháng 8, 2019",
-        button: 'Nhà thờ'
+        button: 'Sự kiện'
     },
     
 ]

@@ -26,7 +26,7 @@ export default class ReaderItem extends Component {
                     style={styles.image}
                 />
                 <View style={styles.shareAndDatePosting}>
-                    <Text style={styles.textButton}>{button}</Text>
+                    <Text style={styles.textButton} numberOfLines={1}>{button}</Text>
                     <Text>{datePosting}</Text>
                 </View>
                 <Text style={styles.titleStyle}>{title}</Text>
