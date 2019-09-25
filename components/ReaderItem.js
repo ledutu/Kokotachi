@@ -10,14 +10,14 @@ export default class ReaderItem extends Component {
 
     render() {
 
-        const { 
+        const {
             data: {
                 image,
                 title,
                 datePosting,
                 button
             }
-         } = this.props;
+        } = this.props;
 
         return (
             <TouchableOpacity style={{ padding: 15 }} activeOpacity={0.9}>
@@ -26,9 +26,7 @@ export default class ReaderItem extends Component {
                     style={styles.image}
                 />
                 <View style={styles.shareAndDatePosting}>
-                    <TouchableOpacity style={styles.touchableOpacity}>
-                        <Text style={styles.textButton}>{button}</Text>
-                    </TouchableOpacity>
+                    <Text style={styles.textButton}>{button}</Text>
                     <Text>{datePosting}</Text>
                 </View>
                 <Text style={styles.titleStyle}>{title}</Text>
@@ -49,15 +47,13 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         alignItems: 'center'
     },
-    touchableOpacity:{
+    textButton: {
+        color: 'white',
+        fontSize: 15,
         backgroundColor: "#ff2a30",
         paddingVertical: 8,
         paddingHorizontal: 10,
         borderRadius: 40,
-    },
-    textButton: {
-        color: 'white',
-        fontSize: 15
     },
 
     datePosting:

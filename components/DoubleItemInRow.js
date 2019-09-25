@@ -26,10 +26,8 @@ export default class DoubleItemInRow extends Component {
                     style={styles.image}
                 />
                 <View style={styles.shareAndDatePosting}>
-                    <TouchableOpacity style={styles.touchableOpacity}>
-                        <Text style={styles.textButton}>{button}</Text>
-                    </TouchableOpacity>
-                    <Text>{datePosting}</Text>
+                    <Text style={styles.textButton} numberOfLines={1}>{button}</Text>
+                    <Text style={styles.datePosting}>{datePosting}</Text>
                 </View>
                 <Text style={styles.titleStyle}>{title}</Text>
             </TouchableOpacity>
@@ -41,12 +39,12 @@ const styles = StyleSheet.create({
     container: {
         padding: 15,
         width: 200,
-        height: 400,
+        height: 375,
     },
 
     image: {
         height: 200,
-        width:'100%',
+        width: '100%',
         borderRadius: 10
     },
     shareAndDatePosting:
@@ -56,21 +54,24 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         alignItems: 'center'
     },
-    touchableOpacity: {
+    textButton: {
+        color: 'white',
+        fontSize: 15,
+        overflow: 'hidden',
         backgroundColor: "#ff2a30",
         paddingVertical: 8,
         paddingHorizontal: 10,
         borderRadius: 40,
-    },
-    textButton: {
-        color: 'white',
-        fontSize: 15
+        width: 85,
     },
 
     datePosting:
     {
-        fontSize: 15,
+        fontSize: 14,
         color: 'rgba(51, 51, 51, 0.3)',
+        width: 80,
+        textAlign: 'right'
+
     },
     titleStyle:
     {

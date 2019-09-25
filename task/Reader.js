@@ -17,7 +17,7 @@ export default class Reader extends Component {
         return (
             <View style={styles.container}>
                 <SectionItem
-                    icon={require('../kokotachi_image/title-icon-01.png')}
+                    icon={{uri: 'https://kokotachi.com/images/assets/title-icon-01.png'}}
                     title="Nhiều người đọc"
                     button="Xem thêm"
                 />

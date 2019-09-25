@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import SectionItem from '../components/SectionItem';
+import SectionItem from './SectionItem';
 import { JobData } from '../data/Data';
-import DoubleItemInRow from '../components/DoubleItemInRow';
+import DoubleItemInRow from './DoubleItemInRow';
 
-const centerData = Math.floor(JobData.length / 2);
 
-export default class Job extends Component {
+
+export default class DoubleRow extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -16,18 +16,19 @@ export default class Job extends Component {
     }
 
     render() {
+        const centerData = Math.floor(this.props.data.length / 2);
         return (
             <View style={styles.container}>
                 <SectionItem
-                    icon={require('../kokotachi_image/title-icon-job.png')}
-                    title="Công việc"
+                    icon={this.props.icon}
+                    title={this.props.title}
                     button="Xem thêm"
                 />
 
-                <View style={{ marginTop: 60, flexDirection: 'row' }}>
-                    <View style={{ flexDirection: 'column' }}>
+                <View style={{ marginTop: 60, flexDirection: 'column' }}>
+                    <View style={{ flexDirection: 'row' }}>
                         {
-                            JobData.slice(0, centerData).map(item => {
+                            this.props.data.slice(0, centerData).map(item => {
                                 return (
                                     <DoubleItemInRow
                                         key={item.id}
@@ -37,9 +38,9 @@ export default class Job extends Component {
                             })
                         }
                     </View>
-                    <View style={{ flexDirection: 'column' }}>
+                    <View style={{ flexDirection: 'row' }}>
                         {
-                            JobData.slice(centerData).map(item => {
+                            this.props.data.slice(centerData).map(item => {
                                 return (
                                     <DoubleItemInRow
                                         key={item.id}
