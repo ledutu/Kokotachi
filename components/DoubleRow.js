@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import SectionItem from './SectionItem';
-import { JobData } from '../data/Data';
 import DoubleItemInRow from './DoubleItemInRow';
-
-
 
 export default class DoubleRow extends Component {
     constructor(props) {
@@ -33,6 +30,8 @@ export default class DoubleRow extends Component {
                                     <DoubleItemInRow
                                         key={item.id}
                                         data={item}
+                                        screen={this.props.screen}
+                                        info={item}
                                     />
                                 )
                             })
@@ -45,6 +44,8 @@ export default class DoubleRow extends Component {
                                     <DoubleItemInRow
                                         key={item.id}
                                         data={item}
+                                        screen={this.props.screen}
+                                        info={item}
                                     />
                                 )
                             })

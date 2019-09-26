@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { withNavigation } from 'react-navigation';
 
-export default class DoubleItemInRow extends Component {
+class DoubleItemInRow extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -16,11 +17,15 @@ export default class DoubleItemInRow extends Component {
                 title,
                 datePosting,
                 button
-            }
+            },
         } = this.props;
 
         return (
-            <TouchableOpacity style={styles.container} activeOpacity={0.9}>
+            <TouchableOpacity
+                style={styles.container}
+                activeOpacity={0.9}
+                onPress={() => this.props.navigation.navigate(this.props.screen, {data: this.props.info})}
+            >
                 <Image
                     source={{ uri: image }}
                     style={styles.image}
@@ -83,3 +88,5 @@ const styles = StyleSheet.create({
 
 
 })
+
+export default withNavigation(DoubleItemInRow);
