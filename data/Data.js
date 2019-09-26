@@ -28,28 +28,65 @@ const JobData = [
         image: 'https://admin.kokotachi.com/storage/articles/2019/08/5d47e04f74311_tachiaikawa.jpg',
         title: "Tuyển nhân viên khu vực Shinagawa, Tokyo",
         datePosting: "29 Tháng 5, 2019",
-        button: 'Tuyển dụng'
+        button: 'Tuyển dụng',
+        //content
+        position: 'Nhân viên',
+        jobInfo: 'Phụ bếp tại ga Tachiaikawa',
+        condition: 'Giao tiếp tương đương N3.\nCó thẻ ngân hàng Yucho và giấy chứng nhận địa chỉ.\nCó thể được làm full 25 tiếng/tuần.',
+        jobStyle: 'Bán thời gian',
+        jobTime: '10:00 AM - 3:00 PM\n5:00 PM - 8:00 PM',
+        salaryPerHour: 1100,
+        workAt: 'Tokyo - Shinagawa Ward',
+        near: 'ga Tachiaikawa',
+        contact: 'Vui lòng tạo tài khoản tại đây để kokotachi hỗ trợ bạn tốt hơn'
     },
     {
         id: 1,
         image: 'https://admin.kokotachi.com/storage/articles/2019/08/5d42892fea70e_2-1519411445161838536977.jpg',
         title: "Tuyển nhân viên bảo trì, sửa chữa xe hơi cho công ty Mercedes-benz",
         datePosting: "29 Tháng 5, 2019",
-        button: 'Tuyển dụng'
+        button: 'Tuyển dụng',
+        //content
+        position: 'Nhân viên',
+        jobInfo: 'Phụ bếp tại ga Tachiaikawa',
+        condition: 'Giao tiếp tương đương N3.\nCó thẻ ngân hàng Yucho và giấy chứng nhận địa chỉ.\nCó thể được làm full 25 tiếng/tuần.',
+        jobStyle: 'Bán thời gian',
+        jobTime: '10:00 AM - 3:00 PM\n5:00 PM - 8:00 PM',
+        salaryPerHour: 1100,
+        near: 'ga Tachiaikawa',
+        contact: 'Vui lòng tạo tài khoản tại đây để kokotachi hỗ trợ bạn tốt hơn'
     },
     {
         id: 2,
         image: 'https://admin.kokotachi.com/storage/articles/2019/08/5d43dffc24224_caption.jpg',
         title: "Tuyển nhân viên bán hàng tại Chiba",
         datePosting: "29 Tháng 5, 2019",
-        button: 'Tuyển dụng'
+        button: 'Tuyển dụng',
+        //content
+        position: 'Nhân viên',
+        jobInfo: 'Phụ bếp tại ga Tachiaikawa',
+        condition: 'Giao tiếp tương đương N3.\nCó thẻ ngân hàng Yucho và giấy chứng nhận địa chỉ.\nCó thể được làm full 25 tiếng/tuần.',
+        jobStyle: 'Bán thời gian',
+        jobTime: '10:00 AM - 3:00 PM\n5:00 PM - 8:00 PM',
+        salaryPerHour: 1100,
+        near: 'ga Tachiaikawa',
+        contact: 'Vui lòng tạo tài khoản tại đây để kokotachi hỗ trợ bạn tốt hơn'
     },
     {
         id: 3,
         image: 'https://admin.kokotachi.com/storage/articles/2019/05/5cef6390b44bf_thiet-ke-nha-hang-truyen-thong-han-quoc-8.jpg',
         title: "[Việc làm thêm ở Tokyo] làm việc tại nhà hàng Hàn Quốc",
         datePosting: "29 Tháng 5, 2019",
-        button: 'Tuyển dụng'
+        button: 'Tuyển dụng',
+        //content
+        position: 'Nhân viên',
+        jobInfo: 'Phụ bếp tại ga Tachiaikawa',
+        condition: 'Giao tiếp tương đương N3.\nCó thẻ ngân hàng Yucho và giấy chứng nhận địa chỉ.\nCó thể được làm full 25 tiếng/tuần.',
+        jobStyle: 'Bán thời gian',
+        jobTime: '10:00 AM - 3:00 PM\n5:00 PM - 8:00 PM',
+        salaryPerHour: 1100,
+        near: 'ga Tachiaikawa',
+        contact: 'Vui lòng tạo tài khoản tại đây để kokotachi hỗ trợ bạn tốt hơn'
     },
 ];
 
@@ -206,7 +243,7 @@ const EventData = [
         datePosting: "22 Tháng 8, 2019",
         button: 'Sự kiện'
     },
-    
+
 ]
 
 export {
