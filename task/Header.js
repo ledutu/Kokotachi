@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+
 export default class Header extends Component {
   constructor(props) {
     super(props);
@@ -9,10 +10,14 @@ export default class Header extends Component {
     };
   }
 
+  dropDownSection = () => {
+
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={this.dropDownSection}>
           <Image
             source={require('../kokotachi_image/menu.png')}
             style={styles.menuIcon}

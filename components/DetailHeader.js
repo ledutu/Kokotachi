@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-export default class DetailNews extends Component {
+export default class DetailHeader extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -13,7 +13,7 @@ export default class DetailNews extends Component {
             button, title, timePosting
         } = this.props
         return (
-            <View style={{padding: 15}}>
+            <View>
                 <View style={styles.buttonStyle}>
                     <TouchableOpacity style={styles.homeButton}>
                         <Text style={{fontSize: 18, color: 'rgba(51, 51, 51, 0.3)'}}>Trang chủ</Text>

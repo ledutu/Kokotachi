@@ -30,8 +30,8 @@ export default class HomeScreen extends Component {
                     {/* <ImageSlider />
                     <Reader /> */}
                     <DoubleRow
-                        icon={{ uri: 'https://kokotachi.com/images/assets/title-icon-apartment.png' }}
-                        title="Căn hộ"
+                        icon={{ uri: 'https://kokotachi.com/images/assets/title-icon-job.png' }}
+                        title="Công việc"
                         data={JobData}
                         screen="Job"
                     />

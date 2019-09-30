@@ -53,6 +53,7 @@ const JobData = [
         jobStyle: 'Bán thời gian',
         jobTime: '10:00 AM - 3:00 PM\n5:00 PM - 8:00 PM',
         salaryPerHour: 1100,
+        workAt: 'Tokyo - Shinagawa Ward',
         near: 'ga Tachiaikawa',
         contact: 'Vui lòng tạo tài khoản tại đây để kokotachi hỗ trợ bạn tốt hơn'
     },
@@ -69,6 +70,7 @@ const JobData = [
         jobStyle: 'Bán thời gian',
         jobTime: '10:00 AM - 3:00 PM\n5:00 PM - 8:00 PM',
         salaryPerHour: 1100,
+        workAt: 'Tokyo - Shinagawa Ward',
         near: 'ga Tachiaikawa',
         contact: 'Vui lòng tạo tài khoản tại đây để kokotachi hỗ trợ bạn tốt hơn'
     },
@@ -85,6 +87,7 @@ const JobData = [
         jobStyle: 'Bán thời gian',
         jobTime: '10:00 AM - 3:00 PM\n5:00 PM - 8:00 PM',
         salaryPerHour: 1100,
+        workAt: 'Tokyo - Shinagawa Ward',
         near: 'ga Tachiaikawa',
         contact: 'Vui lòng tạo tài khoản tại đây để kokotachi hỗ trợ bạn tốt hơn'
     },
