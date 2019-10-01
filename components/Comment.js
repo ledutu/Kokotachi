@@ -36,6 +36,7 @@ const Comment = props => {
 const styles = StyleSheet.create({
     container:{
         justifyContent: 'space-around',
+        marginBottom: 48,
     },
 
     avtAndCmt: {

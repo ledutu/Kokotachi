@@ -47,15 +47,18 @@ const JobData = [
         datePosting: "29 Tháng 5, 2019",
         button: 'Tuyển dụng',
         //content
-        position: 'Nhân viên',
-        jobInfo: 'Phụ bếp tại ga Tachiaikawa',
-        condition: 'Giao tiếp tương đương N3.\nCó thẻ ngân hàng Yucho và giấy chứng nhận địa chỉ.\nCó thể được làm full 25 tiếng/tuần.',
-        jobStyle: 'Bán thời gian',
-        jobTime: '10:00 AM - 3:00 PM\n5:00 PM - 8:00 PM',
-        salaryPerHour: 1100,
-        workAt: 'Tokyo - Shinagawa Ward',
-        near: 'ga Tachiaikawa',
-        contact: 'Vui lòng tạo tài khoản tại đây để kokotachi hỗ trợ bạn tốt hơn'
+        position: 'Nhân viên bảo trì',
+        jobInfo: 'Sửa chữa, lắp đặt phụ tùng xe oto.\nBảo dưỡng và kiểm tra xe.',
+        condition: 'Chỉ tuyển nhân viên có chứng chỉ Seibishi ở Nhật.',
+        jobStyle: 'Toàn thời gian',
+        jobTime: '9:30 AM - 6:00 PM',
+        salaryPerHour: 316.800,
+        workAt: 'Tottori Prefecture - Chi nhánh Yonago\nHyogo Prefecture - Chi nhánh Nishinomiya\nOsaka Prefecture - Cửa hàng Osaka',
+        contact: 'Vui lòng tạo tài khoản tại đây để kokotachi hỗ trợ bạn tốt hơn',
+        note: 'Lương: \nTùy theo năng lực, trình độ, theo chứng chỉ cơ khí\nChứng chỉ cơ khí bậc 3: 1,600 Yên/1 giờ\nChứng chỉ cơ khí bậc 2: 1,800/1 giờ\n\n'
+        + 'Tăng ca thoải mái Việc cực nhiều ( tăng ca lương up 25%)\n\nThưởng: 1 năm 1 lần 200.000'
+        + '\nLương cơ bản: \n1,800 yên x 8 giờ = 14,400 yên\n\n14,400 yên x 22 ngày = 316,800 yên\n'
+        + 'ĐẶC BIỆT CÁC ỨNG VIÊN Ở TỈNH TOTTORI SẼ CÓ HỖ TRỢ TIỀN KÝ TÚC XÁ'
     },
     {
         id: 2,
@@ -64,14 +67,13 @@ const JobData = [
         datePosting: "29 Tháng 5, 2019",
         button: 'Tuyển dụng',
         //content
-        position: 'Nhân viên',
-        jobInfo: 'Phụ bếp tại ga Tachiaikawa',
-        condition: 'Giao tiếp tương đương N3.\nCó thẻ ngân hàng Yucho và giấy chứng nhận địa chỉ.\nCó thể được làm full 25 tiếng/tuần.',
+        position: 'Nhân viên bán hàng',
+        jobInfo: 'Bán túi xách hàng hiệu',
+        condition: 'Trình độ giao tiếp N2 trở lên (Không yêu cầu bằng cấp)\nVisa du học (Công ty sẽ hỗ trợ thủ tục xin visa)',
         jobStyle: 'Bán thời gian',
-        jobTime: '10:00 AM - 3:00 PM\n5:00 PM - 8:00 PM',
-        salaryPerHour: 1100,
-        workAt: 'Tokyo - Shinagawa Ward',
-        near: 'ga Tachiaikawa',
+        jobTime: '8:00 AM - 8:00 PM',
+        salaryPerHour: 1400,
+        workAt: 'Chiba Prefecture - Chiba City - Shisui Premium Outlet',
         contact: 'Vui lòng tạo tài khoản tại đây để kokotachi hỗ trợ bạn tốt hơn'
     },
     {
@@ -81,15 +83,16 @@ const JobData = [
         datePosting: "29 Tháng 5, 2019",
         button: 'Tuyển dụng',
         //content
-        position: 'Nhân viên',
-        jobInfo: 'Phụ bếp tại ga Tachiaikawa',
-        condition: 'Giao tiếp tương đương N3.\nCó thẻ ngân hàng Yucho và giấy chứng nhận địa chỉ.\nCó thể được làm full 25 tiếng/tuần.',
+        position: 'Làm việc tại nhà hàng Hàn Quốc',
+        jobInfo: 'Nhân viên làm bếp tại nhà hàng Hàn Quốc',
+        condition: 'Tiếng Nhật N4, N3.',
         jobStyle: 'Bán thời gian',
-        jobTime: '10:00 AM - 3:00 PM\n5:00 PM - 8:00 PM',
-        salaryPerHour: 1100,
-        workAt: 'Tokyo - Shinagawa Ward',
-        near: 'ga Tachiaikawa',
-        contact: 'Vui lòng tạo tài khoản tại đây để kokotachi hỗ trợ bạn tốt hơn'
+        jobTime: '5:00 PM - 12:00 PM',
+        salaryPerHour: '1,050¥ ~ 1,100',
+        workAt: 'Tokyo - Chuo Ward',
+        near: 'Gần ga Mikata (三鷹) tuyến Chuo - Sobu line (総武緩行線) khoảng 1 phút đi bộ.',
+        contact: 'Vui lòng tạo tài khoản tại đây để kokotachi hỗ trợ bạn tốt hơn',
+        note: 'Có thể thương lượng lại giờ làm việc\nLàm được 3 buổi trở lên\nLương trainning 1050 Yên/ giờ, trainning 1-2 tháng\nGiờ nghỉ vẫn được tính lương.\nHỗ trợ 100% tiền tàu.\nCó cơm nhân viên. '
     },
 ];
 
@@ -99,28 +102,62 @@ const ApartmentData = [
         image: 'https://admin.kokotachi.com/storage/articles/2019/08/5d42886dc8de2_376--0eee33ee3b1ca17b5d3012d773872790.jpg',
         title: "Cho thuê nhà tỉnh Saitama, vùng Kanto",
         datePosting: "30 Tháng 8, 2019",
-        button: 'Thông tin'
+        button: 'Thông tin',
+
+        //Content
+        apartInfo: "",
+        area: 'Saitama Prefecture - Kawaguchi City',
+        acreage: '50 m2',
+        near: 'Đi bộ 7 phút từ ga Kawaguchi',
+        note: '- Nhà kiểu 3DK\n- Nhà rộng nên sức chứa có thể chứa được nhiều người.',
+        contact: 'Vui lòng tạo tài khoản tại đây để kokotachi hỗ trợ bạn tốt hơn'
     },
     {
         id: 1,
         image: 'https://admin.kokotachi.com/storage/articles/2019/08/5d428898175bc_station_ph_12_nakano.jpg',
         title: "Cho thuê nhà khu vực Nakano, Tokyo",
         datePosting: "30 Tháng 8, 2019",
-        button: 'Thông tin'
+        button: 'Thông tin',
+
+        //Content
+        apartInfo: "",
+        area: 'Saitama Prefecture - Kawaguchi City',
+        acreage: '50 m2',
+        near: 'Đi bộ 7 phút từ ga Kawaguchi',
+        note: '- Nhà kiểu 3DK\n- Nhà rộng nên sức chứa có thể chứa được nhiều người.',
+        contact: 'Vui lòng tạo tài khoản tại đây để kokotachi hỗ trợ bạn tốt hơn'
+
+        
     },
     {
         id: 2,
         image: 'https://admin.kokotachi.com/storage/articles/2019/08/5d4298af440aa_fussa8.jpg',
         title: "Cho thuê nhà khu vực Fussa, Tokyo",
         datePosting: "30 Tháng 8, 2019",
-        button: 'Thông tin'
+        button: 'Thông tin',
+
+        //Content
+        apartInfo: "",
+        area: 'Saitama Prefecture - Kawaguchi City',
+        acreage: '50 m2',
+        near: 'Đi bộ 7 phút từ ga Kawaguchi',
+        note: '- Nhà kiểu 3DK\n- Nhà rộng nên sức chứa có thể chứa được nhiều người.',
+        contact: 'Vui lòng tạo tài khoản tại đây để kokotachi hỗ trợ bạn tốt hơn'
     },
     {
         id: 3,
         image: 'https://admin.kokotachi.com/storage/articles/2019/08/5d42a609e92b9_2010_0036_SugamoSt_01.jpg',
         title: "Cho thuê nhà khu vực ga Sugamo, Tokyo",
         datePosting: "30 Tháng 8, 2019",
-        button: 'Thông tin'
+        button: 'Thông tin',
+
+        //Content
+        apartInfo: "",
+        area: 'Saitama Prefecture - Kawaguchi City',
+        acreage: '50 m2',
+        near: 'Đi bộ 7 phút từ ga Kawaguchi',
+        note: '- Nhà kiểu 3DK\n- Nhà rộng nên sức chứa có thể chứa được nhiều người.',
+        contact: 'Vui lòng tạo tài khoản tại đây để kokotachi hỗ trợ bạn tốt hơn'
     }
 ];
 

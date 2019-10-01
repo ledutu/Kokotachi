@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import Header from '../task/Header';
 import DetailHeader from '../components/DetailHeader';
 import ShareButton from '../components/ShareButton';
@@ -9,26 +9,30 @@ import RefPosting from '../components/RefPosting';
 import Footer from '../task/Footer';
 import DetailSectionText from '../components/DetailSectionText';
 
-
-export default class JobScreen extends Component {
+export default class ApartmentScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
+        
         };
     }
+
+    goToTop = () => {
+        this.scroll.scrollTo({x: 0, y: 0, animated: true})
+    }
+        
 
     static navigationOptions = {
         header: null,
     };
 
     render() {
-        //get data from DoubleItemInRow and DouleInRow
         const data = this.props.navigation.getParam('data');
         return (
             <View style={{ flex: 1 }}>
                 <Header />
                 <View style={{ flex: 1, }}>
-                    <ScrollView showsVerticalScrollIndicator={false}>
+                    <ScrollView showsVerticalScrollIndicator={false} ref={(c) => {this.scroll = c}}>
                         <View style={{ marginHorizontal: 15 }}>
                             <DetailHeader
                                 button={data.button}
@@ -37,53 +41,31 @@ export default class JobScreen extends Component {
                             />
                             <View style={styles.infoContainer}>
                                 <DetailSectionText
-                                    sectionText="Chức vụ:"
-                                    data={data.position}
+                                    sectionText="Thông tin căn hộ: "
+                                    data={data.apartInfo}
                                 />
                                 <DetailSectionText
-                                    sectionText="Nội dung công việc:"
-                                    data={data.jobInfo}
+                                    sectionText="Khu vực: "
+                                    data={data.area}
                                 />
-
                                 <DetailSectionText
-                                    sectionText="Điều kiện ứng tuyển:"
-                                    data={data.condition}
+                                    sectionText="Diện tích: "
+                                    data={data.acreage}
                                 />
-
                                 <DetailSectionText
-                                    sectionText="Loại công việc:"
-                                    data={data.jobStyle}
-                                />
-
-                                <DetailSectionText
-                                    sectionText="Thời gian làm việc:"
-                                    data={data.jobTime}
-                                />
-
-                                <DetailSectionText
-                                    sectionText="Lương theo giờ:"
-                                    data={data.salaryPerHour}
-                                />
-
-                                <DetailSectionText
-                                    sectionText="Địa điểm làm việc:"
-                                    data={data.workAt}
-                                />
-
-                                <DetailSectionText
-                                    sectionText="Nhà ga gần nhất:"
+                                    sectionText="Ga gần nhất: "
                                     data={data.near}
                                 />
-
                                 <DetailSectionText
-                                    sectionText="Liên hệ:"
-                                    data={data.contact}
-                                />
-
-                                <DetailSectionText
-                                    sectionText="Ghi chú:"
+                                    sectionText="Chú ý: "
                                     data={data.note}
                                 />
+                                <DetailSectionText
+                                    sectionText="Liên hệ: "
+                                    data={data.contact}
+                                />
+                                
+                                
                             </View>
 
                             <ShareButton />
@@ -100,7 +82,7 @@ export default class JobScreen extends Component {
                                 image="https://kokotachi.com/images/avatar-no-image.jpg"
                                 commentNumber={0}
                             />
-                            <RefPosting/>
+                            <RefPosting goToTop={this.goToTop}/>
                         </View>
                         <Footer />
                     </ScrollView>
@@ -118,3 +100,4 @@ const styles = StyleSheet.create({
 
     },
 })
+

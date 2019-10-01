@@ -22,7 +22,7 @@ export default class DoubleRow extends Component {
                     button="Xem thêm"
                 />
 
-                <View style={{ marginTop: 60, flexDirection: 'row' }}>
+                <View style={{ marginTop: 60, flexDirection: 'row',justifyContent: 'space-around',}}>
                     <View style={{ flexDirection: 'column' }}>
                         {
                             this.props.data.slice(0, centerData).map(item => {

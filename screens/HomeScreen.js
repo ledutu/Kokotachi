@@ -29,20 +29,21 @@ export default class HomeScreen extends Component {
                 <ScrollView>
                     {/* <ImageSlider />
                     <Reader /> */}
-                    <DoubleRow
+                    {/* <DoubleRow
                         icon={{ uri: 'https://kokotachi.com/images/assets/title-icon-job.png' }}
                         title="Công việc"
                         data={JobData}
                         screen="Job"
-                    />
+                    /> */}
 
-                    {/* <DoubleRow
+                    <DoubleRow
                         icon={{ uri: 'https://kokotachi.com/images/assets/title-icon-apartment.png' }}
                         title="Căn hộ"
                         data={ApartmentData}
+                        screen="Apartment"
                     />
 
-                    <DoubleRow
+                    {/* <DoubleRow
                         icon={{ uri: 'https://kokotachi.com/images/assets/title-icon-lifestyle.png' }}
                         title="Xã hội"
                         data={SocialData}

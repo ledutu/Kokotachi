@@ -9,6 +9,11 @@ class DoubleItemInRow extends Component {
         };
     }
 
+    goToAnotherScreen = () => {
+        this.props.onToTop;
+        this.props.navigation.navigate(this.props.screen, {data: this.props.info});
+    }
+
     render() {
 
         const {
@@ -24,7 +29,7 @@ class DoubleItemInRow extends Component {
             <TouchableOpacity
                 style={styles.container}
                 activeOpacity={0.9}
-                onPress={() => this.props.navigation.navigate(this.props.screen, {data: this.props.info})}
+                onPress={this.goToAnotherScreen}
             >
                 <Image
                     source={{ uri: image }}
@@ -44,18 +49,19 @@ const styles = StyleSheet.create({
     container: {
         padding: 15,
         width: 200,
-        height: 375,
+        height: 340,
+        alignItems: 'center'
     },
 
     image: {
-        height: 200,
+        height: 180,
         width: '100%',
         borderRadius: 10
     },
     shareAndDatePosting:
     {
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'space-around',
         paddingVertical: 10,
         alignItems: 'center',
     },
@@ -66,7 +72,8 @@ const styles = StyleSheet.create({
         backgroundColor: "#ff2a30",
         paddingVertical: 8,
         paddingHorizontal: 10,
-        borderRadius: 40,
+        marginRight: 20,
+        borderRadius: 16,
         width: 75,
     },
 
