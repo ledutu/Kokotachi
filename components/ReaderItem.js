@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { withNavigation } from 'react-navigation';
 
-export default class ReaderItem extends Component {
+class ReaderItem extends Component {
     constructor(props) {
         super(props);
         this.state = {
         };
+    }
+
+    goToAnotherScreen = () => {
+        this.props.navigation.navigate(this.props.screen, { data: this.props.info });
     }
 
     render() {
@@ -20,7 +25,10 @@ export default class ReaderItem extends Component {
         } = this.props;
 
         return (
-            <TouchableOpacity style={{ padding: 15 }} activeOpacity={0.9}>
+            <TouchableOpacity
+                style={{ padding: 15 }}
+                activeOpacity={0.9}
+                onPress={this.goToAnotherScreen}>
                 <Image
                     source={{ uri: image }}
                     style={styles.image}
@@ -71,3 +79,5 @@ const styles = StyleSheet.create({
 
 
 })
+
+export default withNavigation(ReaderItem);

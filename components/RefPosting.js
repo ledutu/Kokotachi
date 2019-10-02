@@ -21,15 +21,13 @@ export default class RefPosting extends Component {
                         title="Căn hộ"
                         data={ApartmentData}
                         screen="Apartment"
-                        goToTop={this.props.goToTop}
                     />
 
                     <RefItem
                         icon={{ uri: 'https://kokotachi.com/images/assets/title-icon-apartment.png' }}
                         title="Mỹ phẩm"
                         data={CosmeticData}
-                        screen="Apartment"
-                        goToTop={this.props.goToTop}
+                        screen="Cosmetic"
                     />
                 </View>
             </View>

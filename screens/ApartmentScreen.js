@@ -16,12 +16,7 @@ export default class ApartmentScreen extends Component {
         
         };
     }
-
-    goToTop = () => {
-        this.scroll.scrollTo({x: 0, y: 0, animated: true})
-    }
-        
-
+    
     static navigationOptions = {
         header: null,
     };
@@ -82,7 +77,7 @@ export default class ApartmentScreen extends Component {
                                 image="https://kokotachi.com/images/avatar-no-image.jpg"
                                 commentNumber={0}
                             />
-                            <RefPosting goToTop={this.goToTop}/>
+                            <RefPosting/>
                         </View>
                         <Footer />
                     </ScrollView>

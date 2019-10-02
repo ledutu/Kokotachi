@@ -10,7 +10,6 @@ class DoubleItemInRow extends Component {
     }
 
     goToAnotherScreen = () => {
-        this.props.onToTop;
         this.props.navigation.navigate(this.props.screen, {data: this.props.info});
     }
 

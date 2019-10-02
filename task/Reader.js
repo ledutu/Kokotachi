@@ -13,6 +13,27 @@ export default class Reader extends Component {
 
     }
 
+    compare = button => {
+        var screen = ""
+        if(button === "Tuyển dụng")
+        {
+            screen = "Job"
+        }
+        else if(button === "Thông tin")
+        {
+            screen = "Apartment"
+        }
+        else if(button === "Xã hội")
+        {
+            screen = "Cosmetic"
+        }
+        else if(button === "Chia sẽ")
+        {
+            screen = "Cosmetic"
+        }
+        return screen;
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -27,8 +48,9 @@ export default class Reader extends Component {
                             return (
                                 <ReaderItem
                                     key={item.id}
-                                    
                                     data={item}
+                                    info = {item}
+                                    screen = {this.compare(item.button)}
                                 />
                             )
                         })

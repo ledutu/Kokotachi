@@ -9,6 +9,8 @@ export default class RefItem extends Component {
         };
     }
 
+
+    //props RefPosting
     render() {
         const centerData = Math.floor(this.props.data.length / 2);
         return (
@@ -22,7 +24,6 @@ export default class RefItem extends Component {
                                     data={item}
                                     screen={this.props.screen}
                                     info={item}
-                                    goToTop={this.props.goToTop}
                                 />
                             )
                         })
@@ -37,7 +38,6 @@ export default class RefItem extends Component {
                                     data={item}
                                     screen={this.props.screen}
                                     info={item}
-                                    goToTop={this.props.goToTop}
                                 />
                             )
                         })
