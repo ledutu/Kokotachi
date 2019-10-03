@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import { withNavigation } from 'react-navigation';
 import ChurchBox from './ChurchBox';
 
-class DoubleItemInRow extends Component {
+class ChurchItem extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -11,16 +10,16 @@ class DoubleItemInRow extends Component {
         };
     }
 
-    goToAnotherScreen = () => {
-        this.props.navigation.navigate(this.props.screen, { data: this.props.info });
+    triggerModal = () => {
+        this.setState({
+            display: true
+        })
     }
 
-    triggerModal() {
-        this.setState(prevState => {
-            return {
-                display: true
-            }
-        });
+    close = () => {
+        this.setState({
+            display: false
+        })
     }
 
     render() {
@@ -30,7 +29,10 @@ class DoubleItemInRow extends Component {
                 image,
                 title,
                 datePosting,
-                button
+                button,
+                address, english, vietnam,
+                japan, normal, sunday,
+                volunteerActivity, detail, source
             },
         } = this.props;
 
@@ -39,7 +41,7 @@ class DoubleItemInRow extends Component {
                 <TouchableOpacity
                     style={styles.container}
                     activeOpacity={0.9}
-                    onPress={title === "Nhà thờ" ? this.triggerModal : this.goToAnotherScreen}
+                    onPress={this.triggerModal}
                 >
                     <Image
                         source={{ uri: image }}
@@ -54,6 +56,17 @@ class DoubleItemInRow extends Component {
 
                 <ChurchBox
                     display={this.state.display}
+                    close={this.close}
+                    address={address}
+                    english={english}
+                    vietnam={vietnam}
+                    japan={japan}
+                    normal={normal}
+                    sunday={sunday}
+                    volunteerActivity={volunteerActivity}
+                    detail={detail}
+                    source={source}
+                    title={title}
                 />
             </View>
         );
@@ -111,4 +124,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default withNavigation(DoubleItemInRow);
+export default ChurchItem;

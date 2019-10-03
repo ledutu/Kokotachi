@@ -8,8 +8,9 @@ import Footer from '../task/Footer';
 import FabButton from '../components/FabButton';
 import DoubleRow from '../components/DoubleRow';
 import LogoImages from '../utils/LogoImages';
+import ChurchInRow from '../components/ChurchInRow';
 
-const title = ["Công việc", "Căn hộ", "Xã hội", "Mỹ phẩm", "Nhà thờ", "Sự kiện"];
+
 
 export default class HomeScreen extends Component {
     constructor(props) {
@@ -28,7 +29,7 @@ export default class HomeScreen extends Component {
             <View style={{ flex: 1 }}>
                 <Header />
                 <ScrollView>
-                    <ImageSlider />
+                    {/* <ImageSlider />
                     <Reader />
                     <DoubleRow
                         icon={{ uri: LogoImages[0] }}
@@ -56,9 +57,9 @@ export default class HomeScreen extends Component {
                         title="Mỹ phẩm"
                         data={CosmeticData}
                         screen="Cosmetic"
-                    />
+                    /> */}
 
-                    <DoubleRow
+                    <ChurchInRow
                         icon={{ uri: LogoImages[4] }}
                         title="Nhà thờ"
                         data={ChurchData}
@@ -67,7 +68,8 @@ export default class HomeScreen extends Component {
                     <DoubleRow
                         icon={{ uri: LogoImages[5] }}
                         title="Sự kiện"
-                        data={EventData}
+                        data={SocialData}
+                        screen="Cosmetic"
                     />
 
                     <Footer />

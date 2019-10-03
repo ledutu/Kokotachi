@@ -477,28 +477,100 @@ const ChurchData = [
         image: 'https://admin.kokotachi.com/storage/article_church/5ca63de6da394_adachi1-thumbnail400x.jpg',
         title: "Nhà thờ Adachi Catholic",
         datePosting: "04 tháng 4, 2019",
-        button: 'Nhà thờ'
+        button: 'Nhà thờ',
+
+        //content
+        address: '3-40-27 Kohoku, Adachi-ku, Tokyo 123-0872',
+        english: 'Không',
+        vietnam: 'Không',
+        japan: '9:00',
+        normal: '6:45 thứ 2 đến thứ 7 hàng tuần. 19:00 thứ 6 tuần đầu tiên trong tháng .',
+        sunday: 'Có 2 lớp: Trường tiểu học bậc thấp, trường tiểu học bậc cao và trường trung học cơ sở. Cả 2 lớp đều vào Chủ nhật, sau Thánh lễ 9h00 khoảng 1 tiếng.',
+        volunteerActivity: 'Giúp đỡ các chị em trong “Missionaries of Charity” vào ngày thứ 7 thứ 2, thứ 3 và thứ 4 mỗi tháng với dịch vụ bữa ăn cho người già.',
+        detail: 'Năm 1957, một quý ông của thị trấn, ông Fukuji Funatsu đã đóng góp tài sản đất đai của mình là 300 tsubo với mục đích là nuôi dưỡng những người trẻ tuổi trong khu. Khu ấy đã bắt đầu như một tiểu giáo xứ của nhà thờ Mikawashima vào năm 1958. Sau đó, có nhiều tài sản được mua từ ông Funatsu. '
+        + 'Theo di chúc ban đầu của ông Funatsu, đội Hướng đạo sinh số 6 được thành lập vào năm 1964. Năm 1967, trường mẫu giáo Adachi Salesio đã được thành lập và nhà thờ trở thành giáo xứ của nhà thờ Mikawashima. Năm 1972, Nữ hướng đạo sinh Tokyo số 104 đã được thành lập.'
+        + 'Năm 1986, tiểu giáo xứ bắt đầu độc lập khỏi nhà thở Mikawashima và thành lập giáo xứ Adachi mới. Mặc dù nhà thờ đã được bắt đầu từ một nhóm rất nhỏ, khi giáo dân tăng lên giáo xứ đã phát triển dần dần bằng cách lặp lại công việc sửa chữa và mở rộng của nơi này. Vào tháng 11 năm 1997, nhà thờ hiện tại đã được xây dựng mới kể từ khi mưa dầm qua mái nhà và trở nên rất tồi tệ.'
+        + 'Giáo sĩ đầu tiên và là người đứng đầu trường mẫu giáo là Fr. Zenkichi Josef Emi. Sau đó, Fr. Demleitner Karl, Fr.Renato Stefani, Fr. Shoichiro Kosaka, Fr. Giovanni Petracco, Fr. Richard Smith, Fr. Attilio Felicani, Fr. Joseph De Witte, Cha Gentaro Yamano, Fr. Yoshihiro Omaki, Fr.Cesar Fraga và Fr. Yasuto Ishii được chỉ định đến nhà thờ và nhà trẻ này. Cha Nakamaro Abe cũng đã giúp đỡ giáo hội. '
+        + 'Nhà thờ Adachi hiện tại:'
+        + 'Nhà thờ và trường mẫu giáo nằm trong cùng một sân nhà thờ. Cả nam hướng đạo và nữ hướng đạo đều rất năng động. Có khoảng 80 người tham dự Thánh lễ Chủ nhật và sau Thánh lễ, họ tận hưởng thời gian uống cà phê trao đổi hỗ trợ lẫn nhau và cảm thấy trong gia đình như đoàn kết trong bầu không khí thân mật. Trong khu phố chị em Chúa Giesu Hài đồng và truyền giáo từ thiện sống tạo ra môi trường tối để cùng làm việc cho các hoạt động phúc lợi chung.'
+        + 'Cộng đồng nhà thờ nghĩ cách chăm sóc người bệnh, người già, cách tổ chức giáo lý. Gần đây, nhiều bà mẹ trẻ đưa các em bé đến tham dự Thánh lễ và hy vọng họ sẽ tham gia nhiều hơn để tăng thêm giáo dân.'
+        + 'Bằng việc tái tổ chức tổng giáo phận Tokyo, nhà thờ Adachi đã thược về Đơn vị hợp tác Tin lành adachi cùng với nhà thờ Mikawashima, nhà thờ Machiya, nhà thờ Umeda và nhà thờ Arakawa. Cho đến bây giờ không có thay đổi lớn nhưng dần dần các thiết bị mới sẽ được áp dụng cho tương lai của giáo hội.'
+        + '(Tháng 8 năm 2005 Thư tin tức Tổng giáo phận Tokyo)',
+        source: 'http://tokyo.catholic.jp'
     },
     {
         id: 1,
         image: 'https://admin.kokotachi.com/storage/article_church/5ca63e1d49eb1_akatsutsumi-thumbnail400x.jpg',
         title: "Nhà thờ Akatsutsumi Catholic",
         datePosting: "04 tháng 4, 2019",
-        button: 'Nhà thờ'
+        button: 'Nhà thờ',
+
+        //content
+        address: '3-20-1 Akatsutsumi, Setagaya-ku, Tokyo 156-0044',
+        english: 'Không',
+        vietnam: 'Không',
+        japan: '9:00 / 11:00',
+        normal: '10:30 thứ 6 tuần đầu tiên trong tháng',
+        sunday: 'Học kinh thánh: Thứ tư: 10h00, thứ năm: 19h00, Thứ 7: 10h00 (tiếng Nhật)',
+        volunteerActivity: 'Nam hướng đạo sinh Setagaya Troop thứ 9 Nữ hướng đạo sinh Tokyo Troop thứ 91',
+        detail: 'Lịch sử hình thành'
+        + 'Vào năm 1949, khi ngọn lửa âm ỉ của chiến tranh thế giới thứ 2 vẫn còn ở một số nơi ở Tokyo thì các hoạt động của nhà thờ đã được bắt đầu bởi ba nhà truyền giáo đã trở về từ Trung Quốc vào năm 1948. Một ngôi nhà nhỏ kiểu Nhật Bản trong khu vườn đổ nát phía trước bụi tre dọc theo con đường từ ga Tamaden Matsubara, nơi được miêu tả trong tiểu thuyết của ông Shusaku Endo, là nhà thờ đầu tiên. Trước đó, cha Boule Roland đã trải qua căn bệnh lao phổi.'
+        + 'Cha Parent Evariste có kiến thức tốt về Kanji ( chữ Hán Trung Quốc). Cha Blain Real trẻ trung với mái tóc vàng. Cả ba người cha đều cử hành thánh lễ đầu tiên tại nhà thờ Akazutsumi ngoài ra còn mở trường mẫu giáo và thành lập hướng đạo sinh. Trong thời gian đó có khoảng 50 người và 20 thành viên nam hướng đạo sinh đã tham dự thánh lễ ngày chủ nhật tại thính phòng hẹp và giản dị. Sau này, nữ hướng đạo sinh cũng được thành lập. Nhà thờ, trường mẫu giáo và nam nữ hướng đạo sinh đã hợp nhất thành một để hỗ trợ lẫn nhau vì sự phát triển của cộng đồng giáo xứ.'
+        + 'Từ năm 1960, chợ nhà thờ đã được bắt đầu mỗi năm với mục đích là xây dựng nhà thờ mới và lợi nhuận trong năm đầu tiên là 50.000 yên. Năm 1963, chợ được tổ chức với sự hợp tác của trường mẫu giáo và Hướng đạo sinh ngày 22 tháng 11 khi Tổng thống J.F.Kennedy bị ám sát vào ngày 23 tháng 11 tại Nhật Bản. Sau đó, nữ hướng đạo sinh tham gia vào chợ và sau đó ngôi chợ trở thành ngôi chợ lớn nhất trong khu vực.'
+        + 'Vào năm 1967, với ước muốn được ấp ủ từ lâu là xây dựng nhà thờ mới đã được thực hiện. Năm 1972, nhà thờ trở thành giáo xứ của giáo hội Setagaya và trở thành giáo hội Akazutsumi độc lập vào năm 1974. Mỗi ngày chủ nhật sẽ là ngày dành cho Đức Kito, vị vua mà nhà thờ này đã cống hiến. '
+        + 'Nhà nguyện cho thấy bầu không khí ánh sáng của Canada được thiết kế bởi những người truyền giáo nước ngoài Quebec, đặc biệt là Fr.Gilles Caron.',
+        website:'http://www7a.biglobe.ne.jp/~akatsutsumi_catholic/',
+        source: 'http://tokyo.catholic.jp'
     },
     {
         id: 2,
         image: 'https://admin.kokotachi.com/storage/article_church/5ca63e6ea2a9f_akabane1s-thumbnail400x.jpg',
         title: "Nhà thờ Akabane Catholic",
         datePosting: "04 tháng 4, 2019",
-        button: 'Nhà thờ'
+        button: 'Nhà thờ',
+
+        //content
+        address: '2-1-12 Akabane, Kita-ku, Tokyo 115-0045',
+        english: 'Không',
+        vietnam: 'Không',
+        japan: '7:00 / 9:00 / 17:00',
+        normal: '6:30 thứ 2 đến thứ 7 hàng tuần 6:30 & 10:00 thứ 6 tuần đầu tiên trong tháng.',
+        sunday: 'Các lớp học: 9h00 sáng- 12h00 Lớp học ngày chủ nhật dành cho học sinh trung học cơ sở Hiệu trưởng: Mục sư Fr. Minoru B.Nagao',
+        volunteerActivity: 'Giúp đỡ các chị em trong “Missionaries of Charity” vào ngày thứ 7 thứ 2, thứ 3 và thứ 4 mỗi tháng với dịch vụ bữa ăn cho người già.',
+        detail: 'Trước khi nói về lịch sử của nhà thờ Aakabane, chúng ta hãy cùng xem nhiệm vụ đầu tiên ở Tokyo. Với điều kiện Fr. Heronimo de Jesus, cha M. Kolbe đã khao khát tìm thấy một ngôi nhà tôn giáo ở Tokyo, họ đã bắt đầu sứ mệnh của Tu viện Conventual tại một tòa nhà gạch đỏ không cháy ở Akabane.'
+        + 'Sau chiến tranh thế giới thứ 2, ý tưởng về việc lập Giáo hội Akabane đã được nêu ra do sự cần thiết cấp bạch của việc xây dựng trường học ở Tokyo để hình thành các trường học mới trong các tu viện vì các nhà truyền giáo của Tu viện thông thường đã giải quyết nhiệm vụ của họ ngay từ đầu. Vì mục đích này, Fr. Donatus Goszinski, OFM.Conv và anh Zenon Zebrowski đã được đưa đến Tokyo. Họ đã tìm thấy vùng đất vốn là tàn tích của nhà máy bị đốt cháy bởi các cuộc công kích của chiến tranh. Cha Samuel Rosenbeiger, OFM.Conv. sau đó là provincial của OFM.Conv. tại Nhật Bản đã mua với sự đóng góp từ USA.'
+        + 'Vào ngày 8 tháng 11 năm 1947 (Showa 22) ngày Đức Mẹ vô nhiễm, việc đặt viên đá đã được thực hiện. Vào ngày 15 tháng 8 năm 1949, nhà thờ Công giáo Akabane đã được chính thức là một giáo xứ mới ra đời của Tổng giáo phận Tokyo. Giáo hội công giáo Akabane chính thức được thành lập với số thành viên gồm 20 giáo dân. Vào tháng 11 năm 1951, nhà nguyện mới đã được hoàn thành và nghi thức dâng lễ khánh thành Đức Mẹ Giả định đã được Đức Hồng Y Peter Tatsuo Doi tổ chức. Giáo hội đã được truyền giáo bởi giáo sĩ Truyền giáo dòng Phanxico và người sáng lập là Thánh Phanxico Assisi, người tạo dựng hòa bình vĩ đại và là người yêu thiên nhiên.'
+        + 'Khi Cha Samuel Rosenbeiger nhìn thấy Giáo hội thánh hiến mới vào năm 1951, ông đã viết những hồi ức của mình như sau: “ Giáo hội mới này dường như nói với tôi về tình yêu của nhiều nhà hảo tâm Mỹ đã hợp tác để quyên góp cho tòa nhà Giáo hội này mặc dù họ thường xuyên phải chịu đựng bệnh tật hoặc ngày càng già yếu.” trong cuốn sách tưởng niệm nhà thờ kỷ niệm 25 năm. Có một văn phòng việc làm vào thời điểm đó trong sân nhà thờ nhưng sau đó trường mẫu giáo Hiệp sĩ Đức Mẹ đã được thành lập trực thuộc Giáo hội. Nhiều đứa trẻ đã được tốt nghiệp mẫu giáo.'
+        + 'Nhà thờ từng được công nhận từ nền tảng ga Akabane nhưng bây giờ đã được nhìn thoáng qua bởi các tòa nhà cao tầng từ nhà ga.'
+        + 'Chúng tôi tự hào rằng nhà thờ đã được chọn là một trong 100 cảnh đẹp của phường Kita ở Tokyo.'
+        + 'Trong khu vườn nhà thờ, nhiều hoa nở vào mỗi mùa và đã trở thành như một ốc đào của khu vực. Vào ngày Đức mẹ đồng trinh, ngày 15 tháng 8 mọi người đã vẽ bức tượng và ngồi trên chiếc xe cùng với tiếng hát và diễu hành trên các phố mua sắm. Theo cách đó, Giáo hội nhìn đến sự thân mật với người dân khu vực Akabane.',
+        source: 'http://tokyo.catholic.jp'
     },
     {
         id: 3,
         image: 'https://admin.kokotachi.com/storage/article_church/5ca63eae04ce5_asakusa1-thumbnail400x.jpg',
         title: "Nhà thờ Asakusa Catholic",
         datePosting: "04 tháng 4, 2019",
-        button: 'Nhà thờ'
+        button: 'Nhà thờ',
+
+        //content
+        address: '3-40-27 Kohoku, Adachi-ku, Tokyo 123-0872',
+        english: 'Không',
+        vietnam: 'Không',
+        japan: '9:00',
+        normal: '6:45 thứ 2 đến thứ 7 hàng tuần. 19:00 thứ 6 tuần đầu tiên trong tháng .',
+        sunday: 'Có 2 lớp: Trường tiểu học bậc thấp, trường tiểu học bậc cao và trường trung học cơ sở. Cả 2 lớp đều vào Chủ nhật, sau Thánh lễ 9h00 khoảng 1 tiếng.',
+        volunteerActivity: 'Giúp đỡ các chị em trong “Missionaries of Charity” vào ngày thứ 7 thứ 2, thứ 3 và thứ 4 mỗi tháng với dịch vụ bữa ăn cho người già.',
+        detail: 'Năm 1957, một quý ông của thị trấn, ông Fukuji Funatsu đã đóng góp tài sản đất đai của mình là 300 tsubo với mục đích là nuôi dưỡng những người trẻ tuổi trong khu. Khu ấy đã bắt đầu như một tiểu giáo xứ của nhà thờ Mikawashima vào năm 1958. Sau đó, có nhiều tài sản được mua từ ông Funatsu. '
+        + 'Theo di chúc ban đầu của ông Funatsu, đội Hướng đạo sinh số 6 được thành lập vào năm 1964. Năm 1967, trường mẫu giáo Adachi Salesio đã được thành lập và nhà thờ trở thành giáo xứ của nhà thờ Mikawashima. Năm 1972, Nữ hướng đạo sinh Tokyo số 104 đã được thành lập.'
+        + 'Năm 1986, tiểu giáo xứ bắt đầu độc lập khỏi nhà thở Mikawashima và thành lập giáo xứ Adachi mới. Mặc dù nhà thờ đã được bắt đầu từ một nhóm rất nhỏ, khi giáo dân tăng lên giáo xứ đã phát triển dần dần bằng cách lặp lại công việc sửa chữa và mở rộng của nơi này. Vào tháng 11 năm 1997, nhà thờ hiện tại đã được xây dựng mới kể từ khi mưa dầm qua mái nhà và trở nên rất tồi tệ.'
+        + 'Giáo sĩ đầu tiên và là người đứng đầu trường mẫu giáo là Fr. Zenkichi Josef Emi. Sau đó, Fr. Demleitner Karl, Fr.Renato Stefani, Fr. Shoichiro Kosaka, Fr. Giovanni Petracco, Fr. Richard Smith, Fr. Attilio Felicani, Fr. Joseph De Witte, Cha Gentaro Yamano, Fr. Yoshihiro Omaki, Fr.Cesar Fraga và Fr. Yasuto Ishii được chỉ định đến nhà thờ và nhà trẻ này. Cha Nakamaro Abe cũng đã giúp đỡ giáo hội. '
+        + 'Nhà thờ Adachi hiện tại:'
+        + 'Nhà thờ và trường mẫu giáo nằm trong cùng một sân nhà thờ. Cả nam hướng đạo và nữ hướng đạo đều rất năng động. Có khoảng 80 người tham dự Thánh lễ Chủ nhật và sau Thánh lễ, họ tận hưởng thời gian uống cà phê trao đổi hỗ trợ lẫn nhau và cảm thấy trong gia đình như đoàn kết trong bầu không khí thân mật. Trong khu phố chị em Chúa Giesu Hài đồng và truyền giáo từ thiện sống tạo ra môi trường tối để cùng làm việc cho các hoạt động phúc lợi chung.'
+        + 'Cộng đồng nhà thờ nghĩ cách chăm sóc người bệnh, người già, cách tổ chức giáo lý. Gần đây, nhiều bà mẹ trẻ đưa các em bé đến tham dự Thánh lễ và hy vọng họ sẽ tham gia nhiều hơn để tăng thêm giáo dân.'
+        + 'Bằng việc tái tổ chức tổng giáo phận Tokyo, nhà thờ Adachi đã thược về Đơn vị hợp tác Tin lành adachi cùng với nhà thờ Mikawashima, nhà thờ Machiya, nhà thờ Umeda và nhà thờ Arakawa. Cho đến bây giờ không có thay đổi lớn nhưng dần dần các thiết bị mới sẽ được áp dụng cho tương lai của giáo hội.'
+        + '(Tháng 8 năm 2005 Thư tin tức Tổng giáo phận Tokyo)',
+        source: 'http://tokyo.catholic.jp'
     }
 ];
 
