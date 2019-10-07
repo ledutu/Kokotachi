@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Button, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Button, TouchableOpacity, ScrollView, Linking } from 'react-native';
 import Modal from "react-native-modal";
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import OpenLinking from '../utils/OpenLinking';
 
 export default class ChurchBox extends Component {
+
+    handleLink = () => {
+        OpenLinking(this.props.source)
+    }
+
+
     render() {
         const {
             address, english, vietnam,
@@ -55,7 +62,7 @@ export default class ChurchBox extends Component {
 
                             <Text style={styles.sectionStyle}  >Mô tả</Text>
                             <Text style={styles.textStyle}>{detail}</Text>
-                            <TouchableOpacity activeOpacity={0.9}>
+                            <TouchableOpacity activeOpacity={0.9} onPress={this.handleLink}>
                                 <Text style={styles.sectionStyle}  >Nguồn dữ liệu</Text>
                                 <Text style={[styles.textStyle, styles.link]}>{source}</Text>
                             </TouchableOpacity>

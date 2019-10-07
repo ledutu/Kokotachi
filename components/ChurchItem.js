@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet, Linking } from 'react-native';
 import ChurchBox from './ChurchBox';
 
 class ChurchItem extends Component {
@@ -20,8 +20,8 @@ class ChurchItem extends Component {
         this.setState({
             display: false
         })
-    }
-
+    };
+    
     render() {
 
         const {

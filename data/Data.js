@@ -580,28 +580,112 @@ const EventData = [
         image: 'https://eventon.jp/uploads/2019/06/97b112487e8b1a8ddfdff107c6ea6653.jpg',
         title: "SPECIAL WORKSHOP NGÀY 7/9! TỔ CHỨC HỘI THẢO ĐẶC BIỆT PEET (BE BOP CREW)",
         datePosting: "07 Tháng 9, 2019",
-        button: 'Sự kiện'
+        button: 'Sự kiện',
+
+        //content
+        day: "2019/09/07(saturday)",
+        period: '18:00 ~ 19:30',
+        begin: 'Thời gian bắt đầu [18:00]',
+        registerPeopleNumber: 0,
+
+        nameCost: 'PEET WS',
+        cost: '3,000 Yên',
+        paymentMethod: 'Thanh toán tại cổng sự kiện',
+        registerTime: 'Từ ngày đăng tin tuyển dụng',
+        registerStoppingTime: 'Trước 18:00 ngày 07/09/2019',
+        place: 'STUDIO MISSION（Shibuya）８０１',
+        address: '8F 9F Tầng 8 - 9,  tòa nhà Shin Omose tòa thứ 4, 2-10-12, Dogenzaka, Shibuya - ku, Tokyo',
+        ageLimited: 'Trên 20 tuổi dưới 50 tuổi',
+        url: ['https://www.hot-pants.info', 'https://eventon.jp'],
+        hoster: 'SCOOBY-DOO',
+        eventID: 'E17537',
+        detail: 'Giai điệu của linh hồn, từ những điều cơ bản nhất đến ứng dụng của nhạc rock, Bất kể bạn thuộc thể loại âm nhạc gì, cách bạn cảm nhận ra sao và cách bạn làm ra âm nhạc như thế nào, \n'
+        + 'Những bài học về cách nhận thức và khám phá ra các nhịp điệu!!!!!\n\n'
+        + 'Bạn sẽ không thể kiếm được một cơ hội như vầy ở Tokyo đâu, vì vậy bạn đừng bỏ lỡ WS lần này nhé!!!!!\n\n'
     },
     {
         id: 1,
         image: 'https://eventon.jp/uploads/2019/07/d6e80c553e86e82e3f2577f97e967580.JPG',
         title: "SỰ KIỆN \"TRÒ CHƠI THỰC TẾ・TRÒ CHƠI TRỰC TUYẾN\" ĐƯỢC TỔ CHỨC TẠI THÀNH PHỐ YOKOHAMA, TỈNH KANAGAWA",
         datePosting: "21 Tháng 7, 2019",
-        button: 'Sự kiện'
+        button: 'Sự kiện',
+
+        //content
+        day: "2019/09/07(saturday)",
+        period: '18:00 ~ 19:30',
+        begin: 'Thời gian bắt đầu [18:00]',
+        registerPeopleNumber: 2,
+
+        nameCost: 'PEET WS',
+        cost: '3,000 Yên',
+        paymentMethod: 'Thanh toán tại cổng sự kiện',
+        registerTime: 'Từ ngày đăng tin tuyển dụng',
+        registerStoppingTime: 'Trước 18:00 ngày 07/09/2019',
+        place: 'STUDIO MISSION（Shibuya）８０１',
+        address: '8F 9F Tầng 8 - 9,  tòa nhà Shin Omose tòa thứ 4, 2-10-12, Dogenzaka, Shibuya - ku, Tokyo',
+        ageLimited: 'Trên 20 tuổi dưới 50 tuổi',
+        url: ['https://www.hot-pants.info', 'https://eventon.jp'],
+        hoster: 'SCOOBY-DOO',
+        eventID: 'E17537',
+        detail: 'Giai điệu của linh hồn, từ những điều cơ bản nhất đến ứng dụng của nhạc rock, Bất kể bạn thuộc thể loại âm nhạc gì, cách bạn cảm nhận ra sao và cách bạn làm ra âm nhạc như thế nào, \n'
+        + 'Những bài học về cách nhận thức và khám phá ra các nhịp điệu!!!!!\n\n'
+        + 'Bạn sẽ không thể kiếm được một cơ hội như vầy ở Tokyo đâu, vì vậy bạn đừng bỏ lỡ WS lần này nhé!!!!!\n\n'
     },
     {
         id: 2,
         image: 'https://kokotachi.com/images/noimage.jpg',
         title: "TIỆC HALLOWEEN",
         datePosting: "27 Tháng 10, 2019",
-        button: 'Sự kiện'
+        button: 'Sự kiện',
+
+        //content
+        day: "2019/09/07(saturday)",
+        period: '18:00 ~ 19:30',
+        begin: 'Thời gian bắt đầu [18:00]',
+        registerPeopleNumber: 0,
+
+        nameCost: 'PEET WS',
+        cost: '3,000 Yên',
+        paymentMethod: 'Thanh toán tại cổng sự kiện',
+        registerTime: 'Từ ngày đăng tin tuyển dụng',
+        registerStoppingTime: 'Trước 18:00 ngày 07/09/2019',
+        place: 'STUDIO MISSION（Shibuya）８０１',
+        address: '8F 9F Tầng 8 - 9,  tòa nhà Shin Omose tòa thứ 4, 2-10-12, Dogenzaka, Shibuya - ku, Tokyo',
+        ageLimited: 'Trên 20 tuổi dưới 50 tuổi',
+        url: ['https://www.hot-pants.info', 'https://eventon.jp'],
+        hoster: 'SCOOBY-DOO',
+        eventID: 'E17537',
+        detail: 'Giai điệu của linh hồn, từ những điều cơ bản nhất đến ứng dụng của nhạc rock, Bất kể bạn thuộc thể loại âm nhạc gì, cách bạn cảm nhận ra sao và cách bạn làm ra âm nhạc như thế nào, \n'
+        + 'Những bài học về cách nhận thức và khám phá ra các nhịp điệu!!!!!\n\n'
+        + 'Bạn sẽ không thể kiếm được một cơ hội như vầy ở Tokyo đâu, vì vậy bạn đừng bỏ lỡ WS lần này nhé!!!!!\n\n'
     },
     {
         id: 3,
         image: 'https://eventon.jp/uploads/2019/06/e3c886aeb1793f196bf31df72a764446.jpeg',
         title: "CỘNG ĐỒNG KOEN MÙA HÈ NÀY 2019",
         datePosting: "22 Tháng 8, 2019",
-        button: 'Sự kiện'
+        button: 'Sự kiện',
+
+        //content
+        day: "2019/09/07(saturday)",
+        period: '18:00 ~ 19:30',
+        begin: 'Thời gian bắt đầu [18:00]',
+        registerPeopleNumber: 0,
+
+        nameCost: 'PEET WS',
+        cost: '3,000 Yên',
+        paymentMethod: 'Thanh toán tại cổng sự kiện',
+        registerTime: 'Từ ngày đăng tin tuyển dụng',
+        registerStoppingTime: 'Trước 18:00 ngày 07/09/2019',
+        place: 'STUDIO MISSION（Shibuya）８０１',
+        address: '8F 9F Tầng 8 - 9,  tòa nhà Shin Omose tòa thứ 4, 2-10-12, Dogenzaka, Shibuya - ku, Tokyo',
+        ageLimited: 'Trên 20 tuổi dưới 50 tuổi',
+        url: ['https://www.hot-pants.info', 'https://eventon.jp'],
+        hoster: 'SCOOBY-DOO',
+        eventID: 'E17537',
+        detail: 'Giai điệu của linh hồn, từ những điều cơ bản nhất đến ứng dụng của nhạc rock, Bất kể bạn thuộc thể loại âm nhạc gì, cách bạn cảm nhận ra sao và cách bạn làm ra âm nhạc như thế nào, \n'
+        + 'Những bài học về cách nhận thức và khám phá ra các nhịp điệu!!!!!\n\n'
+        + 'Bạn sẽ không thể kiếm được một cơ hội như vầy ở Tokyo đâu, vì vậy bạn đừng bỏ lỡ WS lần này nhé!!!!!\n\n'
     },
 
 ]

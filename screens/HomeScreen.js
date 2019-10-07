@@ -50,26 +50,26 @@ export default class HomeScreen extends Component {
                         title="Xã hội"
                         data={SocialData}
                         screen="Cosmetic"
-                    />
+                    /> */}
 
                     <DoubleRow
                         icon={{ uri: LogoImages[3] }}
                         title="Mỹ phẩm"
                         data={CosmeticData}
                         screen="Cosmetic"
-                    /> */}
+                    />
 
-                    <ChurchInRow
+                    {/* <ChurchInRow
                         icon={{ uri: LogoImages[4] }}
                         title="Nhà thờ"
                         data={ChurchData}
-                    />
+                    /> */}
 
                     <DoubleRow
                         icon={{ uri: LogoImages[5] }}
                         title="Sự kiện"
-                        data={SocialData}
-                        screen="Cosmetic"
+                        data={EventData}
+                        screen="Event"
                     />
 
                     <Footer />

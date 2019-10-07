@@ -13,7 +13,7 @@ export default class DetailHeader extends Component {
             button, title, timePosting
         } = this.props
         return (
-            <View>
+            <View style={styles.container}>
                 <View style={styles.buttonStyle}>
                     <TouchableOpacity style={styles.homeButton}>
                         <Text style={{fontSize: 18, color: 'rgba(51, 51, 51, 0.3)'}}>Trang chủ</Text>
@@ -73,5 +73,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         paddingVertical: 10
+    },
+    container:{
+        marginTop: 30
     }
 })
