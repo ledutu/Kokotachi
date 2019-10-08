@@ -10,7 +10,7 @@ export default class DetailHeader extends Component {
 
     render() {
         const {
-            button, title, timePosting
+            button, title, timePosting, textAlign
         } = this.props
         return (
             <View style={styles.container}>
@@ -25,7 +25,7 @@ export default class DetailHeader extends Component {
                 </View>
 
                 <View>
-                    <Text style={styles.titleText}>{title}</Text>
+                    <Text style={[styles.titleText, {textAlign: textAlign}]}>{title}</Text>
                 </View>
 
                 <View style={styles.textViewDateTime}>
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     titleText:
     {
         fontSize: 40,
-        fontWeight: '500'
+        fontWeight: '500',
     },
     timeText:
     {
