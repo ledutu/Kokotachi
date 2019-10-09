@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
 
 export default class SectionItem extends Component {
     constructor(props) {
@@ -7,6 +8,13 @@ export default class SectionItem extends Component {
         this.state = {
         };
     }
+
+    static propTypes = {
+        icon: PropTypes.object.isRequired,
+        title: PropTypes.string.isRequired,
+        button: PropTypes.string.isRequired
+    }
+
 
     render() {
         const { icon, title, button } = this.props

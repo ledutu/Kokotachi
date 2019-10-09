@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import InfoItem from './InfoItem';
+import PropTypes from 'prop-types';
 
 export default function InfoEvent({
     nameCost,
@@ -16,6 +17,20 @@ export default function InfoEvent({
     hoster,
     eventID
 }) {
+
+    propTypes = {
+        nameCost: PropTypes.string.isRequired,
+        totalCost: PropTypes.string.isRequired,
+        paymentMethod: PropTypes.string,
+        registerTime: PropTypes.string,
+        registerStoppingTime: PropTypes.string,
+        place: PropTypes.string,
+        address: PropTypes.string,
+        ageLimited: PropTypes.string,
+        url: PropTypes.string,
+        hoster: PropTypes.string,
+        eventID: PropTypes.string
+    };
 
     return (
         <View style={styles.container}>

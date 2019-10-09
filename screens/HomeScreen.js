@@ -29,7 +29,7 @@ export default class HomeScreen extends Component {
             <View style={{ flex: 1 }}>
                 <Header />
                 <ScrollView>
-                    {/* <ImageSlider />
+                    <ImageSlider />
                     <Reader />
                     <DoubleRow
                         icon={{ uri: LogoImages[0] }}
@@ -50,7 +50,7 @@ export default class HomeScreen extends Component {
                         title="Xã hội"
                         data={SocialData}
                         screen="Cosmetic"
-                    /> */}
+                    />
 
                     <DoubleRow
                         icon={{ uri: LogoImages[3] }}
@@ -59,11 +59,11 @@ export default class HomeScreen extends Component {
                         screen="Cosmetic"
                     />
 
-                    {/* <ChurchInRow
+                    <ChurchInRow
                         icon={{ uri: LogoImages[4] }}
                         title="Nhà thờ"
                         data={ChurchData}
-                    /> */}
+                    />
 
                     <DoubleRow
                         icon={{ uri: LogoImages[5] }}

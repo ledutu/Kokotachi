@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import { View, Text, Modal, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
 
 export default class AccountFotgotBox extends Component {
     constructor(props) {
         super(props);
         this.state = {
         };
+    }
+
+    static propTypes = {
+        display: PropTypes.string.isRequired,
+        close: PropTypes.func.isRequired
     }
 
     render() {

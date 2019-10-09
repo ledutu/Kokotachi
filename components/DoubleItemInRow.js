@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import ChurchBox from './ChurchBox';
+import PropTypes from 'prop-types';
 
 class DoubleItemInRow extends Component {
     constructor(props) {
@@ -9,6 +10,11 @@ class DoubleItemInRow extends Component {
         this.state = {
             display: false
         };
+    }
+
+    static propTypes = {
+        screen: PropTypes.string.isRequired,
+        info: PropTypes.object.isRequired,
     }
 
     goToAnotherScreen = () => {

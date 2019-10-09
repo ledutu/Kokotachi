@@ -2,8 +2,20 @@ import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import AutoHeightImage from 'react-native-auto-height-image';
+import PropTypes from 'prop-types';
+
+
 
 export default function ImagePoster({ source, day, period, begin, registerPeopleNumber }) {
+
+    propTypes = {
+        source: PropTypes.string.isRequired,
+        day: PropTypes.string.isRequired,
+        period: PropTypes.string.isRequired,
+        begin: PropTypes.string.isRequired,
+        registerPeopleNumber: PropTypes.string.isRequired
+    }
+
     return (
         <View style={styles.container}>
             <AutoHeightImage

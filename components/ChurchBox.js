@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, ScrollView} from 'react-nativ
 import Modal from "react-native-modal";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import OpenLinking from '../utils/OpenLinking';
+import PropTypes from 'prop-types';
 
 export default class ChurchBox extends Component {
 
@@ -10,6 +11,18 @@ export default class ChurchBox extends Component {
         OpenLinking(this.props.source)
     }
 
+    static propTypes = { 
+        address: PropTypes.string,
+        english: PropTypes.string,
+        vietnam: PropTypes.string,
+        japan: PropTypes.string,
+        normal: PropTypes.string,
+        normal: PropTypes.string,
+        sunday: PropTypes.string,
+        volunteerActivity: PropTypes.string,
+        detail: PropTypes.string,
+        source: PropTypes.string
+    }
 
     render() {
         const {

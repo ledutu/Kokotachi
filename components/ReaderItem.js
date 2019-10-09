@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { withNavigation } from 'react-navigation';
+import PropTypes from 'prop-types';
 
 class ReaderItem extends Component {
     constructor(props) {
         super(props);
         this.state = {
         };
+    }
+
+    static propTypes = {
+        screen: PropTypes.string.isRequired,
+        info: PropTypes.object.isRequired,
     }
 
     goToAnotherScreen = () => {

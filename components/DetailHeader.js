@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import PropTypes from 'prop-types';
 
 export default class DetailHeader extends Component {
     constructor(props) {
         super(props);
         this.state = {
         };
+    }
+
+    static propTypes = {
+        button: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        timePosting: PropTypes.string,
+        textAlign: PropTypes.string
     }
 
     render() {

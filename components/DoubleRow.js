@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import SectionItem from './SectionItem';
 import DoubleItemInRow from './DoubleItemInRow';
+import PropTypes from 'prop-types';
 
 export default class DoubleRow extends Component {
     constructor(props) {
@@ -10,6 +11,13 @@ export default class DoubleRow extends Component {
 
         };
 
+    }
+
+    static propTypes = {
+        data: PropTypes.array.isRequired,
+        screen: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        icon: PropTypes.object.isRequired
     }
 
     render() {

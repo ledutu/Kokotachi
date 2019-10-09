@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
 
 const DetailSectionText = props => {
+
+    propTypes = {
+        sectionText: PropTypes.string.isRequired,
+        data: PropTypes.string.isRequired,
+    }
+
     return (
         <View>
             <Text style={styles.sectionText}>{props.sectionText}</Text>

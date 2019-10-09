@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, Linking } from 'react-native';
 import ChurchBox from './ChurchBox';
+import PropTypes from 'prop-types';
 
 class ChurchItem extends Component {
     constructor(props) {
@@ -8,6 +9,18 @@ class ChurchItem extends Component {
         this.state = {
             display: false
         };
+    }
+
+    static propTypes = {
+        address: PropTypes.string,
+        english: PropTypes.string,
+        vietnam: PropTypes.string,
+        japan: PropTypes.string,
+        normal: PropTypes.string,
+        sunday: PropTypes.string,
+        volunteerActivity: PropTypes.string,
+        detail: PropTypes.string,
+        source: PropTypes.string,
     }
 
     triggerModal = () => {
@@ -21,7 +34,9 @@ class ChurchItem extends Component {
             display: false
         })
     };
-    
+
+
+
     render() {
 
         const {

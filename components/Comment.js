@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity } from 'react-native';
+import PropTypes from 'prop-types';
 
 const Comment = props => {
+
+    propTypes = {
+        commentNumber: PropTypes.number.isRequired,
+        image: PropTypes.string.isRequired,
+    }
+
     return (
         <View style = {styles.container}>
             <View>

@@ -1,8 +1,17 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Linking } from 'react-native';
+import { View, Text, StyleSheet, ColorPropType } from 'react-native';
 import OpenLinking from '../../utils/OpenLinking';
+import PropTypes from 'prop-types';
 
 export default function InfoItem({ titleName, detail, isTitle, color, isLink }) {
+
+    propTypes = {
+        titleName: PropTypes.string.isRequired,
+        detail: PropTypes.string.isRequired,
+        isTitle: PropTypes.bool,
+        color: ColorPropType.isRequired,
+        isLink: PropTypes.bool,
+    }
 
 
     handleLinking = () => {

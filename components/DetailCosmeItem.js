@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
+import PropTypes from 'prop-types';
 
 const DetailCosmeItem = props => {
+
+    propTypes = {
+        image: PropTypes.string.isRequired,
+        source: PropTypes.string.isRequired,
+        content: PropTypes.string.isRequired,
+    }
 
     const temp =
         <View style={styles.imageWrapper}>

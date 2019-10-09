@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-
+import PropTypes from 'prop-types';
 
 const Admin = props => {
+
+    propTypes = {
+        image: PropTypes.string.isRequired,
+        adminName: PropTypes.string.isRequired,
+        adminGender: PropTypes.string.isRequired,
+        joinDay: PropTypes.string,
+        allPosting: PropTypes.string.isRequired,
+    }
+
     return (
         <View style={styles.container}>
             <View>

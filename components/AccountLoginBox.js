@@ -12,6 +12,7 @@ import { withNavigation } from 'react-navigation';
 import Modal from "react-native-modal";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { CheckBox, Button } from 'native-base';
+import PropTypes from 'prop-types';
 
 class AccountLoginBox extends React.Component {
     constructor(props) {
@@ -19,6 +20,11 @@ class AccountLoginBox extends React.Component {
         this.state = {
             checked: false,
         };
+    }
+
+    static propTypes = {
+        display: PropTypes.bool.isRequired,
+        close: PropTypes.func.isRequired
     }
 
     onPressButton = () => {

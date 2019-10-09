@@ -1,7 +1,17 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity, ColorPropType } from 'react-native';
+import PropTypes from 'prop-types';
 
 const TouchableButton = props => {
+
+    propTypes = {
+        iconName: PropTypes.string.isRequired,
+        size: PropTypes.number.isRequired,
+        color: ColorPropType.isRequired,
+        style: PropTypes.object,
+        title: PropTypes.string.isRequired
+    }
+
     return (
         <TouchableOpacity style={[props.style, styles.button]}>
             <props.icon
