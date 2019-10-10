@@ -5,6 +5,9 @@ import DetailHeader from '../components/DetailHeader';
 import Header from '../task/Header';
 import AccountLoginBox from '../components/AccountLoginBox';
 import Form from '../components/Form';
+import { CheckBox } from 'native-base';
+import OpenLinking from '../utils/OpenLinking';
+import Icon from 'react-native-vector-icons/Feather';
 
 
 export default class RegisterScreen extends Component {
@@ -12,12 +15,34 @@ export default class RegisterScreen extends Component {
         super(props);
         this.state = {
             display: false,
+            province: ['Hokkaido', 'Aomori Prefecture', 'Iwate Prefecture', 'Miyagi Prefecture',
+                'Akita Prefecture', 'Yamagata Prefecture', 'Fukushima Prefecture',
+                'Ibaraki Prefecture', 'Tochigi Prefecture', 'Gunma Prefecture'
+            ],
+            city: ['Tokyo'],
+            national: ['Andorra', 'Các Tiểu Vương quốc Ả Rập Thống nhất', 'Afghanistan', 'Antigua và Barbuda',
+                'Anguilla', 'Albania', 'Armenia'
+            ],
+            japanLevel: ['N1', 'N2', 'N3', 'N4', 'N5', 'Chưa có'],
+            status: [
+                'Vui lòng chọn tình trạng của bạn',
+                'Đang xem xét kế hoạch du học/làm việc tại Nhật Bản',
+                'Đã quyết định du học/làm việc tại Nhật Bản',
+                'Đang chờ ngày bay qua Nhật Bản',
+                'Đã đến Nhật Bản',
+            ],
+            checked: false
         };
     }
 
     static navigationOptions = {
         header: null
-    }
+    };
+
+    onPressButton = () => {
+        const { checked } = this.state;
+        this.setState({ checked: !checked })
+    };
 
     handleOpenLoginBox = () => {
         this.setState({
@@ -29,7 +54,7 @@ export default class RegisterScreen extends Component {
         this.setState({
             display: false
         })
-    }
+    };
 
     render() {
         return (
@@ -73,18 +98,101 @@ export default class RegisterScreen extends Component {
                                 title="Tên tài khoản"
                                 star
                                 isInput
+                                placeholder="Vui lòng chỉ nhập ký tự chữ"
                             />
                             <Form
-                                title="Tên tài khoản"
+                                title="Giới tính"
                                 star
                                 isGender
                             />
                             <Form
-                                title="Tên tài khoản"
+                                title="Ngày sinh"
                                 star
                                 isThreeDropDown
                             />
+                            <View style={styles.line} />
+                            <Form
+                                title="Email"
+                                star
+                                isInput
+                                placeholder="email@example.com"
+                            />
+                            <Form
+                                title="Mật khẩu"
+                                star
+                                isInput
+                                secureTextEntry={true}
+                            />
+                            <Form
+                                title="nhập lại Mật khẩu"
+                                star
+                                isInput
+                                secureTextEntry={true}
+                            />
+
+                            <View style={styles.line} />
+
+                            <Form
+                                title="Địa chỉ lưu trú tại nhật"
+                                isTwoDropDown
+                                province="Vui lòng chọn tỉnh"
+                                city="Vui lòng chọn thành phố"
+                                list1={this.state.province}
+                                list2={this.state.city}
+                            />
+
+                            <Form
+                                title="Quốc tịch"
+                                star
+                                isOneDropDown
+                                section="Vui lòng chọn quốc tịch"
+                                list={this.state.national}
+                            />
+
+                            <Form
+                                title="Trình độ JLPT"
+                                star
+                                isOneDropDown
+                                section="Vui lòng chọn trình độ tiếng Nhật"
+                                list={this.state.national}
+                            />
+
+                            <Form
+                                title="Tình trạn hiện tại"
+                                star
+                                isOneDropDown
+                                section="Vui lòng chọn tình trạng hiện tại của bạn"
+                                list={this.state.status}
+                            />
+
+                            <View style={styles.checkBoxStyle}>
+                                <CheckBox
+                                    checked={this.state.checked}
+                                    onPress={this.onPressButton}
+                                    style={styles.checkBoxButtonStyle} />
+
+                                <Text style={styles.saveText}>
+                                    Đồng ý với <Text
+                                        style={{ color: '#ff2a30' }}
+                                        onPress={() => OpenLinking('https://kokotachi.com/dieu-khoan-su-dung')}
+                                    >
+                                        Điều khoản sử dụng
+                                        </Text>
+                                </Text>
+                            </View>
+                            <View style={{alignItems: 'center',}}>
+                                <TouchableOpacity style={styles.register}>
+                                    <Icon
+                                        name="user-check"
+                                        size={20}
+                                        color="white"
+                                    />
+                                    <Text style={styles.registerText}>Đăng ký</Text>
+                                </TouchableOpacity>
+                            </View>
+
                         </View>
+
                     </View>
                     <Footer />
                 </ScrollView>
@@ -135,5 +243,50 @@ const styles = StyleSheet.create({
         backgroundColor: '#007bff',
         width: 95,
         borderRadius: 5
+    },
+
+    line: {
+        borderColor: 'rgba(214, 214, 214, 0.8)',
+        borderWidth: 1,
+        marginTop: 11,
+        marginBottom: 27
+    },
+
+    checkBoxStyle: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        paddingRight: 20,
+    },
+
+    checkBoxButtonStyle: {
+        marginRight: 20,
+    },
+
+    saveText: {
+        fontSize: 18,
+        fontWeight: '400',
+        color: '#212529'
+    },
+
+    register: {
+        paddingVertical: 4.5,
+        paddingHorizontal: 13.5,
+        backgroundColor: '#e02f49',
+        flexDirection: 'row',
+        width: 120,
+        height: 37,
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        borderRadius: 20,
+        marginBottom: 40,
+        marginTop: 30
+    },
+
+    registerText: {
+        fontSize: 18,
+        color: 'white',
+        fontWeight: '500'
     }
+
 });

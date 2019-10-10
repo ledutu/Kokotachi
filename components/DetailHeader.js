@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
+import {withNavigation} from 'react-navigation';
 
-export default class DetailHeader extends Component {
+class DetailHeader extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -23,17 +24,20 @@ export default class DetailHeader extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.buttonStyle}>
-                    <TouchableOpacity style={styles.homeButton}>
-                        <Text style={{fontSize: 18, color: 'rgba(51, 51, 51, 0.3)'}}>Trang chủ</Text>
+                    <TouchableOpacity
+                        style={styles.homeButton}
+                        onPress={() => this.props.navigation.navigate('Home')}
+                    >
+                        <Text style={{ fontSize: 18, color: 'rgba(51, 51, 51, 0.3)' }}>Trang chủ</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity style={styles.jobButton}>
-                        <Text style={{fontSize: 18, color: 'white'}}>{button}</Text>
+                        <Text style={{ fontSize: 18, color: 'white' }}>{button}</Text>
                     </TouchableOpacity>
                 </View>
 
                 <View>
-                    <Text style={[styles.titleText, {textAlign: textAlign}]}>{title}</Text>
+                    <Text style={[styles.titleText, { textAlign: textAlign }]}>{title}</Text>
                 </View>
 
                 <View style={styles.textViewDateTime}>
@@ -52,7 +56,7 @@ const styles = StyleSheet.create({
     },
     homeButton:
     {
-        
+
         backgroundColor: '#ededed',
         marginRight: 15,
         paddingVertical: 5,
@@ -60,7 +64,7 @@ const styles = StyleSheet.create({
         borderRadius: 20
 
     },
-    jobButton:{
+    jobButton: {
         backgroundColor: '#ff2a30',
         paddingVertical: 5,
         paddingHorizontal: 18,
@@ -82,7 +86,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingVertical: 10
     },
-    container:{
+    container: {
         marginTop: 30
     }
 })
+
+export default withNavigation(DetailHeader)

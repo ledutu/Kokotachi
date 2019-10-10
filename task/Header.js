@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import AccountLoginBox from '../components/AccountLoginBox';
 import { withNavigation } from 'react-navigation';
+import Menu, { MenuItem, MenuDivider } from 'react-native-material-menu';
 
 class Header extends Component {
   constructor(props) {
@@ -10,7 +11,25 @@ class Header extends Component {
     this.state = {
       display: false,
       displayForgot: false,
+      menu: [
+        "Công việc", "Căn hộ", "Xã hội", "Nhà thờ", "Sự kiện",
+        "Mỹ phẩm", "Sim", "Tìm bạn", "Liên hệ",
+      ]
     };
+  };
+
+  _menu = null;
+
+  hideMenu = () => {
+    this._menu.hide();
+  };
+
+  showMenu = () => {
+    this._menu.show();
+  };
+
+  setMenuRef = ref => {
+    this._menu = ref;
   };
 
   close = () => {
@@ -36,7 +55,7 @@ class Header extends Component {
   };
 
   handleOpenRegisterScreen = () => {
-    this.setState({display: false})
+    this.setState({ display: false })
     this.props.navigation.navigate('Register');
   }
 
@@ -46,12 +65,21 @@ class Header extends Component {
     return (
       <View>
         <View style={styles.container}>
-          <TouchableOpacity onPress={this.dropDownSection}>
-            <Image
-              source={require('../kokotachi_image/menu.png')}
-              style={styles.menuIcon}
-            />
-          </TouchableOpacity>
+          <Menu
+            ref={this.setMenuRef}
+            button={
+              <TouchableOpacity onPress={this.showMenu}>
+                <Image
+                  source={require('../kokotachi_image/menu.png')}
+                  style={styles.menuIcon}
+                />
+              </TouchableOpacity>
+            }
+          >
+            <MenuItem onPress={this.hideMenu}>Menu item 1</MenuItem>
+            <MenuItem onPress={this.hideMenu} style={styles.menu}>Menu item 2</MenuItem>
+          </Menu>
+
 
           <TouchableOpacity>
             <Image
@@ -107,6 +135,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'white',
     borderRadius: 50,
+  },
+
+  menu: {
+    width: 600,
   }
 
 

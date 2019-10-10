@@ -1,24 +1,71 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import { RadioButton } from 'react-native-paper';
 import { Picker } from "native-base";
+import CustomPicker from './CustomPicker';
+import PropTypes from 'prop-types';
 
 export default class Form extends Component {
     constructor(props) {
         super(props);
         this.state = {
             value: 'Nam',
-            selected: 'key0',
-            arrDay: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13',
-                '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31']
+            arrDay: [],
+            arrMonth: [],
+            arrYear: [],
+            selected: '1',
+            text: '',
         };
     }
 
-    onValueChange(value) {
+
+    static propTypes = {
+        title: PropTypes.string.isRequired,
+        star: PropTypes.bool,
+        placeholder: PropTypes.string,
+        isInput: PropTypes.bool,
+        isGender: PropTypes.bool,
+        isThreeDropDown: PropTypes.bool,
+        isTwoDropDown: PropTypes.bool,
+        isOneDropDown: PropTypes.bool,
+        secureTextEntry: PropTypes.bool,
+        province: PropTypes.string,
+        city: PropTypes.string,
+        section: PropTypes.string,
+        list: PropTypes.array,
+        list1: PropTypes.array,
+        list2: PropTypes.array
+    }
+
+    onChangeText = text => {
         this.setState({
-            selected: value
-        });
+            text: text
+        })
+    }
+
+    componentDidMount() {
+        let arrDay = [];
+        let arrMonth = [];
+        let arrYear = [];
+        for (let i = 1; i <= 31; i++) {
+            arrDay = arrDay.concat(i + "")
+        }
+
+        for (let i = 1; i <= 12; i++) {
+            arrMonth = arrMonth.concat(i + "")
+        }
+
+        for (let i = 1950; i <= 2019; i++) {
+            arrYear = arrYear.concat(i + "")
+        }
+        this.setState({
+            arrDay: arrDay,
+            arrMonth: arrMonth,
+            arrYear: arrYear,
+        })
     };
+
+
 
     render() {
         const {
@@ -27,7 +74,16 @@ export default class Form extends Component {
             placeholder,
             isInput,
             isGender,
-            isThreeDropDown
+            isThreeDropDown,
+            secureTextEntry,
+            isTwoDropDown,
+            isOneDropDown,
+            province,
+            city,
+            section,
+            list,
+            list1,
+            list2,
         } = this.props;
 
         {
@@ -35,10 +91,15 @@ export default class Form extends Component {
                 <View style={{ marginBottom: 16 }}>
                     <Text style={styles.text}>{title} {star ? <Text style={{ color: 'red' }}>*</Text> : ""}</Text>
                     {isInput && (
-                        <TextInput
-                            placeholder={placeholder}
-                            style={styles.textInput}
-                        />
+                        <View>
+                            <TextInput
+                                placeholder={placeholder}
+                                style={styles.textInput}
+                                onChangeText={this.onChangeText}
+                                value={this.state.text}
+                                secureTextEntry={secureTextEntry}
+                            />
+                        </View>
                     )}
 
                     {isGender && (
@@ -62,57 +123,50 @@ export default class Form extends Component {
                     )}
 
                     {isThreeDropDown && (
-                        <View style={{flexDirection: 'row'}}>
-                            <View style={styles.dateContainer}>
-                                <Picker
-                                    mode="dropdown"
-                                    selectedValue={this.state.selected}
-                                    onValueChange={this.onValueChange.bind(this)}
-                                    style={{ fontSize: 30 }}
-                                >
-                                    <Picker.Item label="Chọn ngày" value="key0" style={{ fontSize: 25 }} />
-                                    {
-                                        this.state.arrDay.map(item => {
-                                            return (
-                                                <Picker.Item label={item} value={`key${item}`} key={item} />
-                                            )
-                                        })
-                                    }
-                                </Picker>
-                            </View>
-                            <View style={styles.dateContainer}>
-                                <Picker
-                                    mode="dropdown"
-                                    selectedValue={this.state.selected}
-                                    onValueChange={this.onValueChange.bind(this)}
-                                    style={{ fontSize: 30 }}
-                                >
-                                    <Picker.Item label="Chọn ngày" value="key0" style={{ fontSize: 25 }} />
-                                    {
-                                        this.state.arrDay.map(item => {
-                                            return (
-                                                <Picker.Item label={item} value={`key${item}`} key={item} />
-                                            )
-                                        })
-                                    }
-                                </Picker>
-                            </View>
-                            <View style={styles.dateContainer}>
-                                <Picker
-                                    mode="dropdown"
-                                    selectedValue={this.state.selected}
-                                    onValueChange={this.onValueChange.bind(this)}
-                                >
-                                    <Picker.Item label="Chọn ngày" value="key0" style={{ fontSize: 25 }} />
-                                    {
-                                        this.state.arrDay.map(item => {
-                                            return (
-                                                <Picker.Item label={item} value={`key${item}`} key={item} />
-                                            )
-                                        })
-                                    }
-                                </Picker>
-                            </View>
+                        <View style={styles.threeDropDownContainer}>
+                            <CustomPicker
+                                defaultList="Chọn ngày"
+                                list={this.state.arrDay}
+                                flex={0.333333}
+                            />
+                            <CustomPicker
+                                defaultList="Chọn tháng"
+                                list={this.state.arrMonth}
+                                flex={0.333333}
+                            />
+                            <CustomPicker
+                                defaultList="Chọn năm"
+                                list={this.state.arrYear}
+                                flex={0.333333}
+                            />
+
+                        </View>
+
+                    )}
+
+                    {isTwoDropDown && (
+                        <View style={styles.threeDropDownContainer}>
+                            <CustomPicker
+                                defaultList={province}
+                                list={list1}
+                                flex={0.5}
+                            />
+                            <CustomPicker
+                                defaultList={city}
+                                list={list2}
+                                flex={0.5}
+                            />
+
+                        </View>
+                    )}
+
+                    {isOneDropDown && (
+                        <View style={styles.threeDropDownContainer}>
+                            <CustomPicker
+                                defaultList={section}
+                                list={list}
+                                flex={1}
+                            />
 
                         </View>
                     )}
@@ -148,10 +202,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    dateContainer: {
-        borderColor: 'red',
-        borderWidth: 2,
-    },
+
+    threeDropDownContainer: {
+        flexDirection: 'row',
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
 
 
 });
