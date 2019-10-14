@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, Image, StyleSheet, TouchableHighlight } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import AccountLoginBox from '../components/AccountLoginBox';
 import { withNavigation } from 'react-navigation';
-import Menu, { MenuItem, MenuDivider } from 'react-native-material-menu';
+import PropTypes from 'prop-types';
 
 class Header extends Component {
   constructor(props) {
@@ -11,34 +11,12 @@ class Header extends Component {
     this.state = {
       display: false,
       displayForgot: false,
-      menu: [
-        "Công việc", "Căn hộ", "Xã hội", "Nhà thờ", "Sự kiện",
-        "Mỹ phẩm", "Sim", "Tìm bạn", "Liên hệ",
-      ]
     };
   };
 
-  _menu = null;
-
-  hideMenu = () => {
-    this._menu.hide();
-  };
-
-  showMenu = () => {
-    this._menu.show();
-  };
-
-  setMenuRef = ref => {
-    this._menu = ref;
-  };
-
-  close = () => {
-    this.setState({ display: false })
+  static propTypes = {
+    onPress: PropTypes.func,
   }
-
-  dropDownSection = () => {
-
-  };
 
   handleOpenAccount = () => {
     this.setState({
@@ -57,31 +35,33 @@ class Header extends Component {
   handleOpenRegisterScreen = () => {
     this.setState({ display: false })
     this.props.navigation.navigate('Register');
+  };
+
+  close = () => {
+    this.setState({
+      display: false,
+    })
+  };
+
+  handleBackToHome = () => {
+    this.props.navigation.navigate('Home')
   }
 
-
-
   render() {
+    const { onPress } = this.props
+
     return (
       <View>
         <View style={styles.container}>
-          <Menu
-            ref={this.setMenuRef}
-            button={
-              <TouchableOpacity onPress={this.showMenu}>
-                <Image
-                  source={require('../kokotachi_image/menu.png')}
-                  style={styles.menuIcon}
-                />
-              </TouchableOpacity>
-            }
-          >
-            <MenuItem onPress={this.hideMenu}>Menu item 1</MenuItem>
-            <MenuItem onPress={this.hideMenu} style={styles.menu}>Menu item 2</MenuItem>
-          </Menu>
+          <TouchableOpacity onPress={onPress}>
+            <Image
+              source={require('../kokotachi_image/menu.png')}
+              style={styles.menuIcon}
+            />
+          </TouchableOpacity>
 
 
-          <TouchableOpacity>
+          <TouchableOpacity onPress={this.handleBackToHome}>
             <Image
               source={require('../kokotachi_image/logo.png')}
               style={styles.logoImage}
@@ -102,6 +82,8 @@ class Header extends Component {
           close={this.close}
           onPress={this.handleOpenRegisterScreen}
         />
+
+
 
       </View>
     );
@@ -136,11 +118,6 @@ const styles = StyleSheet.create({
     borderColor: 'white',
     borderRadius: 50,
   },
-
-  menu: {
-    width: 600,
-  }
-
 
 });
 

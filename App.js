@@ -6,6 +6,7 @@ import ApartmentScreen from './screens/ApartmentScreen';
 import CosmeticScreen from './screens/CosmeticScreen';
 import EventScreen from './screens/EventScreen';
 import RegisterScreen from './screens/RegisterScreen';
+import DetailScreen from './screens/DetailScreen';
 
 const MainNavigator = createStackNavigator({
   Home: {screen: HomeScreen},
@@ -13,7 +14,8 @@ const MainNavigator = createStackNavigator({
   Apartment: {screen: ApartmentScreen},
   Cosmetic: {screen: CosmeticScreen},
   Event: {screen: EventScreen},
-  Register: {screen: RegisterScreen}
+  Register: {screen: RegisterScreen},
+  Detail: {screen: DetailScreen}
 });
 
 
