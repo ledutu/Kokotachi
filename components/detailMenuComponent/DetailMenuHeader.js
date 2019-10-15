@@ -13,25 +13,42 @@ export default function DetailMenuHeader({
     return (
         <View style={styles.container}>
             <View style={styles.titleWrapper}>
-                <Image source={{ uri }} />
+                <Image
+                    source={{ uri }}
+                    style={styles.image}
+                />
                 <Text style={styles.title}>Trang chủ > {title}</Text>
             </View>
             <View style={styles.postingNumberWrapping}>
                 <Text style={styles.postingNumber}>{periodNumber} Trong {postingNumber} Bài viết</Text>
                 <View style={styles.buttonGroup}>
+
                     <CountingButton
                         number={'<'}
                         onPress={() => { }}
                     />
+
                     <CountingButton
                         number={'1'}
                         isChosen
                         onPress={() => { }}
                     />
+
+                    <CountingButton
+                        number={'2'}
+                        onPress={() => { }}
+                    />
+
+                    <CountingButton
+                        number={'3'}
+                        onPress={() => { }}
+                    />
+
                     <CountingButton
                         number={'>'}
                         onPress={() => { }}
                     />
+
                 </View>
             </View>
         </View>
@@ -47,10 +64,12 @@ DetailMenuHeader.propTypes = {
 
 const styles = StyleSheet.create({
     container: {
-
+        paddingBottom: 27
     },
     titleWrapper: {
         flexDirection: 'row',
+        alignItems: 'center',
+        marginVertical: 54
     },
     title: {
         fontSize: 31.5,
@@ -60,9 +79,19 @@ const styles = StyleSheet.create({
     postingNumberWrapping: {
         flexDirection: 'row',
         justifyContent: 'space-between',
+        alignItems: 'center'
     },
-    postingNumber:{
+    postingNumber: {
         color: 'rgba(51, 51, 51, 0.3)',
         fontSize: 15,
+    },
+    image: {
+        width: 55,
+        height: 55,
+        marginRight: 5
+    },
+    buttonGroup: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
     }
 });

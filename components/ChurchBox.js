@@ -17,7 +17,6 @@ export default class ChurchBox extends Component {
         vietnam: PropTypes.string,
         japan: PropTypes.string,
         normal: PropTypes.string,
-        normal: PropTypes.string,
         sunday: PropTypes.string,
         volunteerActivity: PropTypes.string,
         detail: PropTypes.string,
@@ -28,7 +27,7 @@ export default class ChurchBox extends Component {
         const {
             address, english, vietnam,
             japan, normal, sunday,
-            volunteerActivity, detail, source
+            volunteerActivity, detail, source,
         } = this.props;
         return (
             <View>

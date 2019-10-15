@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, Image, StyleSheet, TouchableHighlight } from 'react-native';
+import {
+  View,
+  TouchableOpacity,
+  Image,
+  StyleSheet,
+  ScrollView
+} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import AccountLoginBox from '../components/AccountLoginBox';
 import { withNavigation } from 'react-navigation';
 import PropTypes from 'prop-types';
+import LogoImages from '../utils/LogoImages';
+import MenuModal from '../components/detailMenuComponent/MenuModal';
+
 
 class Header extends Component {
   constructor(props) {
@@ -11,6 +20,7 @@ class Header extends Component {
     this.state = {
       display: false,
       displayForgot: false,
+      displayShowMenu: false,
     };
   };
 
@@ -45,15 +55,63 @@ class Header extends Component {
 
   handleBackToHome = () => {
     this.props.navigation.navigate('Home')
+  };
+
+  dismissRender = () => {
+    this.setState({
+      displayShowMenu: false,
+    })
+  };
+
+  handleOpenMenu = () => {
+    const { displayShowMenu } = this.state;
+    if (displayShowMenu === true) {
+      this.setState({ displayShowMenu: false })
+    }
+
+    else {
+      this.setState({ displayShowMenu: true })
+    }
+  }
+
+  renderMenu = () => {
+    const { displayShowMenu } = this.state;
+    if (displayShowMenu) {
+      return (
+        <View style={styles.fullScreen}>
+          <ScrollView>
+            {
+              LogoImages.map(item => {
+                return (
+                  <MenuModal
+                    key={item.id}
+                    title={item.title}
+                    uri={item.uri}
+                    onPress={this.handleOnPressMenu}
+                  />
+                )
+              })
+            }
+          </ScrollView>
+        </View>
+      )
+    };
+
+    return null;
+
+  };
+
+  handleOnPressMenu = (title, uri) => {
+    this.props.navigation.navigate('Detail', { data: { title, uri } });
+    this.setState({displayShowMenu: false})
   }
 
   render() {
-    const { onPress } = this.props
 
     return (
-      <View>
-        <View style={styles.container}>
-          <TouchableOpacity onPress={onPress}>
+      <View style={styles.container}>
+        <View style={styles.detailContainer}>
+          <TouchableOpacity onPress={this.handleOpenMenu}>
             <Image
               source={require('../kokotachi_image/menu.png')}
               style={styles.menuIcon}
@@ -83,8 +141,7 @@ class Header extends Component {
           onPress={this.handleOpenRegisterScreen}
         />
 
-
-
+        {this.renderMenu()}
       </View>
     );
   }
@@ -92,6 +149,10 @@ class Header extends Component {
 
 const styles = StyleSheet.create({
   container: {
+
+  },
+
+  detailContainer: {
     backgroundColor: "#ff2a30",
     height: 100,
     flexDirection: "row",
@@ -118,6 +179,17 @@ const styles = StyleSheet.create({
     borderColor: 'white',
     borderRadius: 50,
   },
+
+  fullScreen: {
+    ...StyleSheet.absoluteFillObject,
+    zIndex: 2,
+    backgroundColor: 'white',
+    top: 100,
+    padding: 20,
+    height: 550
+  },
+  fullScreenText: {
+  }
 
 });
 

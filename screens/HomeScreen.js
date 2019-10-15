@@ -9,7 +9,6 @@ import FabButton from '../components/FabButton';
 import DoubleRow from '../components/DoubleRow';
 import LogoImages from '../utils/LogoImages';
 import ChurchInRow from '../components/ChurchInRow';
-import MenuModal from '../components/detailMenuComponent/MenuModal';
 
 
 
@@ -25,59 +24,11 @@ export default class HomeScreen extends Component {
         header: null,
     };
 
-    dismissRender = () => {
-        this.setState({
-            display: false,
-        })
-    };
-
-    handleOpenMenu = () => {
-        const { display } = this.state;
-        if (display === true) {
-            this.setState({ display: false })
-        }
-
-        else {
-            this.setState({ display: true })
-        }
-    }
-
-    renderMenu = () => {
-        const { display } = this.state;
-        if (display) {
-            return (
-                <View style={styles.fullScreen}>
-                    <ScrollView>
-                        {
-                            LogoImages.map(item => {
-                                return (
-                                    <MenuModal
-                                        key={item.id}
-                                        title={item.title}
-                                        uri={item.uri}
-                                        onPress={this.handleOnPressMenu}
-                                    />
-                                )
-                            })
-                        }
-                    </ScrollView>
-                </View>
-            )
-        };
-
-        return null;
-
-    };
-
-    handleOnPressMenu = (title, uri) => {
-        this.props.navigation.navigate('Detail', { data: { title, uri } });
-    }
-
     render() {
 
         return (
             <View style={{ flex: 1 }}>
-                <Header onPress={this.handleOpenMenu} />
+                <Header />
 
                 <ScrollView>
                     <ImageSlider />
@@ -126,7 +77,7 @@ export default class HomeScreen extends Component {
                     <Footer />
 
                 </ScrollView>
-                {this.renderMenu()}
+
                 <FabButton />
 
 

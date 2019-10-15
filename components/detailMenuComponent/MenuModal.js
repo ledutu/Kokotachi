@@ -7,7 +7,7 @@ export default function MenuModal({ isContain,
     onPress,
     subTitle,
     numberOfSubMenu,
-    uri
+    uri,
 }) {
 
     if (isContain) {
@@ -30,7 +30,7 @@ MenuModal.propTypes = {
     title: PropTypes.string.isRequired,
     subTitle: PropTypes.string,
     onPress: PropTypes.func,
-    uri: PropTypes.string.isRequired
+    uri: PropTypes.string.isRequired,
 };
 
 const styles = StyleSheet.create({
@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         paddingVertical: 9,
         paddingHorizontal: 18,
+        flex: 1
     },
     text: {
         fontSize: 18,
