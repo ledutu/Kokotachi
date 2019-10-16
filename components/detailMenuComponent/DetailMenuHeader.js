@@ -7,18 +7,21 @@ export default function DetailMenuHeader({
     uri,
     title,
     postingNumber,
-    periodNumber
+    periodNumber,
+    isTitle,
 }) {
 
     return (
         <View style={styles.container}>
-            <View style={styles.titleWrapper}>
-                <Image
-                    source={{ uri }}
-                    style={styles.image}
-                />
-                <Text style={styles.title}>Trang chủ > {title}</Text>
-            </View>
+            {isTitle && (
+                <View style={styles.titleWrapper}>
+                    <Image
+                        source={{ uri }}
+                        style={styles.image}
+                    />
+                    <Text style={styles.title}>Trang chủ > {title}</Text>
+                </View>
+            )}
             <View style={styles.postingNumberWrapping}>
                 <Text style={styles.postingNumber}>{periodNumber} Trong {postingNumber} Bài viết</Text>
                 <View style={styles.buttonGroup}>
@@ -56,20 +59,21 @@ export default function DetailMenuHeader({
 };
 
 DetailMenuHeader.propTypes = {
-    uri: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
+    uri: PropTypes.string,
+    title: PropTypes.string,
     postingNumber: PropTypes.number.isRequired,
     periodNumber: PropTypes.string.isRequired,
+    isTitle: PropTypes.bool,
 };
 
 const styles = StyleSheet.create({
     container: {
-        paddingBottom: 27
+        paddingBottom: 27,
+        paddingTop: 27
     },
     titleWrapper: {
         flexDirection: 'row',
-        alignItems: 'center',
-        marginVertical: 54
+        marginBottom: 27,
     },
     title: {
         fontSize: 31.5,

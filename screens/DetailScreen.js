@@ -5,12 +5,17 @@ import Header from '../task/Header';
 import DetailCard from '../components/detailMenuComponent/DetailCard';
 import { JobData, ChurchData, CosmeticData, EventData, ApartmentData, SocialData } from "../data/Data";
 import ChurchBox from '../components/ChurchBox';
+import RefMostPosting from '../components/detailMenuComponent/RefMostPosting';
+import Footer from '../task/Footer';
 
 export default class DetailScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
             display: false,
+            selectedId: 0,
+            postingNumber: 30,
+            periodNumber: '1 - 10'
         };
     };
 
@@ -19,6 +24,9 @@ export default class DetailScreen extends Component {
     };
 
     renderDetail = data => {
+        if (data === null) return;
+
+
         return (
             data.map(item => {
                 return (
@@ -37,6 +45,7 @@ export default class DetailScreen extends Component {
         )
     }
 
+    //List of screen
     renderDetailCard() {
         const data = this.props.navigation.getParam('data', '')
         switch (data.title) {
@@ -79,31 +88,30 @@ export default class DetailScreen extends Component {
         })
     };
 
+    //open model church
     handleOpenModel = id => {
+
         return (
             <ChurchBox
-                address={ChurchData[0].address}
-                english={ChurchData[0].english}
-                vietnam={ChurchData[0].vietnam}
-                japan={ChurchData[0].japan}
-                normal={ChurchData[0].normal}
-                sunday={ChurchData[0].sunday}
-                volunteerActivity={ChurchData[0].volunteerActivity}
-                detail={ChurchData[0].detail}
-                source={ChurchData[0].source}
-                title={ChurchData[0].title}
+                address={ChurchData[id].address}
+                english={ChurchData[id].english}
+                vietnam={ChurchData[id].vietnam}
+                japan={ChurchData[id].japan}
+                normal={ChurchData[id].normal}
+                sunday={ChurchData[id].sunday}
+                volunteerActivity={ChurchData[id].volunteerActivity}
+                detail={ChurchData[id].detail}
+                source={ChurchData[id].source}
+                title={ChurchData[id].title}
                 display={this.state.display}
                 close={this.handleCloseModel}
             />
         )
     }
 
+    //navigation to another screen
     handleNavigation = id => {
         const data = this.props.navigation.getParam('data', '')
-        if (data.title === "Nhà thờ") {
-            this.setState({ display: true })
-            console.log(this.state.display)
-        }
         switch (data.title) {
             case "Công việc":
                 this.props.navigation.navigate('Job', { data: JobData[id] });
@@ -119,7 +127,10 @@ export default class DetailScreen extends Component {
                 break;
             case "Nhà thờ":
                 if (data.title === "Nhà thờ") {
-                    this.setState({ display: true }, () => {
+                    this.setState({
+                        display: true,
+                        selectedId: id,
+                    }, () => {
                         this.handleOpenModel(id)
                     })
                 }
@@ -127,24 +138,92 @@ export default class DetailScreen extends Component {
             case "Sự kiện":
                 this.props.navigation.navigate('Event', { data: EventData[id] });
                 break;
+            default:
+                break;
         }
+    };
+
+    //list reference of screen
+    renderRef() {
+        const data = this.props.navigation.getParam('data', '')
+        switch (data.title) {
+            case "Công việc":
+                return (
+                    this.renderRefDetail(JobData)
+                );
+            case "Căn hộ":
+                return (
+                    this.renderRefDetail(ApartmentData)
+                );
+            case "Mỹ phẩm":
+                return (
+                    this.renderRefDetail(CosmeticData)
+                );
+            case "Xã hội":
+                return (
+                    this.renderRefDetail(SocialData)
+                );
+            case "Nhà thờ":
+                return (
+                    this.renderRefDetail(ChurchData)
+                );
+            case "Sự kiện":
+                return (
+                    this.renderRefDetail(EventData)
+                );
+            default:
+                return (
+                    alert('Thư mục này vẫn chưa có bài viết')
+                )
+        }
+    };
+
+    renderRefDetail = data => {
+        if (data === null) return;
+        return (
+            data.map(item => {
+                return (
+                    <RefMostPosting
+                        key={item.id}
+                        id={item.id}
+                        title={item.title}
+                        uri={item.image}
+                        onPress={this.handleNavigation}
+                        date={item.datePosting}
+                    />
+                )
+            })
+        )
     }
 
     render() {
-        const data = this.props.navigation.getParam('data', '')
+        const data = this.props.navigation.getParam('data', '');
+        const { selectedId, periodNumber, postingNumber } = this.state;
         return (
             <View style={styles.container}>
                 <Header />
                 <ScrollView style={styles.detailContainer}>
-                    <DetailMenuHeader
-                        uri={data.uri}
-                        title={data.title}
-                        postingNumber={30}
-                        periodNumber={'1 - 10'}
-                    />
-                    {this.renderDetailCard()}
+                    <View style={{ paddingHorizontal: 15, }}>
+                        <DetailMenuHeader
+                            uri={data.uri}
+                            title={data.title}
+                            postingNumber={postingNumber}
+                            periodNumber={periodNumber}
+                            isTitle
+                        />
+                        {this.renderDetailCard()}
+                        <DetailMenuHeader
+                            postingNumber={postingNumber}
+                            periodNumber={periodNumber}
+                        />
+                        <Text style={styles.text}>Bài viết đọc nhiều</Text>
+                        <View style={{ marginBottom: 54 }}>
+                            {this.renderRef()}
+                        </View>
+                    </View>
+                    <Footer />
                 </ScrollView>
-                {this.handleOpenModel()}
+                {this.handleOpenModel(selectedId)}
 
             </View>
         );
@@ -153,11 +232,17 @@ export default class DetailScreen extends Component {
 
 const styles = StyleSheet.create({
     detailContainer: {
-        paddingHorizontal: 15,
+
         flex: 1,
     },
 
     container: {
         flex: 1,
+    },
+
+    text: {
+        color: '#e73227',
+        marginBottom: 27,
+        fontSize: 27,
     }
 });

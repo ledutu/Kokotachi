@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
+import { withNavigation } from 'react-navigation';
 
-export default class SectionItem extends Component {
+class SectionItem extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -10,26 +11,31 @@ export default class SectionItem extends Component {
     }
 
     static propTypes = {
-        icon: PropTypes.object.isRequired,
+        uri: PropTypes.object.isRequired,
         title: PropTypes.string.isRequired,
-        button: PropTypes.string.isRequired
+        button: PropTypes.string.isRequired,
+    };
+
+    handleOnPress = () => {
+        const { title, uri, onPress } = this.props;
+        onPress(title, uri);
     }
 
 
     render() {
-        const { icon, title, button } = this.props
+        const { uri, title, button } = this.props
         return (
             <View style={styles.container}>
-                <View style={{paddingHorizontal: 15}}>
+                <View style={{ paddingHorizontal: 15 }}>
                     <View style={styles.header}>
                         <View style={styles.wrapIconAndText}>
                             <Image
-                                source={icon}
+                                source={uri}
                                 style={styles.icon}
                             />
                             <Text style={styles.title}>{title}</Text>
                         </View>
-                        <TouchableOpacity style={styles.button}>
+                        <TouchableOpacity style={styles.button} onPress={this.handleOnPress}>
                             <Text style={styles.more}>{button}</Text>
                         </TouchableOpacity>
                     </View>
@@ -87,4 +93,6 @@ const styles = StyleSheet.create({
     }
 
 
-})
+});
+
+export default withNavigation(SectionItem);

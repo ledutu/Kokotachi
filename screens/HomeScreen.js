@@ -24,6 +24,10 @@ export default class HomeScreen extends Component {
         header: null,
     };
 
+    handleOnPress = (title, uri) => {
+        this.props.navigation.navigate('Detail', { data: { title, uri } });
+    }
+
     render() {
 
         return (
@@ -34,31 +38,35 @@ export default class HomeScreen extends Component {
                     <ImageSlider />
                     <Reader />
                     <DoubleRow
-                        icon={{ uri: LogoImages[0].uri }}
+                        uri={LogoImages[0].uri}
                         title="Công việc"
                         data={JobData}
                         screen="Job"
+                        onPress={this.handleOnPress}
                     />
 
                     <DoubleRow
-                        icon={{ uri: LogoImages[1].uri }}
+                        uri={LogoImages[1].uri}
                         title="Căn hộ"
                         data={ApartmentData}
                         screen="Apartment"
+                        onPress={this.handleOnPress}
                     />
 
                     <DoubleRow
-                        icon={{ uri: LogoImages[2].uri }}
+                        uri={LogoImages[2].uri}
                         title="Xã hội"
                         data={SocialData}
                         screen="Cosmetic"
+                        onPress={this.handleOnPress}
                     />
 
                     <DoubleRow
-                        icon={{ uri: LogoImages[3].uri }}
+                        uri={LogoImages[3].uri}
                         title="Mỹ phẩm"
                         data={CosmeticData}
                         screen="Cosmetic"
+                        onPress={this.handleOnPress}
                     />
 
                     <ChurchInRow
@@ -68,10 +76,11 @@ export default class HomeScreen extends Component {
                     />
 
                     <DoubleRow
-                        icon={{ uri: LogoImages[5].uri }}
+                        uri={LogoImages[5].uri}
                         title="Sự kiện"
                         data={EventData}
                         screen="Event"
+                        onPress={this.handleOnPress}
                     />
 
                     <Footer />

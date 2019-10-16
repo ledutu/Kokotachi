@@ -17,28 +17,32 @@ export default class DoubleRow extends Component {
         data: PropTypes.array.isRequired,
         screen: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
-        icon: PropTypes.object.isRequired
-    }
+        uri: PropTypes.string.isRequired,
+        onPress: PropTypes.func,
+    };
 
     render() {
-        const centerData = Math.floor(this.props.data.length / 2);
+        const { screen, data, onPress, uri, title, } = this.props;
+        const centerData = Math.floor(data.length / 2);
+
         return (
             <View style={styles.container}>
                 <SectionItem
-                    icon={this.props.icon}
-                    title={this.props.title}
+                    uri={{ uri }}
+                    title={title}
                     button="Xem thêm"
+                    onPress={() => onPress(title, uri)}
                 />
 
-                <View style={{ marginTop: 60, flexDirection: 'row',justifyContent: 'space-around',}}>
+                <View style={{ marginTop: 60, flexDirection: 'row', justifyContent: 'space-around', }}>
                     <View style={{ flexDirection: 'column' }}>
                         {
-                            this.props.data.slice(0, centerData).map(item => {
+                            data.slice(0, centerData).map(item => {
                                 return (
                                     <DoubleItemInRow
                                         key={item.id}
                                         data={item}
-                                        screen={this.props.screen}
+                                        screen={screen}
                                         info={item}
                                     />
                                 )
@@ -46,13 +50,13 @@ export default class DoubleRow extends Component {
                         }
                     </View>
                     <View style={{ flexDirection: 'column' }}>
-                        {   
-                            this.props.data.slice(centerData).map(item => {
+                        {
+                            data.slice(centerData).map(item => {
                                 return (
                                     <DoubleItemInRow
                                         key={item.id}
                                         data={item}
-                                        screen={this.props.screen}
+                                        screen={screen}
                                         info={item}
                                     />
                                 )

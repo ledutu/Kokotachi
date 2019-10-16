@@ -17,21 +17,23 @@ export default class ChurchInRow extends Component {
     static propTypes = {
         icon: PropTypes.object.isRequired,
         title: PropTypes.string.isRequired,
-        data: PropTypes.array.isRequired
+        data: PropTypes.array.isRequired,
+        onPress: PropTypes.func,
     }
 
     render() {
-        const {icon, title, data} = this.props;
+        const { data, onPress, uri, title, } = this.props;
         const centerData = Math.floor(this.props.data.length / 2);
         return (
             <View style={styles.container}>
                 <SectionItem
-                    icon={icon}
+                    uri={{ uri }}
                     title={title}
                     button="Xem thêm"
+                    onPress={() => onPress(title, uri)}
                 />
 
-                <View style={{ marginTop: 60, flexDirection: 'row',justifyContent: 'space-around',}}>
+                <View style={{ marginTop: 60, flexDirection: 'row', justifyContent: 'space-around', }}>
                     <View style={{ flexDirection: 'column' }}>
                         {
                             data.slice(0, centerData).map(item => {
@@ -45,7 +47,7 @@ export default class ChurchInRow extends Component {
                         }
                     </View>
                     <View style={{ flexDirection: 'column' }}>
-                        {   
+                        {
                             data.slice(centerData).map(item => {
                                 return (
                                     <ChurchItem

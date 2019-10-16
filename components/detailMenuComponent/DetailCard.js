@@ -19,6 +19,7 @@ export default function DetailCard({
         <TouchableOpacity
             style={styles.container}
             onPress={() => { onPress(id) }}
+            activeOpacity={0.9}
         >
             <Image source={{ uri }} style={styles.image} />
             <Text style={styles.title}>{title}</Text>
