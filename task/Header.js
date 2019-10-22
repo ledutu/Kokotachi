@@ -12,6 +12,13 @@ import { withNavigation } from 'react-navigation';
 import PropTypes from 'prop-types';
 import LogoImages from '../utils/LogoImages';
 import MenuModal from '../components/detailMenuComponent/MenuModal';
+import {
+  LoginButton,
+  AccessToken,
+  LoginManager,
+  GraphRequest,
+  GraphRequestManager,
+} from 'react-native-fbsdk';
 
 
 class Header extends Component {
@@ -21,6 +28,9 @@ class Header extends Component {
       display: false,
       displayForgot: false,
       displayShowMenu: false,
+      name: '',
+      image: '',
+      isLogin: false,
     };
   };
 
@@ -72,7 +82,7 @@ class Header extends Component {
     else {
       this.setState({ displayShowMenu: true })
     }
-  }
+  };
 
   renderMenu = () => {
     const { displayShowMenu } = this.state;
@@ -103,10 +113,70 @@ class Header extends Component {
 
   handleOnPressMenu = (title, uri) => {
     this.props.navigation.navigate('Detail', { data: { title, uri } });
-    this.setState({displayShowMenu: false})
+    this.setState({ displayShowMenu: false })
+  };
+
+  update = () => {
+    return console.log('object')
   }
 
+  handleLoginFacebook = () => {
+    LoginManager.logInWithPermissions(["public_profile"]).then(
+      (result) => {
+        if (result.isCancelled) {
+          console.log("Login cancelled");
+        } else {
+          AccessToken.getCurrentAccessToken()
+            .then(data => {
+              let accessToken = data.accessToken;
+
+              const responseInfoCallback = (error, result) => {
+                if (error) {
+                  console.log('Error fetching data: ' + error.toString());
+                } else {
+                  infoData = JSON.parse(JSON.stringify(result));
+                  const { name, picture } = infoData;
+                  this.setState({
+                    name,
+                    image: picture.data.url,
+                    isLogin: true,
+                  })
+                }
+              }
+
+              const infoRequest = new GraphRequest(
+                '/me',
+                {
+                  accessToken: accessToken,
+                  parameters: {
+                    fields: {
+                      string: 'email, name, picture',
+                    }
+                  }
+                },
+                responseInfoCallback,
+              );
+              new GraphRequestManager().addRequest(infoRequest).start();
+
+            })
+
+        }
+      },
+      function (error) {
+        console.log("Login fail with error: " + error);
+      }
+    );
+    this.close();
+  };
+
+
   render() {
+
+    const { isLogin, image, name, display, } = this.state;
+
+    console.log("isLogin: " + isLogin);
+    console.log("name: " + name);
+    console.log("image: "+image);
 
     return (
       <View style={styles.container}>
@@ -126,19 +196,26 @@ class Header extends Component {
             />
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={this.handleOpenAccount}>
-            <Icon
-              name="user"
-              color="white"
-              size={30}
-              style={styles.loginAccount}
-            />
+          <TouchableOpacity
+            onPress={this.handleOpenAccount}
+          >
+            {isLogin ? (
+              <Image source={{ uri: image }} style={styles.image} />
+            ) : (
+                <Icon
+                  name="user"
+                  color="white"
+                  size={30}
+                  style={styles.loginAccount}
+                />
+              )}
           </TouchableOpacity>
         </View>
         <AccountLoginBox
-          display={this.state.display}
+          display={display}
           close={this.close}
           onPress={this.handleOpenRegisterScreen}
+          facebookLogin={this.handleLoginFacebook}
         />
 
         {this.renderMenu()}
@@ -150,6 +227,16 @@ class Header extends Component {
 const styles = StyleSheet.create({
   container: {
 
+  },
+
+  nothing: {
+
+  },
+
+  image: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
   },
 
   detailContainer: {

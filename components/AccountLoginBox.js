@@ -24,7 +24,8 @@ class AccountLoginBox extends React.Component {
 
     static propTypes = {
         display: PropTypes.bool.isRequired,
-        close: PropTypes.func.isRequired
+        close: PropTypes.func.isRequired,
+        facebookLogin: PropTypes.func.isRequired
     }
 
     onPressButton = () => {
@@ -33,7 +34,7 @@ class AccountLoginBox extends React.Component {
     };
 
     render() {
-        const { display, close } = this.props
+        const { display, close, facebookLogin } = this.props
         return (
             <View style={{ flex: 1 }}>
                 <Modal
@@ -55,7 +56,7 @@ class AccountLoginBox extends React.Component {
                         </View>
                         <View style={styles.infoContainer}>
                             <Text style={styles.loginText}>Đăng nhập</Text>
-                            <TouchableOpacity style={styles.facebookButton}>
+                            <TouchableOpacity style={styles.facebookButton} onPress={facebookLogin}>
                                 <Icon
                                     name="facebook"
                                     size={30}
@@ -225,7 +226,7 @@ const styles = StyleSheet.create({
     registerButton: {
         paddingVertical: 4.5,
         paddingHorizontal: 18,
-        marginTop: 15
+        marginTop: 15,
     }
 
 

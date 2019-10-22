@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import OpenLinking from '../utils/OpenLinking';
 
 
 export default class Footer extends Component {
@@ -32,7 +33,10 @@ export default class Footer extends Component {
                                 style={styles.iconStyle}
                             />
                         </TouchableOpacity>
-                        <TouchableOpacity activeOpacity={0.9}>
+                        <TouchableOpacity
+                            activeOpacity={0.9}
+                            onPress={() => {OpenLinking('https://www.facebook.com/Kokotachi-1245099025640534/')}}
+                        >
                             <Icon
                                 name="logo-facebook"
                                 color="rgba(255, 255, 255, 0.5)"
@@ -64,7 +68,7 @@ export default class Footer extends Component {
                         </View>
                     </View>
 
-                    <View style={{alignItems: 'center',}}>
+                    <View style={{ alignItems: 'center', }}>
                         <Text style={styles.copyrightText}>© Kokotachi 2019</Text>
                     </View>
                 </View>
@@ -115,7 +119,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    copyrightText:{
+    copyrightText: {
         color: 'rgba(255, 255, 255, 0.5)',
         fontSize: 18
     }

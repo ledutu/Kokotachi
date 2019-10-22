@@ -9,7 +9,6 @@ export default function RefMostPosting({
     onPress,
     id,
 }) {
-
     return (
         <TouchableOpacity
             style={styles.container}
