@@ -17,6 +17,7 @@ export default class HomeScreen extends Component {
         super(props);
         this.state = {
             display: false,
+            isOpacity: null,
         };
     }
 
@@ -26,13 +27,20 @@ export default class HomeScreen extends Component {
 
     handleOnPress = (title, uri) => {
         this.props.navigation.navigate('Detail', { data: { title, uri } });
+    };
+
+    handleChangeOpacity = isOpacity => {
+        this.setState({
+            isOpacity,
+        })
     }
 
     render() {
+        const { isOpacity } = this.state;
 
         return (
-            <View style={{ flex: 1 }}>
-                <Header />
+            <View style={[styles.container, isOpacity ? {opacity: 0.7}:{}]}>
+                <Header changeOpacity={this.handleChangeOpacity} />
 
                 <ScrollView>
                     <ImageSlider />
@@ -104,5 +112,10 @@ const styles = StyleSheet.create({
         padding: 20
     },
     fullScreenText: {
+    },
+
+    container: {
+        flex: 1,
+        // backgroundColor: 'black',
     }
 });

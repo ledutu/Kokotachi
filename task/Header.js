@@ -4,14 +4,18 @@ import {
   TouchableOpacity,
   Image,
   StyleSheet,
-  ScrollView
+  ScrollView,
+  Text
 } from 'react-native';
+
+import AsyncStorage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import AccountLoginBox from '../components/AccountLoginBox';
 import { withNavigation } from 'react-navigation';
 import PropTypes from 'prop-types';
 import LogoImages from '../utils/LogoImages';
 import MenuModal from '../components/detailMenuComponent/MenuModal';
+
 import {
   LoginButton,
   AccessToken,
@@ -19,7 +23,9 @@ import {
   GraphRequest,
   GraphRequestManager,
 } from 'react-native-fbsdk';
+import LogoutBox from '../components/LogoutBox';
 
+const KEY = "KEY";
 
 class Header extends Component {
   constructor(props) {
@@ -31,6 +37,8 @@ class Header extends Component {
       name: '',
       image: '',
       isLogin: false,
+      isLoginMenu: false,
+      isLogoutBox: false,
     };
   };
 
@@ -116,9 +124,87 @@ class Header extends Component {
     this.setState({ displayShowMenu: false })
   };
 
-  update = () => {
-    return console.log('object')
+  requestInfo = accessToken => {
+    const infoRequest = new GraphRequest(
+      '/me',
+      {
+        accessToken,
+        parameters: {
+          fields: {
+            string: 'email, name, picture',
+          }
+        }
+      },
+      this.responseCallback,
+    );
+    new GraphRequestManager().addRequest(infoRequest).start();
   }
+
+  responseCallback = (error, result) => {
+    if (error) {
+      console.log('Error fetching data: ' + error.toString());
+    } else {
+      infoData = JSON.parse(JSON.stringify(result));
+      const { name, picture } = infoData;
+      this.setState({
+        name,
+        image: picture.data.url,
+        isLogin: true,
+      }, () => {
+        const { name, image, isLogin } = this.state;
+
+        this.storeData({ name, image, isLogin });
+
+      });
+
+
+    }
+  };
+
+  storeData = async ({ name, image, isLogin }) => {
+
+    const user = {
+      name: name,
+      image: image,
+      isLogin
+    };
+
+    try {
+      await AsyncStorage.setItem(KEY, JSON.stringify(user));
+    }
+    catch (e) {
+      console.log(e)
+    }
+  };
+
+  getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem(KEY);
+
+      if (value !== null) {
+        const user = JSON.parse(value)
+        const { name, image, isLogin } = user
+        this.setState({
+          name,
+          image,
+          isLogin,
+        })
+      }
+
+      // this.setState({
+
+      // })
+    }
+    catch (e) {
+      console.log(e)
+    }
+  };
+
+  UNSAFE_componentWillMount() {
+    this.getData();
+  };
+
+
 
   handleLoginFacebook = () => {
     LoginManager.logInWithPermissions(["public_profile"]).then(
@@ -130,33 +216,7 @@ class Header extends Component {
             .then(data => {
               let accessToken = data.accessToken;
 
-              const responseInfoCallback = (error, result) => {
-                if (error) {
-                  console.log('Error fetching data: ' + error.toString());
-                } else {
-                  infoData = JSON.parse(JSON.stringify(result));
-                  const { name, picture } = infoData;
-                  this.setState({
-                    name,
-                    image: picture.data.url,
-                    isLogin: true,
-                  })
-                }
-              }
-
-              const infoRequest = new GraphRequest(
-                '/me',
-                {
-                  accessToken: accessToken,
-                  parameters: {
-                    fields: {
-                      string: 'email, name, picture',
-                    }
-                  }
-                },
-                responseInfoCallback,
-              );
-              new GraphRequestManager().addRequest(infoRequest).start();
+              this.requestInfo(accessToken);
 
             })
 
@@ -169,14 +229,69 @@ class Header extends Component {
     this.close();
   };
 
+  handleOpenMenuLogin = () => {
+    const { isLoginMenu } = this.state;
+
+    this.setState({
+      isLoginMenu: !isLoginMenu,
+    })
+  };
+
+  handleLogout = () => {
+    const { changeOpacity } = this.props;
+    this.setState({
+      isLogoutBox: true,
+      isLoginMenu: false,
+    });
+
+    changeOpacity(true)
+  }
+
+  renderLoginMenu = () => {
+    const { isLoginMenu } = this.state;
+    if (isLoginMenu) {
+      return (
+        <View
+          style={styles.picker}
+        >
+          <TouchableOpacity onPress={this.handleOpenMoreInfo} activeOpacity={0.8}>
+            <Text
+              style={[styles.text, styles.textBorder]}>Thông tin tài khoản</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.handleLogout} activeOpacity={0.8}>
+            <Text style={styles.text}>Đăng xuất</Text>
+          </TouchableOpacity>
+        </View>
+      )
+    }
+    return;
+  };
+
+  handleCloseLogoutBox = () => {
+    const { changeOpacity } = this.props;
+
+    this.setState({
+      isLogoutBox: false,
+    })
+
+    changeOpacity(false)
+  }
+
+  renderModal = () => {
+    const { isLogoutBox } = this.state;
+    return (
+      <LogoutBox
+        visible={isLogoutBox}
+        onRequestClose={this.handleCloseLogoutBox}
+      />
+    )
+  }
+
+
 
   render() {
 
     const { isLogin, image, name, display, } = this.state;
-
-    console.log("isLogin: " + isLogin);
-    console.log("name: " + name);
-    console.log("image: "+image);
 
     return (
       <View style={styles.container}>
@@ -197,7 +312,7 @@ class Header extends Component {
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={this.handleOpenAccount}
+            onPress={isLogin ? this.handleOpenMenuLogin : this.handleOpenAccount}
           >
             {isLogin ? (
               <Image source={{ uri: image }} style={styles.image} />
@@ -210,6 +325,7 @@ class Header extends Component {
                 />
               )}
           </TouchableOpacity>
+
         </View>
         <AccountLoginBox
           display={display}
@@ -217,8 +333,13 @@ class Header extends Component {
           onPress={this.handleOpenRegisterScreen}
           facebookLogin={this.handleLoginFacebook}
         />
+        {this.renderLoginMenu()}
 
         {this.renderMenu()}
+
+        {this.renderModal()}
+
+
       </View>
     );
   }
@@ -276,6 +397,30 @@ const styles = StyleSheet.create({
     height: 550
   },
   fullScreenText: {
+  },
+
+  picker: {
+    position: 'absolute',
+    zIndex: 2,
+    backgroundColor: 'white',
+    top: 75,
+    right: 20,
+    justifyContent: 'space-around',
+    borderWidth: 1,
+    borderColor: 'rgba(0,0,0,.15)',
+  },
+
+  text: {
+    fontWeight: '400',
+    color: '#212529',
+    fontSize: 17,
+    paddingVertical: 13.5,
+    paddingHorizontal: 27
+  },
+
+  textBorder: {
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(0,0,0,.15)',
   }
 
 });
