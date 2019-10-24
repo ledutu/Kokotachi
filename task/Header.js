@@ -46,35 +46,42 @@ class Header extends Component {
     onPress: PropTypes.func,
   }
 
+  //to open a login box
   handleOpenAccount = () => {
     this.setState({
       display: true
     })
   };
 
+  //to swtich forgot username and password screen
   handleOpenForgot = () => {
     this.setState({ displayForgot: true })
   };
 
+  //to close forgotScreen
   closeForgot = () => {
     this.setState({ displayForgot: false })
   };
+
 
   handleOpenRegisterScreen = () => {
     this.setState({ display: false })
     this.props.navigation.navigate('Register');
   };
 
+  //To close a login box
   close = () => {
     this.setState({
       display: false,
     })
   };
 
+  //to return a HomeScreen
   handleBackToHome = () => {
     this.props.navigation.navigate('Home')
   };
 
+  //To close a menu
   dismissRender = () => {
     this.setState({
       displayShowMenu: false,
@@ -92,6 +99,7 @@ class Header extends Component {
     }
   };
 
+  //return a menu with a lot of option
   renderMenu = () => {
     const { displayShowMenu } = this.state;
     if (displayShowMenu) {
@@ -124,6 +132,7 @@ class Header extends Component {
     this.setState({ displayShowMenu: false })
   };
 
+  //to Get info user of facebook login
   requestInfo = accessToken => {
     const infoRequest = new GraphRequest(
       '/me',
@@ -140,6 +149,7 @@ class Header extends Component {
     new GraphRequestManager().addRequest(infoRequest).start();
   }
 
+  //to Get info user of facebook login
   responseCallback = (error, result) => {
     if (error) {
       console.log('Error fetching data: ' + error.toString());
@@ -161,6 +171,7 @@ class Header extends Component {
     }
   };
 
+  //Store data to display that no need to get info user again
   storeData = async ({ name, image, isLogin }) => {
 
     const user = {
@@ -177,6 +188,7 @@ class Header extends Component {
     }
   };
 
+  //to get data from storage
   getData = async () => {
     try {
       const value = await AsyncStorage.getItem(KEY);
@@ -190,16 +202,13 @@ class Header extends Component {
           isLogin,
         })
       }
-
-      // this.setState({
-
-      // })
     }
     catch (e) {
       console.log(e)
     }
   };
 
+  //call every app run
   UNSAFE_componentWillMount() {
     this.getData();
   };
@@ -229,6 +238,7 @@ class Header extends Component {
     this.close();
   };
 
+  //Open menu in Avatar
   handleOpenMenuLogin = () => {
     const { isLoginMenu } = this.state;
 
@@ -238,15 +248,13 @@ class Header extends Component {
   };
 
   handleLogout = () => {
-    const { changeOpacity } = this.props;
     this.setState({
       isLogoutBox: true,
       isLoginMenu: false,
     });
-
-    changeOpacity(true)
   }
 
+  //return a menu of login
   renderLoginMenu = () => {
     const { isLoginMenu } = this.state;
     if (isLoginMenu) {
@@ -267,22 +275,42 @@ class Header extends Component {
     return;
   };
 
-  handleCloseLogoutBox = () => {
-    const { changeOpacity } = this.props;
+  //To go to user infomation detail screen
+  handleOpenMoreInfo = () => {
+    const { image, name } = this.state;
+    this.props.navigation.navigate('Register', { data: { image, name } });
+  }
 
+  handleCloseLogoutBox = () => {
     this.setState({
       isLogoutBox: false,
     })
+  };
 
-    changeOpacity(false)
+  //Logout facebook
+  handleLogoutFacebook = () => {
+    LoginManager.logOut();
+
+    this.setState({
+      isLogoutBox: false,
+      isLogin: false,
+    })
+
+    this.storeData({
+      name: '',
+      image: '',
+      isLogin: false,
+    });
   }
 
+  //return a modal to ask exit
   renderModal = () => {
     const { isLogoutBox } = this.state;
     return (
       <LogoutBox
         visible={isLogoutBox}
         onRequestClose={this.handleCloseLogoutBox}
+        logoutPress={this.handleLogoutFacebook}
       />
     )
   }
@@ -291,7 +319,7 @@ class Header extends Component {
 
   render() {
 
-    const { isLogin, image, name, display, } = this.state;
+    const { isLogin, image, display, } = this.state;
 
     return (
       <View style={styles.container}>

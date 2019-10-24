@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, StyleSheet, Image, TouchableOpacity, TextInput } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, Image, TouchableOpacity, TextInput, PermissionsAndroid } from 'react-native';
 import Footer from '../task/Footer';
 import DetailHeader from '../components/DetailHeader';
 import Header from '../task/Header';
@@ -8,10 +8,23 @@ import Form from '../components/Form';
 import { CheckBox } from 'native-base';
 import OpenLinking from '../utils/OpenLinking';
 import Icon from 'react-native-vector-icons/Feather';
+import ImagePicker from 'react-native-image-picker';
+
+
+const options = {
+    quality: 1.0,
+    maxWidth: 500,
+    maxHeight: 500,
+    storageOptions: {
+        skipBackup: false,
+    },
+};
+
 
 
 export default class RegisterScreen extends Component {
     constructor(props) {
+        data = props.navigation.getParam('data');
         super(props);
         this.state = {
             display: false,
@@ -31,7 +44,8 @@ export default class RegisterScreen extends Component {
                 'Đang chờ ngày bay qua Nhật Bản',
                 'Đã đến Nhật Bản',
             ],
-            checked: false
+            checked: false,
+            image: data.image,
         };
     }
 
@@ -56,7 +70,38 @@ export default class RegisterScreen extends Component {
         })
     };
 
+    handleChooseImage = async () => {
+        try {
+            const granted = await PermissionsAndroid.request(
+                PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+                {
+                    title: 'Cool Photo App Camera Permission',
+                    message:
+                        'Cool Photo App needs access to your camera ' +
+                        'so you can take awesome pictures.',
+                    buttonNeutral: 'Ask Me Later',
+                    buttonNegative: 'Cancel',
+                    buttonPositive: 'OK',
+                },
+            );
+            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                ImagePicker.launchImageLibrary(options, (response) => {
+                    console.log(response)
+                    this.setState({
+                        image: response.uri,
+                    })
+                });
+            } else {
+                console.log('Camera permission denied');
+            }
+        } catch (err) {
+            console.warn(err);
+        }
+
+    }
+
     render() {
+        console.log(this.state.image);
         return (
             <View style={{ flex: 1 }}>
                 <Header />
@@ -64,27 +109,36 @@ export default class RegisterScreen extends Component {
                     <View style={styles.container}>
                         <View style={styles.headerDetailStyle}>
                             <DetailHeader
-                                button="Tạo tài khoản"
-                                title="Tạo tài khoản Kokotachi"
+                                button={!data ? 'Tạo tài khoản' : 'Thông tin tài khoản'}
+                                title={!data ? 'Tạo tài khoản Kokotachi' : 'Thông tin tài khoản'}
                                 textAlign='center'
                             />
-                            <Text style={styles.questionText}>Bạn đã có tài khoản chưa?
+                            {!data && (
+                                <Text style={styles.questionText}>Bạn đã có tài khoản chưa?
                                 <Text
-                                    style={{ color: '#ff2a30' }}
-                                    onPress={this.handleOpenLoginBox}
-                                >
-                                    Vui lòng đăng nhập
+                                        style={{ color: '#ff2a30' }}
+                                        onPress={this.handleOpenLoginBox}
+                                    >
+                                        Vui lòng đăng nhập
                                 </Text>
-                            </Text>
+                                </Text>
+                            )}
                         </View>
                         <View style={styles.chooseImageContainer}>
                             <Text style={styles.text}>Hình ảnh</Text>
                             <Image
                                 style={styles.image}
-                                source={{ uri: 'https://kokotachi.com/images/avatar-no-image.jpg' }}
+                                source={
+                                    !data ?
+                                        { uri: 'https://kokotachi.com/images/avatar-no-image.jpg' } :
+                                        { uri: this.state.image }
+                                }
                             />
                             <Text style={styles.text}>Vui lòng chọn hình ảnh có định dạng: jpg, jpeg, png và có dung lượng {'<='} 500Kb</Text>
-                            <TouchableOpacity style={styles.chooseImageText}>
+                            <TouchableOpacity
+                                style={styles.chooseImageText}
+                                onPress={this.handleChooseImage}
+                            >
                                 <Text style={[styles.text, { color: 'white', textAlign: 'center' }]}>Chọn ảnh</Text>
                             </TouchableOpacity>
                         </View>
@@ -93,6 +147,7 @@ export default class RegisterScreen extends Component {
                                 title="Họ và tên"
                                 star
                                 isInput
+                                value={data.name}
                             />
                             <Form
                                 title="Tên tài khoản"
@@ -180,14 +235,14 @@ export default class RegisterScreen extends Component {
                                         </Text>
                                 </Text>
                             </View>
-                            <View style={{alignItems: 'center',}}>
+                            <View style={{ alignItems: 'center', }}>
                                 <TouchableOpacity style={styles.register}>
                                     <Icon
                                         name="user-check"
                                         size={20}
                                         color="white"
                                     />
-                                    <Text style={styles.registerText}>Đăng ký</Text>
+                                    <Text style={styles.registerText}>{!data? "Lưu thay đổi": "Đăng ký"}</Text>
                                 </TouchableOpacity>
                             </View>
 

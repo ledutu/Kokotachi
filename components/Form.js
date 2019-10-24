@@ -38,8 +38,8 @@ export default class Form extends Component {
     }
 
     onChangeText = text => {
-        this.setState({
-            text: text
+            this.setState({
+            text,
         })
     }
 
@@ -96,7 +96,7 @@ export default class Form extends Component {
                                 placeholder={placeholder}
                                 style={styles.textInput}
                                 onChangeText={this.onChangeText}
-                                value={this.state.text}
+                                value={this.state.name}
                                 secureTextEntry={secureTextEntry}
                             />
                         </View>

@@ -25,7 +25,7 @@ class AccountLoginBox extends React.Component {
     static propTypes = {
         display: PropTypes.bool.isRequired,
         close: PropTypes.func.isRequired,
-        facebookLogin: PropTypes.func.isRequired
+        facebookLogin: PropTypes.func,
     }
 
     onPressButton = () => {
