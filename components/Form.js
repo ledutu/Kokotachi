@@ -96,7 +96,7 @@ export default class Form extends Component {
                                 placeholder={placeholder}
                                 style={styles.textInput}
                                 onChangeText={this.onChangeText}
-                                value={this.state.name}
+                                value={this.state.text}
                                 secureTextEntry={secureTextEntry}
                             />
                         </View>

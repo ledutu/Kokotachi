@@ -15,9 +15,9 @@ import { withNavigation } from 'react-navigation';
 import PropTypes from 'prop-types';
 import LogoImages from '../utils/LogoImages';
 import MenuModal from '../components/detailMenuComponent/MenuModal';
+import AccountFotgotBox from '../components/AccountFotgotBox';
 
 import {
-  LoginButton,
   AccessToken,
   LoginManager,
   GraphRequest,
@@ -55,11 +55,14 @@ class Header extends Component {
 
   //to swtich forgot username and password screen
   handleOpenForgot = () => {
-    this.setState({ displayForgot: true })
+    this.setState({ 
+      displayForgot: true,
+      display: false,
+    })
   };
 
   //to close forgotScreen
-  closeForgot = () => {
+  handleCloseForgotModal = () => {
     this.setState({ displayForgot: false })
   };
 
@@ -70,7 +73,7 @@ class Header extends Component {
   };
 
   //To close a login box
-  close = () => {
+  handleCloseLoginModal = () => {
     this.setState({
       display: false,
     })
@@ -235,7 +238,7 @@ class Header extends Component {
         console.log("Login fail with error: " + error);
       }
     );
-    this.close();
+    this.handleCloseLoginModal();
   };
 
   //Open menu in Avatar
@@ -277,6 +280,9 @@ class Header extends Component {
 
   //To go to user infomation detail screen
   handleOpenMoreInfo = () => {
+    this.setState({
+      isLoginMenu: false,
+    })
     const { image, name } = this.state;
     this.props.navigation.navigate('Register', { data: { image, name } });
   }
@@ -313,13 +319,20 @@ class Header extends Component {
         logoutPress={this.handleLogoutFacebook}
       />
     )
+  };
+
+  handleBackToLogin = () => {
+    this.setState({
+      display: true,
+      displayForgot: false,
+    })
   }
 
 
 
   render() {
 
-    const { isLogin, image, display, } = this.state;
+    const { isLogin, image, display, displayForgot } = this.state;
 
     return (
       <View style={styles.container}>
@@ -357,9 +370,15 @@ class Header extends Component {
         </View>
         <AccountLoginBox
           display={display}
-          close={this.close}
+          close={this.handleCloseLoginModal}
           onPress={this.handleOpenRegisterScreen}
           facebookLogin={this.handleLoginFacebook}
+          openAnotherModel={this.handleOpenForgot}
+        />
+        <AccountFotgotBox
+          display={displayForgot}
+          close={this.handleCloseForgotModal}
+          back={this.handleBackToLogin}
         />
         {this.renderLoginMenu()}
 

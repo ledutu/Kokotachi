@@ -22,9 +22,25 @@ const options = {
 
 
 
+
 export default class RegisterScreen extends Component {
+    
     constructor(props) {
         data = props.navigation.getParam('data');
+        result = null;
+        {
+            if(data)
+            {
+                result = data;
+            }
+            else
+            {
+                result = {
+                    image: 'https://kokotachi.com/images/avatar-no-image.jpg',
+                    name: 'No name',
+                }
+            }
+        }
         super(props);
         this.state = {
             display: false,
@@ -45,9 +61,10 @@ export default class RegisterScreen extends Component {
                 'Đã đến Nhật Bản',
             ],
             checked: false,
-            image: data.image,
+            image: result.image,
+            name: result.name,
         };
-    }
+    };
 
     static navigationOptions = {
         header: null
@@ -101,7 +118,8 @@ export default class RegisterScreen extends Component {
     }
 
     render() {
-        console.log(this.state.image);
+        const { image } = this.state;
+        
         return (
             <View style={{ flex: 1 }}>
                 <Header />
@@ -128,11 +146,7 @@ export default class RegisterScreen extends Component {
                             <Text style={styles.text}>Hình ảnh</Text>
                             <Image
                                 style={styles.image}
-                                source={
-                                    !data ?
-                                        { uri: 'https://kokotachi.com/images/avatar-no-image.jpg' } :
-                                        { uri: this.state.image }
-                                }
+                                source={{uri: image}}
                             />
                             <Text style={styles.text}>Vui lòng chọn hình ảnh có định dạng: jpg, jpeg, png và có dung lượng {'<='} 500Kb</Text>
                             <TouchableOpacity
@@ -147,7 +161,6 @@ export default class RegisterScreen extends Component {
                                 title="Họ và tên"
                                 star
                                 isInput
-                                value={data.name}
                             />
                             <Form
                                 title="Tên tài khoản"
@@ -242,7 +255,7 @@ export default class RegisterScreen extends Component {
                                         size={20}
                                         color="white"
                                     />
-                                    <Text style={styles.registerText}>{!data? "Lưu thay đổi": "Đăng ký"}</Text>
+                                    <Text style={styles.registerText}>{data ? "Lưu thay đổi" : "Đăng ký"}</Text>
                                 </TouchableOpacity>
                             </View>
 
@@ -329,8 +342,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 13.5,
         backgroundColor: '#e02f49',
         flexDirection: 'row',
-        width: 120,
-        height: 37,
         alignItems: 'center',
         justifyContent: 'space-around',
         borderRadius: 20,

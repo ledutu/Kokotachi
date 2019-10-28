@@ -26,6 +26,7 @@ class AccountLoginBox extends React.Component {
         display: PropTypes.bool.isRequired,
         close: PropTypes.func.isRequired,
         facebookLogin: PropTypes.func,
+        openAnotherModel: PropTypes.func
     }
 
     onPressButton = () => {
@@ -34,7 +35,7 @@ class AccountLoginBox extends React.Component {
     };
 
     render() {
-        const { display, close, facebookLogin } = this.props
+        const { display, close, facebookLogin, openAnotherModel } = this.props
         return (
             <View style={{ flex: 1 }}>
                 <Modal
@@ -47,14 +48,14 @@ class AccountLoginBox extends React.Component {
                     scrollHorizontal={false}
                     children={true}
                 >
-                    <ScrollView>
+                    <View>
                         <View style={styles.imageContainer}>
                             <Image
                                 source={require('../kokotachi_image/logo.png')}
                                 style={styles.logoImage}
                             />
                         </View>
-                        <View style={styles.infoContainer}>
+                        <ScrollView contentContainerStyle={styles.infoContainer}>
                             <Text style={styles.loginText}>Đăng nhập</Text>
                             <TouchableOpacity style={styles.facebookButton} onPress={facebookLogin}>
                                 <Icon
@@ -85,7 +86,7 @@ class AccountLoginBox extends React.Component {
                                         <Text style={styles.saveText}>Ghi nhớ tên {'\n'} đăng nhập</Text>
                                     </View>
 
-                                    <TouchableOpacity>
+                                    <TouchableOpacity onPress={openAnotherModel}>
                                         <Text style={[styles.saveText, { color: '#ff2a30' }]}>Quên mật khẩu</Text>
                                     </TouchableOpacity>
 
@@ -103,8 +104,8 @@ class AccountLoginBox extends React.Component {
                                     </Button>
                                 </View>
                             </View>
-                        </View>
-                    </ScrollView>
+                        </ScrollView>
+                    </View>
                 </Modal>
             </View>
 
@@ -115,7 +116,8 @@ class AccountLoginBox extends React.Component {
 const styles = StyleSheet.create({
     modal: {
         backgroundColor: 'white',
-        borderRadius: 10
+        borderRadius: 10,
+        flex: 1,
     },
 
     checkBoxButtonStyle: {
@@ -212,13 +214,13 @@ const styles = StyleSheet.create({
 
     loginTextButton: {
         fontSize: 18,
-        color: 'white'
+        color: 'white',
+        paddingVertical: 4.5,
+        paddingHorizontal: 18,
     },
 
     button: {
         backgroundColor: '#e02f49',
-        width: 120,
-        height: 40,
         justifyContent: 'center',
         marginVertical: 10
     },
