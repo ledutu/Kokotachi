@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import Header from '../task/Header';
-import { ScrollView } from 'react-native-gesture-handler';
-import DetailHeader from '../components/DetailHeader';
+import DetailHeader from '../components/detail/DetailHeader';
 import Footer from '../task/Footer';
 import ImagePoster from '../components/EventComponents/ImagePoster';
 import InfoEvent from '../components/EventComponents/InfoEvent';

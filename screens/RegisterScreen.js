@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, StyleSheet, Image, TouchableOpacity, TextInput, PermissionsAndroid } from 'react-native';
 import Footer from '../task/Footer';
-import DetailHeader from '../components/DetailHeader';
+import DetailHeader from '../components/detail/DetailHeader';
 import Header from '../task/Header';
-import AccountLoginBox from '../components/AccountLoginBox';
+import AccountLoginBox from '../components/account/AccountLoginBox';
 import Form from '../components/Form';
 import { CheckBox } from 'native-base';
 import OpenLinking from '../utils/OpenLinking';

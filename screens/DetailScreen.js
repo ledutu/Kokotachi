@@ -4,7 +4,7 @@ import DetailMenuHeader from '../components/detailMenuComponent/DetailMenuHeader
 import Header from '../task/Header';
 import DetailCard from '../components/detailMenuComponent/DetailCard';
 import { JobData, ChurchData, CosmeticData, EventData, ApartmentData, SocialData } from "../data/Data";
-import ChurchBox from '../components/ChurchBox';
+import ChurchBox from '../components/church/ChurchBox';
 import RefMostPosting from '../components/detailMenuComponent/RefMostPosting';
 import Footer from '../task/Footer';
 

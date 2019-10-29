@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import Header from '../task/Header';
-import DetailHeader from '../components/DetailHeader';
-import ShareButton from '../components/ShareButton';
-import Admin from '../components/Admin';
-import Comment from '../components/Comment';
+import DetailHeader from '../components/detail/DetailHeader';
+import ShareButton from '../components/detail/ShareButton';
+import Admin from '../components/detail/Admin';
+import Comment from '../components/detail/Comment';
 import RefPosting from '../components/RefPosting';
 import Footer from '../task/Footer';
-import DetailSectionText from '../components/DetailSectionText';
+import DetailSectionText from '../components/detail/DetailSectionText';
 
 export default class ApartmentScreen extends Component {
     constructor(props) {

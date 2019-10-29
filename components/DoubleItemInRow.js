@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import ChurchBox from './ChurchBox';
+import ChurchBox from './church/ChurchBox';
 import PropTypes from 'prop-types';
 
 class DoubleItemInRow extends Component {

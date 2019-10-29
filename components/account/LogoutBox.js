@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import Modal from "react-native-modal";
+import AccountLogo from './AccountLogo';
 
 export default function LogoutBox({ visible, onRequestClose, logoutPress }) {
 
@@ -16,12 +17,9 @@ export default function LogoutBox({ visible, onRequestClose, logoutPress }) {
                 useNativeDriver={true}
             >
                 <View style={styles.modalDetail}>
-                    <View style={styles.imageContainer}>
-                        <Image
-                            source={require('../kokotachi_image/logo.png')}
-                            style={styles.logoImage}
-                        />
-                    </View>
+                    <AccountLogo
+                        uri={'https://kokotachi.com/images/assets/logo-bottom.png'}
+                    />
                     <View style={styles.contentContainer}>
                         <Text style={styles.title}>Bạn có chắc muốn thoát khỏi hiện tại?</Text>
                         <View style={styles.buttonGroup}>
@@ -29,7 +27,7 @@ export default function LogoutBox({ visible, onRequestClose, logoutPress }) {
                                 <Text style={styles.text}>Không</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.yesButton} onPress={logoutPress}>
-                                <Text style={[styles.text, {color: 'white'}]}>Có</Text>
+                                <Text style={[styles.text, { color: 'white' }]}>Có</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -51,7 +49,7 @@ const styles = StyleSheet.create({
     },
 
     modal: {
-        
+
     },
 
     imageContainer: {
@@ -83,7 +81,7 @@ const styles = StyleSheet.create({
         marginBottom: 18,
         textAlign: 'center'
     },
-    text:{
+    text: {
         fontSize: 18,
         paddingVertical: 4.5,
         paddingHorizontal: 18,
@@ -95,7 +93,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginBottom: 18,
     },
-    noButton:{
+    noButton: {
         borderWidth: 1,
         borderColor: 'rgba(51, 51, 51, 0.5)',
         backgroundColor: '#DDDDDD',

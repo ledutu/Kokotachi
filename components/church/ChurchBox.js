@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView} from 'react-native';
 import Modal from "react-native-modal";
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import OpenLinking from '../utils/OpenLinking';
+import OpenLinking from '../../utils/OpenLinking';
 import PropTypes from 'prop-types';
 
 export default class ChurchBox extends Component {

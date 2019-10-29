@@ -13,6 +13,7 @@ import Modal from "react-native-modal";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { CheckBox, Button } from 'native-base';
 import PropTypes from 'prop-types';
+import AccountLogo from './AccountLogo';
 
 class AccountLoginBox extends React.Component {
     constructor(props) {
@@ -49,12 +50,9 @@ class AccountLoginBox extends React.Component {
                     children={true}
                 >
                     <View>
-                        <View style={styles.imageContainer}>
-                            <Image
-                                source={require('../kokotachi_image/logo.png')}
-                                style={styles.logoImage}
-                            />
-                        </View>
+                        <AccountLogo
+                            uri={'https://kokotachi.com/images/assets/logo-bottom.png'}
+                        />
                         <ScrollView contentContainerStyle={styles.infoContainer}>
                             <Text style={styles.loginText}>Đăng nhập</Text>
                             <TouchableOpacity style={styles.facebookButton} onPress={facebookLogin}>

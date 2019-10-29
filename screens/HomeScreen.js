@@ -8,7 +8,7 @@ import Footer from '../task/Footer';
 import FabButton from '../components/FabButton';
 import DoubleRow from '../components/DoubleRow';
 import LogoImages from '../utils/LogoImages';
-import ChurchInRow from '../components/ChurchInRow';
+import ChurchInRow from '../components/church/ChurchInRow';
 
 
 

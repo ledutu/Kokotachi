@@ -10,12 +10,12 @@ import {
 
 import AsyncStorage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import AccountLoginBox from '../components/AccountLoginBox';
+import AccountLoginBox from '../components/account/AccountLoginBox';
 import { withNavigation } from 'react-navigation';
 import PropTypes from 'prop-types';
 import LogoImages from '../utils/LogoImages';
 import MenuModal from '../components/detailMenuComponent/MenuModal';
-import AccountFotgotBox from '../components/AccountFotgotBox';
+import AccountFotgotBox from '../components/account/AccountFotgotBox';
 
 import {
   AccessToken,
@@ -23,7 +23,7 @@ import {
   GraphRequest,
   GraphRequestManager,
 } from 'react-native-fbsdk';
-import LogoutBox from '../components/LogoutBox';
+import LogoutBox from '../components/account/LogoutBox';
 
 const KEY = "KEY";
 

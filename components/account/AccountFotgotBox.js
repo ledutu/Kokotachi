@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, ScrollView, TextInput, Image, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import Modal from "react-native-modal";
+import AccountLogo from './AccountLogo';
 
 export default class AccountFotgotBox extends Component {
     constructor(props) {
@@ -31,12 +32,9 @@ export default class AccountFotgotBox extends Component {
                     children={true}
                 >
                     <View style={{ flex: 1 }}>
-                        <View style={styles.imageContainer}>
-                            <Image
-                                source={require('../kokotachi_image/logo.png')}
-                                style={styles.logoImage}
-                            />
-                        </View>
+                        <AccountLogo
+                            uri={'https://kokotachi.com/images/assets/logo-bottom.png'}
+                        />
                         <ScrollView contentContainerStyle={styles.content}>
                             <Text style={styles.title}>Bạn đã quên mật khẩu?</Text>
                             <View style={styles.subtitleContainer}>
@@ -50,7 +48,7 @@ export default class AccountFotgotBox extends Component {
                                     style={styles.textinput}
                                 />
                             </View>
-                            <View style={styles.captcha}/>
+                            <View style={styles.captcha} />
                             <TouchableOpacity style={styles.button}>
                                 <Text style={styles.resetText}>Thiết đặt lại mật khẩu</Text>
                             </TouchableOpacity>

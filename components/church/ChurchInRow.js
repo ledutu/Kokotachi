@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import SectionItem from './SectionItem';
-import DoubleItemInRow from './DoubleItemInRow';
+import SectionItem from '../SectionItem';
+import DoubleItemInRow from '../DoubleItemInRow';
 import ChurchItem from './ChurchItem';
 import PropTypes from 'prop-types';
 
