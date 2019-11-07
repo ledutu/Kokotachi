@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import ChurchBox from './church/ChurchBox';
 import PropTypes from 'prop-types';
-import { imageSource } from '../utils/pureFunction';
-
+import { imageSource } from '../../utils/pureFunction';
 const { width } = Dimensions.get('window');
 
-class DoubleItemInRow extends Component {
+class EventItem extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -24,22 +22,15 @@ class DoubleItemInRow extends Component {
         this.props.navigation.navigate(this.props.screen, { data: this.props.info });
     }
 
-    triggerModal() {
-        this.setState(prevState => {
-            return {
-                display: true
-            }
-        });
-    }
-
     render() {
 
         const {
             data: {
-                category,
-                thumbnail,
-                approved_at,
-                title,
+                image_path,
+                article: {
+                    created_at,
+                    title
+                },
             },
         } = this.props;
 
@@ -48,22 +39,18 @@ class DoubleItemInRow extends Component {
                 <TouchableOpacity
                     style={styles.container}
                     activeOpacity={0.9}
-                    onPress={title === "Nhà thờ" ? this.triggerModal : this.goToAnotherScreen}
                 >
                     <Image
-                        source={imageSource("/storage/" + thumbnail)}
+                        source={imageSource(image_path)}
                         style={styles.image}
                     />
                     <View style={styles.shareAndDatePosting}>
-                        <Text style={styles.textButton} numberOfLines={1}>{category.title}</Text>
-                        <Text style={styles.datePosting}>{approved_at}</Text>
+                        <Text style={styles.textButton} numberOfLines={1}>Sự kiện</Text>
+                        <Text style={styles.datePosting}>{created_at}</Text>
                     </View>
                     <Text style={styles.titleStyle}>{title}</Text>
                 </TouchableOpacity>
 
-                <ChurchBox
-                    display={this.state.display}
-                />
             </View>
         );
     }
@@ -120,4 +107,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default withNavigation(DoubleItemInRow);
+export default withNavigation(EventItem);

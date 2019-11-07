@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import PropTypes from 'prop-types';
+import { imageSource } from '../utils/pureFunction';
 
 class ReaderItem extends Component {
     constructor(props) {
@@ -11,8 +12,9 @@ class ReaderItem extends Component {
     }
 
     static propTypes = {
-        screen: PropTypes.string.isRequired,
-        info: PropTypes.object.isRequired,
+        data: PropTypes.object.isRequired,
+        screen: PropTypes.string,
+        info: PropTypes.object,
     }
 
     goToAnotherScreen = () => {
@@ -23,10 +25,10 @@ class ReaderItem extends Component {
 
         const {
             data: {
-                image,
+                category,
+                thumbnail,
+                approved_at,
                 title,
-                datePosting,
-                button
             }
         } = this.props;
 
@@ -36,12 +38,12 @@ class ReaderItem extends Component {
                 activeOpacity={0.9}
                 onPress={this.goToAnotherScreen}>
                 <Image
-                    source={{ uri: image }}
+                    source={imageSource("/storage/" + thumbnail)}
                     style={styles.image}
                 />
                 <View style={styles.shareAndDatePosting}>
-                    <Text style={styles.textButton} numberOfLines={1}>{button}</Text>
-                    <Text>{datePosting}</Text>
+                    <Text style={styles.textButton} numberOfLines={1}>{category.title}</Text>
+                    <Text>{approved_at}</Text>
                 </View>
                 <Text style={styles.titleStyle}>{title}</Text>
             </TouchableOpacity>

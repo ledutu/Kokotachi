@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, Linking } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import ChurchBox from './ChurchBox';
 import PropTypes from 'prop-types';
+import { imageSource } from '../../utils/pureFunction';
+const { width } = Dimensions.get('window');
 
 class ChurchItem extends Component {
     constructor(props) {
@@ -41,13 +43,13 @@ class ChurchItem extends Component {
 
         const {
             data: {
-                image,
+                gallery,
+                thumbnail_url400x,
+                article,
                 title,
-                datePosting,
-                button,
-                address, english, vietnam,
-                japan, normal, sunday,
-                volunteerActivity, detail, source
+                // address, english, vietnam,
+                // japan, normal, sunday,
+                // volunteerActivity, detail, source
             },
         } = this.props;
 
@@ -59,17 +61,17 @@ class ChurchItem extends Component {
                     onPress={this.triggerModal}
                 >
                     <Image
-                        source={{ uri: image }}
+                        source={imageSource(thumbnail_url400x)}
                         style={styles.image}
                     />
                     <View style={styles.shareAndDatePosting}>
-                        <Text style={styles.textButton} numberOfLines={1}>{button}</Text>
-                        <Text style={styles.datePosting}>{datePosting}</Text>
+                        <Text style={styles.textButton} numberOfLines={1}>{gallery.type}</Text>
+                        <Text style={styles.datePosting}>{article.created_at}</Text>
                     </View>
                     <Text style={styles.titleStyle}>{title}</Text>
                 </TouchableOpacity>
 
-                <ChurchBox
+                {/* <ChurchBox
                     display={this.state.display}
                     close={this.close}
                     address={address}
@@ -82,7 +84,7 @@ class ChurchItem extends Component {
                     detail={detail}
                     source={source}
                     title={title}
-                />
+                /> */}
             </View>
         );
     }
@@ -91,13 +93,13 @@ class ChurchItem extends Component {
 const styles = StyleSheet.create({
     container: {
         padding: 15,
-        width: 200,
+        width: width/2,
         height: 340,
         alignItems: 'center'
     },
 
     image: {
-        height: 180,
+        height: width/2,
         width: '100%',
         borderRadius: 10
     },

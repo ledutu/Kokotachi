@@ -6,16 +6,9 @@ import ChurchItem from './ChurchItem';
 import PropTypes from 'prop-types';
 
 export default class ChurchInRow extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-
-        };
-
-    }
 
     static propTypes = {
-        icon: PropTypes.object.isRequired,
+        uri: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
         data: PropTypes.array.isRequired,
         onPress: PropTypes.func,
@@ -27,7 +20,7 @@ export default class ChurchInRow extends Component {
         return (
             <View style={styles.container}>
                 <SectionItem
-                    uri={{ uri }}
+                    uri={uri}
                     title={title}
                     button="Xem thêm"
                     onPress={() => onPress(title, uri)}

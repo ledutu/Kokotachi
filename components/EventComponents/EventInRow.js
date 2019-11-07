@@ -1,17 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import SectionItem from './SectionItem';
-import DoubleItemInRow from './DoubleItemInRow';
+import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
+import EventItem from './EventItem';
+import SectionItem from '../SectionItem';
 
-export default class DoubleRow extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-
-        };
-
-    }
+export default class EventInRow extends Component {
 
     static propTypes = {
         data: PropTypes.array.isRequired,
@@ -39,7 +32,7 @@ export default class DoubleRow extends Component {
                         {
                             data.slice(0, centerData).map(item => {
                                 return (
-                                    <DoubleItemInRow
+                                    <EventItem
                                         key={item.id}
                                         data={item}
                                         screen={screen}
@@ -53,7 +46,7 @@ export default class DoubleRow extends Component {
                         {
                             data.slice(centerData).map(item => {
                                 return (
-                                    <DoubleItemInRow
+                                    <EventItem
                                         key={item.id}
                                         data={item}
                                         screen={screen}

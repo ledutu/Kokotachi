@@ -11,7 +11,7 @@ class SectionItem extends Component {
     }
 
     static propTypes = {
-        uri: PropTypes.object.isRequired,
+        // uri: PropTypes.number,
         title: PropTypes.string.isRequired,
         button: PropTypes.string.isRequired,
     };
