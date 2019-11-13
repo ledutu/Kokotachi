@@ -41,20 +41,20 @@ export function imageSource(path) {
  * @param {string} path 
  * @returns {ImageSourcePropType}
  */
-// export function avatarSource(path) {
-//     if (!path) {
-//         return require('./../assets/images/avatar-no-image.jpg')
-//     }
+export function avatarSource(path) {
+    if (!path) {
+        return require('../assets/images/noimage.jpg');
+    }
 
-//     if (isAbsoluteUrl(path)) {
-//         return { uri: path }
-//     }
+    if (isAbsoluteUrl(path)) {
+        return { uri: path }
+    }
 
-//     // remove-leading-slash
-//     path = path.replace(/^\/+/g, '')
+    // remove-leading-slash
+    path = path.replace(/^\/+/g, '')
 
-//     return { uri: APP_URL + "/storage/" + path }
-// }
+    return { uri: APP_URL + "/storage/" + path }
+}
 
 /**
  * Detect scrollbar is close to bottom

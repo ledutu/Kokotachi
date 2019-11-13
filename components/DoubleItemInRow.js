@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import ChurchBox from './church/ChurchBox';
 import PropTypes from 'prop-types';
 import { imageSource } from '../utils/pureFunction';
 
 const { width } = Dimensions.get('window');
+console.log(width)
 
 class DoubleItemInRow extends Component {
     constructor(props) {
@@ -21,15 +21,9 @@ class DoubleItemInRow extends Component {
     }
 
     goToAnotherScreen = () => {
-        this.props.navigation.navigate(this.props.screen, { data: this.props.info });
-    }
+        const { screen, info, } = this.props;
+        this.props.navigation.navigate(screen, { data: info });
 
-    triggerModal() {
-        this.setState(prevState => {
-            return {
-                display: true
-            }
-        });
     }
 
     render() {
@@ -41,29 +35,26 @@ class DoubleItemInRow extends Component {
                 approved_at,
                 title,
             },
+            half,
         } = this.props;
 
         return (
             <View>
                 <TouchableOpacity
-                    style={styles.container}
+                    style={[styles.container, half? styles.ahalf: styles.full]}
                     activeOpacity={0.9}
-                    onPress={title === "Nhà thờ" ? this.triggerModal : this.goToAnotherScreen}
+                    onPress={this.goToAnotherScreen}
                 >
                     <Image
                         source={imageSource("/storage/" + thumbnail)}
-                        style={styles.image}
+                        style={[styles.image, half? {height: width/2,} : {height: width,}]}
                     />
                     <View style={styles.shareAndDatePosting}>
-                        <Text style={styles.textButton} numberOfLines={1}>{category.title}</Text>
-                        <Text style={styles.datePosting}>{approved_at}</Text>
+                        <Text style={[styles.textButton, half? {width: 75}: null]} numberOfLines={1}>{category.title}</Text>
+                        <Text style={[styles.datePosting, half? {width: 80,}: null]}>{approved_at}</Text>
                     </View>
                     <Text style={styles.titleStyle}>{title}</Text>
                 </TouchableOpacity>
-
-                <ChurchBox
-                    display={this.state.display}
-                />
             </View>
         );
     }
@@ -72,22 +63,29 @@ class DoubleItemInRow extends Component {
 const styles = StyleSheet.create({
     container: {
         padding: 15,
+        justifyContent: 'space-around',
+    },
+
+    ahalf:{
         width: width/2,
-        height: 340,
-        alignItems: 'center'
+        height: width/2 + 180,
+        flex: 1,
+    },
+    full: {
+        width: "100%",
+        height: width + 145,  
+        flex: 1,
     },
 
     image: {
-        height: width/2,
         width: '100%',
-        borderRadius: 10
+        borderRadius: 10,
+        
     },
     shareAndDatePosting:
     {
         flexDirection: 'row',
-        justifyContent: 'space-around',
-        paddingVertical: 10,
-        alignItems: 'center',
+        justifyContent: 'space-between'
     },
     textButton: {
         color: 'white',
@@ -96,25 +94,20 @@ const styles = StyleSheet.create({
         backgroundColor: "#ff2a30",
         paddingVertical: 8,
         paddingHorizontal: 10,
-        marginRight: 20,
         borderRadius: 16,
-        width: 75,
     },
 
     datePosting:
     {
         fontSize: 14,
         color: 'rgba(51, 51, 51, 0.3)',
-        width: 80,
-        textAlign: 'right'
-
     },
     titleStyle:
     {
         textTransform: 'uppercase',
         color: '#333333',
         fontSize: 17,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
     }
 
 

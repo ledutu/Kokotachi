@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import SectionItem from '../SectionItem';
-import DoubleItemInRow from '../DoubleItemInRow';
 import ChurchItem from './ChurchItem';
 import PropTypes from 'prop-types';
 
@@ -34,6 +33,8 @@ export default class ChurchInRow extends Component {
                                     <ChurchItem
                                         key={item.id}
                                         data={item}
+                                        screen="Church"
+                                        info={item}
                                     />
                                 )
                             })
@@ -46,6 +47,8 @@ export default class ChurchInRow extends Component {
                                     <ChurchItem
                                         key={item.id}
                                         data={item}
+                                        screen="Church"
+                                        info={item}
                                     />
                                 )
                             })

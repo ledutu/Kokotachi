@@ -15,55 +15,79 @@ export default class DoubleRow extends Component {
 
     static propTypes = {
         data: PropTypes.array.isRequired,
-        screen: PropTypes.string.isRequired,
+        screen: PropTypes.string,
         title: PropTypes.string.isRequired,
-        uri: PropTypes.number.isRequired,
+        uri: PropTypes.number,
         onPress: PropTypes.func,
+        half: PropTypes.bool
     };
 
     render() {
-        const { screen, data, onPress, uri, title, } = this.props;
+        const { screen, data, onPress, uri, title, half, navigation, readMore } = this.props;
         const centerData = Math.floor(data.length / 2);
 
         return (
             <View style={styles.container}>
                 <SectionItem
-                    uri={uri}
+                    uri={uri ? uri : null}
                     title={title}
                     button="Xem thêm"
-                    onPress={() => onPress(title, uri)}
+                    // onPress={() => navigation.navigate('Detail', { ...readMore })}
                 />
 
-                <View style={{ marginTop: 60, flexDirection: 'row', justifyContent: 'space-around', }}>
-                    <View style={{ flexDirection: 'column' }}>
+                {half && (
+                    <View style={{ marginTop: 60, flexDirection: 'row', justifyContent: 'space-around', }}>
+                        <View style={{ flexDirection: 'column' }}>
+                            {
+                                data.slice(0, centerData).map(item => {
+                                    return (
+                                        <DoubleItemInRow
+                                            key={item.id}
+                                            data={item}
+                                            screen={screen}
+                                            info={item}
+                                            half
+                                        />
+                                    )
+                                })
+                            }
+                        </View>
+                        <View style={{ flexDirection: 'column' }}>
+                            {
+                                data.slice(centerData).map(item => {
+                                    return (
+                                        <DoubleItemInRow
+                                            key={item.id}
+                                            data={item}
+                                            screen={screen}
+                                            info={item}
+                                            half
+                                        />
+                                    )
+                                })
+                            }
+                        </View>
+                    </View>
+                )}
+
+                {!half && (
+                    <View style={{ marginTop: 60 }}>
                         {
-                            data.slice(0, centerData).map(item => {
+                            data.map(item => {
                                 return (
                                     <DoubleItemInRow
                                         key={item.id}
                                         data={item}
                                         screen={screen}
                                         info={item}
+                                        half={false}
                                     />
                                 )
                             })
                         }
                     </View>
-                    <View style={{ flexDirection: 'column' }}>
-                        {
-                            data.slice(centerData).map(item => {
-                                return (
-                                    <DoubleItemInRow
-                                        key={item.id}
-                                        data={item}
-                                        screen={screen}
-                                        info={item}
-                                    />
-                                )
-                            })
-                        }
-                    </View>
-                </View>
+                )}
+
             </View>
 
         );

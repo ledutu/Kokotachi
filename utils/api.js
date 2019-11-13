@@ -29,4 +29,17 @@ export function fetchEvents({ category_slug, page = 1, per_page = LIST_PERPAGE }
     return axios.get('/v1/events', {
         params: { page, category_slug, per_page, ...searchQuery }
     })
-}
+};
+
+export function fetchContentArticle(article_id, page = 1) {
+    return axios.get('/v1/get-content-article', {
+        params: { article_id: article_id }
+    })
+};
+
+export function getArticles_MayULike({ except_article, per_page = LIST_PERPAGE, cancelToken }) {
+    return axios.get('/v1/articles', {
+        params: { per_page, except_article },
+        cancelToken
+    })
+};

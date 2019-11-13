@@ -4,7 +4,6 @@ import DetailMenuHeader from '../components/detailMenuComponent/DetailMenuHeader
 import Header from '../task/Header';
 import DetailCard from '../components/detailMenuComponent/DetailCard';
 import { JobData, ChurchData, CosmeticData, EventData, ApartmentData, SocialData } from "../data/Data";
-import ChurchBox from '../components/church/ChurchBox';
 import RefMostPosting from '../components/detailMenuComponent/RefMostPosting';
 import Footer from '../task/Footer';
 
@@ -92,20 +91,7 @@ export default class DetailScreen extends Component {
     handleOpenModel = id => {
 
         return (
-            <ChurchBox
-                address={ChurchData[id].address}
-                english={ChurchData[id].english}
-                vietnam={ChurchData[id].vietnam}
-                japan={ChurchData[id].japan}
-                normal={ChurchData[id].normal}
-                sunday={ChurchData[id].sunday}
-                volunteerActivity={ChurchData[id].volunteerActivity}
-                detail={ChurchData[id].detail}
-                source={ChurchData[id].source}
-                title={ChurchData[id].title}
-                display={this.state.display}
-                close={this.handleCloseModel}
-            />
+            <View></View>
         )
     }
 
@@ -198,10 +184,11 @@ export default class DetailScreen extends Component {
 
     render() {
         const data = this.props.navigation.getParam('data', '');
+        // console.log(data)
         const { selectedId, periodNumber, postingNumber } = this.state;
         return (
             <View style={styles.container}>
-                <Header />
+                {/* <Header />
                 <ScrollView style={styles.detailContainer}>
                     <View style={{ paddingHorizontal: 15, }}>
                         <DetailMenuHeader
@@ -223,7 +210,7 @@ export default class DetailScreen extends Component {
                     </View>
                     <Footer />
                 </ScrollView>
-                {this.handleOpenModel(selectedId)}
+                {this.handleOpenModel(selectedId)} */}
 
             </View>
         );

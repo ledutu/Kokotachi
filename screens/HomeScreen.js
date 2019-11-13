@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
 import Header from '../task/Header';
-import Reader from '../task/Reader';
 import Footer from '../task/Footer';
 import FabButton from '../components/FabButton';
 import DoubleRow from '../components/DoubleRow';
@@ -10,12 +9,17 @@ import {
     fetchArticles,
     fetchBanners,
     fetchTopChurch,
-    fetchEvents
+    fetchEvents,
+    fetchContentArticle
 } from '../utils/api';
 
 import Banners from '../task/Banners';
 import { type_utils } from '../utils/constants';
 import EventInRow from '../components/EventComponents/EventInRow';
+
+const uppercase = text => {
+    return text.slice(0, 1).toUpperCase() + text.slice(1, text.length)
+}
 
 export default class HomeScreen extends Component {
     constructor(props) {
@@ -35,6 +39,7 @@ export default class HomeScreen extends Component {
 
     async componentDidMount() {
         this.getBanner();
+
         try {
             const [
                 jobArticlesRes,
@@ -94,8 +99,8 @@ export default class HomeScreen extends Component {
         header: null,
     };
 
-    handleOnPress = (title, uri) => {
-        this.props.navigation.navigate('Detail', { data: { title, uri } });
+    handleOnPress = ({ type }) => {
+        console.log(type);
     };
 
     render() {
@@ -117,40 +122,49 @@ export default class HomeScreen extends Component {
 
                 <ScrollView>
                     <Banners banners={banners} />
-                    <Reader
+
+                    <DoubleRow
+                        uri={type_utils.most_viewed.icon}
                         title={type_utils.most_viewed.display}
                         data={topViewArticlesRes}
+                        screen="Detail"
+                        // onPress={this.handleOnPress}
+                        // readMore={{type: 'apartment'}}
                     />
                     <DoubleRow
                         uri={type_utils.job.icon}
                         title={type_utils.job.display}
                         data={jobArticlesRes}
-                        screen="Job"
+                        screen="Detail"
                         onPress={this.handleOnPress}
+                        half
                     />
 
                     <DoubleRow
                         uri={type_utils.apartment.icon}
                         title={type_utils.apartment.display}
                         data={apartmentArticlesRes}
-                        screen="Apartment"
+                        screen='Detail'
                         onPress={this.handleOnPress}
+                        half
                     />
 
                     <DoubleRow
                         uri={type_utils.lifestyle.icon}
                         title={type_utils.lifestyle.display}
                         data={lifestyleArticlesRes}
-                        screen="Cosmetic"
+                        screen='Detail'
                         onPress={this.handleOnPress}
+                        half
                     />
 
                     <DoubleRow
                         uri={type_utils.cosme.icon}
                         title={type_utils.cosme.display}
                         data={cosmeArticlesRes}
-                        screen="Cosmetic"
+                        screen='Detail'
                         onPress={this.handleOnPress}
+                        half
                     />
 
                     <ChurchInRow

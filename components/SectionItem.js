@@ -29,10 +29,13 @@ class SectionItem extends Component {
                 <View style={{ paddingHorizontal: 15 }}>
                     <View style={styles.header}>
                         <View style={styles.wrapIconAndText}>
-                            <Image
-                                source={uri}
-                                style={styles.icon}
-                            />
+                            {uri && (
+                                <Image
+                                    source={uri}
+                                    style={styles.icon}
+                                />
+                            )}
+
                             <Text style={styles.title}>{title}</Text>
                         </View>
                         <TouchableOpacity style={styles.button} onPress={this.handleOnPress}>

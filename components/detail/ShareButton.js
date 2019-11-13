@@ -21,9 +21,7 @@ export default class ShareButton extends Component {
                         iconName="favorite"
                         size={18}
                         color="rgba(51, 51, 51, 0.7)"
-                        title="Thích bài viết"
                         style = {styles.favoriteButton}
-                        
                     />
 
                     <TouchableButton
@@ -31,7 +29,6 @@ export default class ShareButton extends Component {
                         iconName="logo-facebook"
                         size={18}
                         color="white"
-                        title="Chia sẽ Facebook"
                         style = {styles.facebookButton}
                     />
 
@@ -40,7 +37,6 @@ export default class ShareButton extends Component {
                         iconName="logo-twitter"
                         size={18}
                         color="white"
-                        title="Chia sẽ Twitter"
                         style = {styles.twitterButton}
                     />
                 </View>
@@ -53,19 +49,22 @@ const styles = StyleSheet.create({
     icon:{
         flexDirection: 'row',
         justifyContent: "flex-end",
-        marginVertical: 18
+        marginVertical: 18,
     },
     favoriteButton: {
         backgroundColor: '#ededed',
-        color: 'rgba(51, 51, 51, 0.7)'
+        color: 'rgba(51, 51, 51, 0.7)',
+        marginLeft: 10,
     },
     facebookButton: {
         backgroundColor: '#3b5998',
-        color: 'white'
+        color: 'white',
+        marginLeft: 10,
     },
     twitterButton: {
         backgroundColor: '#1da1f2',
-        color: 'white'
+        color: 'white',
+        marginLeft: 10,
     },
 
 

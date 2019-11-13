@@ -39,6 +39,7 @@ class EventItem extends Component {
                 <TouchableOpacity
                     style={styles.container}
                     activeOpacity={0.9}
+                    onPress={this.goToAnotherScreen}
                 >
                     <Image
                         source={imageSource(image_path)}
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({
     container: {
         padding: 15,
         width: width/2,
-        height: 340,
+        height: 380,
         alignItems: 'center'
     },
 

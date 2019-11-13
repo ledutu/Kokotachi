@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
-import ChurchBox from './ChurchBox';
 import PropTypes from 'prop-types';
 import { imageSource } from '../../utils/pureFunction';
+import { withNavigation } from 'react-navigation';
+
 const { width } = Dimensions.get('window');
 
 class ChurchItem extends Component {
@@ -14,21 +15,7 @@ class ChurchItem extends Component {
     }
 
     static propTypes = {
-        address: PropTypes.string,
-        english: PropTypes.string,
-        vietnam: PropTypes.string,
-        japan: PropTypes.string,
-        normal: PropTypes.string,
-        sunday: PropTypes.string,
-        volunteerActivity: PropTypes.string,
-        detail: PropTypes.string,
-        source: PropTypes.string,
-    }
-
-    triggerModal = () => {
-        this.setState({
-            display: true
-        })
+        
     }
 
     close = () => {
@@ -36,6 +23,11 @@ class ChurchItem extends Component {
             display: false
         })
     };
+
+    goToAnotherScreen = () => {
+        const { screen, info } = this.props;
+        this.props.navigation.navigate(screen, { data: info });
+    }
 
 
 
@@ -47,10 +39,8 @@ class ChurchItem extends Component {
                 thumbnail_url400x,
                 article,
                 title,
-                // address, english, vietnam,
-                // japan, normal, sunday,
-                // volunteerActivity, detail, source
             },
+
         } = this.props;
 
         return (
@@ -58,7 +48,7 @@ class ChurchItem extends Component {
                 <TouchableOpacity
                     style={styles.container}
                     activeOpacity={0.9}
-                    onPress={this.triggerModal}
+                    onPress={this.goToAnotherScreen}
                 >
                     <Image
                         source={imageSource(thumbnail_url400x)}
@@ -70,21 +60,6 @@ class ChurchItem extends Component {
                     </View>
                     <Text style={styles.titleStyle}>{title}</Text>
                 </TouchableOpacity>
-
-                {/* <ChurchBox
-                    display={this.state.display}
-                    close={this.close}
-                    address={address}
-                    english={english}
-                    vietnam={vietnam}
-                    japan={japan}
-                    normal={normal}
-                    sunday={sunday}
-                    volunteerActivity={volunteerActivity}
-                    detail={detail}
-                    source={source}
-                    title={title}
-                /> */}
             </View>
         );
     }
@@ -93,13 +68,13 @@ class ChurchItem extends Component {
 const styles = StyleSheet.create({
     container: {
         padding: 15,
-        width: width/2,
+        width: width / 2,
         height: 340,
         alignItems: 'center'
     },
 
     image: {
-        height: width/2,
+        height: width / 2,
         width: '100%',
         borderRadius: 10
     },
@@ -141,4 +116,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default ChurchItem;
+export default withNavigation(ChurchItem);

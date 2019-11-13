@@ -43,11 +43,14 @@ export default function InfoEvent({
                 <Text style={styles.cost}>Giá vé</Text>
             </View>
             <View>
-                <InfoItem
-                    isTitle
-                    titleName={nameCost}
-                    detail={totalCost}
-                />
+                {nameCost && totalCost && (
+                    <InfoItem
+                        isTitle
+                        titleName={nameCost}
+                        detail={totalCost}
+                    />
+                )}
+
                 <InfoItem
                     isTitle={false}
                     titleName="Phương thức thanh toán"
@@ -102,7 +105,7 @@ export default function InfoEvent({
 }
 
 const styles = StyleSheet.create({
-    container:{
+    container: {
         marginBottom: 75
     },
     cost: {

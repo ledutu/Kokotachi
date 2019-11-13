@@ -1,26 +1,29 @@
 import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import AutoHeightImage from 'react-native-auto-height-image';
 import PropTypes from 'prop-types';
+import ScalableImage from 'react-native-scalable-image'
 
 
 
-export default function ImagePoster({ source, day, period, begin, registerPeopleNumber }) {
+export default function ImagePoster({ source, day, start, end, timeBegining, accepted, capacity, width }) {
 
     propTypes = {
         source: PropTypes.string.isRequired,
         day: PropTypes.string.isRequired,
-        period: PropTypes.string.isRequired,
-        begin: PropTypes.string.isRequired,
-        registerPeopleNumber: PropTypes.string.isRequired
+        start: PropTypes.string.isRequired,
+        end: PropTypes.string.isRequired,
+        timeBegining: PropTypes.string.isRequired,
+        accepted: PropTypes.number,
+        width: PropTypes.number,
+        capacity: PropTypes.number
     }
 
     return (
         <View style={styles.container}>
-            <AutoHeightImage
-                source={source}
-                width={380} />
+            <View>
+                <ScalableImage source={source} width={380} />
+            </View>
             <View style={styles.timeContainer}>
                 <View style={styles.time}>
                     <Text style={styles.timeText}>Ngày & giờ</Text>
@@ -32,8 +35,8 @@ export default function ImagePoster({ source, day, period, begin, registerPeople
                 </View>
                 <View style={styles.timeInfo}>
                     <Text style={styles.timeText}>{day}</Text>
-                    <Text style={styles.timeText}>{period}</Text>
-                    <Text style={styles.timeText}>{begin}</Text>
+                    <Text style={styles.timeText}>{start} ~ {end}</Text>
+                    <Text style={styles.timeText}>Thời gian bắt đầu {timeBegining}</Text>
                 </View>
             </View>
 
@@ -47,7 +50,7 @@ export default function ImagePoster({ source, day, period, begin, registerPeople
                     />
                 </View>
                 <View style={[styles.countingContainer, styles.timeInfo]}>
-                    <Text style={styles.timeText}>{registerPeopleNumber} / 30 Người</Text>
+                    <Text style={styles.timeText}>{accepted} / {capacity}</Text>
                     <Text style={[styles.countingText, { color: '#EE4154' }]}>Đã đăng kí</Text>
                 </View>
 
@@ -60,10 +63,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    image: {
-        width: '100%',
-        resizeMode: 'cover',
-    },
+
     timeContainer: {
         flexDirection: 'row',
         padding: 15,
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     timeInfo: {
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'flex-end',
+        alignItems: 'flex-start',
         paddingTop: 20
     },
     timeText: {

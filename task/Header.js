@@ -131,7 +131,7 @@ class Header extends Component {
   };
 
   handleOnPressMenu = (title, uri) => {
-    this.props.navigation.navigate('Detail', { data: { title, uri } });
+    this.props.navigation.navigate('DetailMore', { data: { title, uri } });
     this.setState({ displayShowMenu: false })
   };
 
