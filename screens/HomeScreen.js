@@ -17,10 +17,6 @@ import Banners from '../task/Banners';
 import { type_utils } from '../utils/constants';
 import EventInRow from '../components/EventComponents/EventInRow';
 
-const uppercase = text => {
-    return text.slice(0, 1).toUpperCase() + text.slice(1, text.length)
-}
-
 export default class HomeScreen extends Component {
     constructor(props) {
         super(props);
@@ -118,54 +114,52 @@ export default class HomeScreen extends Component {
         return (
             <View style={styles.container}>
 
-                <Header changeOpacity={this.handleChangeOpacity} />
+                <Header />
 
                 <ScrollView>
-                    <Banners banners={banners} />
+                    {/* <Banners banners={banners} /> */}
 
-                    <DoubleRow
+                    {/* <DoubleRow
                         uri={type_utils.most_viewed.icon}
                         title={type_utils.most_viewed.display}
                         data={topViewArticlesRes}
-                        screen="Detail"
-                        // onPress={this.handleOnPress}
-                        // readMore={{type: 'apartment'}}
+                        readMore={{ order: 'reputation' }}
                     />
+
                     <DoubleRow
                         uri={type_utils.job.icon}
                         title={type_utils.job.display}
                         data={jobArticlesRes}
-                        screen="Detail"
-                        onPress={this.handleOnPress}
                         half
+                        readMore={{ type: 'job' }}
                     />
 
                     <DoubleRow
                         uri={type_utils.apartment.icon}
                         title={type_utils.apartment.display}
                         data={apartmentArticlesRes}
-                        screen='Detail'
                         onPress={this.handleOnPress}
                         half
+                        readMore={{ type: 'apartment' }}
                     />
 
                     <DoubleRow
                         uri={type_utils.lifestyle.icon}
                         title={type_utils.lifestyle.display}
                         data={lifestyleArticlesRes}
-                        screen='Detail'
                         onPress={this.handleOnPress}
                         half
+                        readMore={{ type: 'lifestyle' }}
                     />
 
                     <DoubleRow
                         uri={type_utils.cosme.icon}
                         title={type_utils.cosme.display}
                         data={cosmeArticlesRes}
-                        screen='Detail'
                         onPress={this.handleOnPress}
                         half
-                    />
+                        readMore={{ type: 'cosme' }}
+                    /> */}
 
                     <ChurchInRow
                         uri={type_utils.church.icon}

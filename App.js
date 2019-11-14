@@ -6,6 +6,7 @@ import EventScreen from './screens/EventScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import DetailScreen from './screens/DetailScreen';
 import DetailChurch from './screens/DetailChurch';
+import ChurchListScreen from './screens/ChurchListScreen';
 
 const MainNavigator = createStackNavigator({
   Home: HomeScreen,
@@ -14,6 +15,7 @@ const MainNavigator = createStackNavigator({
   Register: RegisterScreen,
   DetailMore: DetailScreen,
   Church: DetailChurch,
+  ChurchList: ChurchListScreen
 });
 
 

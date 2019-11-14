@@ -42,10 +42,6 @@ class Header extends Component {
     };
   };
 
-  static propTypes = {
-    onPress: PropTypes.func,
-  }
-
   //to open a login box
   handleOpenAccount = () => {
     this.setState({

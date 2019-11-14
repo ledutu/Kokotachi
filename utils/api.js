@@ -43,3 +43,13 @@ export function getArticles_MayULike({ except_article, per_page = LIST_PERPAGE, 
         cancelToken
     })
 };
+
+export function fetchChurchs(query = {}) {
+    const params = {
+        ...query,
+    }
+
+    return axios.get('/v1/church', {
+        params
+    })
+}

@@ -3,8 +3,9 @@ import { View, Text, StyleSheet } from 'react-native';
 import SectionItem from './SectionItem';
 import DoubleItemInRow from './DoubleItemInRow';
 import PropTypes from 'prop-types';
+import { withNavigation } from 'react-navigation';
 
-export default class DoubleRow extends Component {
+class DoubleRow extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -15,7 +16,6 @@ export default class DoubleRow extends Component {
 
     static propTypes = {
         data: PropTypes.array.isRequired,
-        screen: PropTypes.string,
         title: PropTypes.string.isRequired,
         uri: PropTypes.number,
         onPress: PropTypes.func,
@@ -23,7 +23,7 @@ export default class DoubleRow extends Component {
     };
 
     render() {
-        const { screen, data, onPress, uri, title, half, navigation, readMore } = this.props;
+        const { data, onPress, uri, title, half, readMore } = this.props;
         const centerData = Math.floor(data.length / 2);
 
         return (
@@ -32,7 +32,7 @@ export default class DoubleRow extends Component {
                     uri={uri ? uri : null}
                     title={title}
                     button="Xem thêm"
-                    // onPress={() => navigation.navigate('Detail', { ...readMore })}
+                    onPress={() => this.props.navigation.navigate('DetailMore', { ...readMore })}
                 />
 
                 {half && (
@@ -44,7 +44,6 @@ export default class DoubleRow extends Component {
                                         <DoubleItemInRow
                                             key={item.id}
                                             data={item}
-                                            screen={screen}
                                             info={item}
                                             half
                                         />
@@ -59,7 +58,6 @@ export default class DoubleRow extends Component {
                                         <DoubleItemInRow
                                             key={item.id}
                                             data={item}
-                                            screen={screen}
                                             info={item}
                                             half
                                         />
@@ -78,7 +76,6 @@ export default class DoubleRow extends Component {
                                     <DoubleItemInRow
                                         key={item.id}
                                         data={item}
-                                        screen={screen}
                                         info={item}
                                         half={false}
                                     />
@@ -101,4 +98,6 @@ const styles = StyleSheet.create({
         marginBottom: 60,
     },
 
-})
+});
+
+export default withNavigation(DoubleRow);

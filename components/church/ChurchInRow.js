@@ -3,8 +3,9 @@ import { View, Text, StyleSheet } from 'react-native';
 import SectionItem from '../SectionItem';
 import ChurchItem from './ChurchItem';
 import PropTypes from 'prop-types';
+import { withNavigation } from 'react-navigation';
 
-export default class ChurchInRow extends Component {
+class ChurchInRow extends Component {
 
     static propTypes = {
         uri: PropTypes.number.isRequired,
@@ -14,7 +15,7 @@ export default class ChurchInRow extends Component {
     }
 
     render() {
-        const { data, onPress, uri, title, } = this.props;
+        const { data, uri, title, } = this.props;
         const centerData = Math.floor(this.props.data.length / 2);
         return (
             <View style={styles.container}>
@@ -22,7 +23,7 @@ export default class ChurchInRow extends Component {
                     uri={uri}
                     title={title}
                     button="Xem thêm"
-                    onPress={() => onPress(title, uri)}
+                    onPress={() => this.props.navigation.navigate("ChurchList")}
                 />
 
                 <View style={{ marginTop: 60, flexDirection: 'row', justifyContent: 'space-around', }}>
@@ -68,4 +69,6 @@ const styles = StyleSheet.create({
         marginBottom: 60,
     },
 
-})
+});
+
+export default withNavigation(ChurchInRow);

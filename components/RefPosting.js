@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import RefItem from './RefItem';
-import { ApartmentData, CosmeticData } from '../data/Data';
 
 export default class RefPosting extends Component {
     constructor(props) {
@@ -13,7 +12,7 @@ export default class RefPosting extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.refText}>Có thể bạn quan tâm</Text>
+                {/* <Text style={styles.refText}>Có thể bạn quan tâm</Text>
 
                 <View style={{marginTop: 10}}>
                     <RefItem
@@ -29,7 +28,7 @@ export default class RefPosting extends Component {
                         data={CosmeticData}
                         screen="Cosmetic"
                     />
-                </View>
+                </View> */}
             </View>
         );
     }

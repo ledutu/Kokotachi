@@ -1,218 +1,136 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { StyleSheet, ScrollView, Image, FlatList, TouchableOpacity } from 'react-native';
 import DetailMenuHeader from '../components/detailMenuComponent/DetailMenuHeader';
 import Header from '../task/Header';
-import DetailCard from '../components/detailMenuComponent/DetailCard';
-import { JobData, ChurchData, CosmeticData, EventData, ApartmentData, SocialData } from "../data/Data";
-import RefMostPosting from '../components/detailMenuComponent/RefMostPosting';
 import Footer from '../task/Footer';
+import { fetchArticles } from '../utils/api';
+import { Container, Content, Card, CardItem, Text, Body, View } from 'native-base';
+import { width, type_utils, check } from '../utils/constants';
+import { imageSource } from '../utils/pureFunction';
+import { uppercase } from '../utils/commons';
 
+var count = 0;
 export default class DetailScreen extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            display: false,
-            selectedId: 0,
-            postingNumber: 30,
-            periodNumber: '1 - 10'
-        };
-    };
+    state = {
+        loading: false,
+        error: false,
+        articles: [],
+        page: 0
+    }
 
     static navigationOptions = {
         header: null,
     };
 
-    renderDetail = data => {
-        if (data === null) return;
-
-
-        return (
-            data.map(item => {
-                return (
-                    <DetailCard
-                        key={item.id}
-                        title={item.title}
-                        uri={item.image}
-                        date={item.datePosting}
-                        likeCounting={item.likeCounting}
-                        commentCounting={item.commentCounting}
-                        id={item.id}
-                        onPress={this.handleNavigation}
-                    />
-                )
-            })
-        )
-    }
-
-    //List of screen
-    renderDetailCard() {
-        const data = this.props.navigation.getParam('data', '')
-        switch (data.title) {
-            case "Công việc":
-                return (
-                    this.renderDetail(JobData)
-                );
-            case "Căn hộ":
-                return (
-                    this.renderDetail(ApartmentData)
-                );
-            case "Mỹ phẩm":
-                return (
-                    this.renderDetail(CosmeticData)
-                );
-            case "Xã hội":
-                return (
-                    this.renderDetail(SocialData)
-                );
-            case "Nhà thờ":
-                return (
-                    this.renderDetail(ChurchData)
-                );
-            case "Sự kiện":
-                return (
-                    this.renderDetail(EventData)
-                );
-            default:
-                return (
-                    alert('Thư mục này vẫn chưa có bài viết')
-                )
-        }
-
-
+    async componentDidMount() {
+        await this.getData();
     };
 
-    handleCloseModel = () => {
-        this.setState({
-            display: false
+    getData = async () => {
+        this.setState({ loading: true, page: this.state.page + 1, }, async () => {
+            try {
+                const top = this.props.navigation.getParam('order');
+                const artData = this.props.navigation.getParam('type');
+                const { page, articles } = this.state;
+
+                const classify = !top && artData ? { type: artData } : { order: top };
+
+                const results = await fetchArticles({ ...classify, page });
+
+                this.setState({
+                    loading: false,
+                    error: false,
+                    articles: page === 1 ? results.data._data.articles.data :
+                        articles.concat(results.data._data.articles.data)
+                })
+            }
+            catch (e) {
+                this.setState({
+                    loading: false,
+                    error: true,
+                })
+            }
         })
-    };
+    }
 
-    //open model church
-    handleOpenModel = id => {
+    renderItem = ({ item }) => {
+        const { articles } = this.state;
+        const data = this.props.navigation.getParam("type");
+
+        count++;
 
         return (
-            <View></View>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate("Detail", { data: item })} activeOpacity={0.9}>
+
+                <Card>
+                    <CardItem>
+                        <Body style={{ justifyContent: 'space-around' }}>
+                            <Image source={imageSource("/storage/" + item.thumbnail)} style={{ width: '100%', height: width, flex: 1 }} />
+                            <Text style={styles.title}>{item.title}</Text>
+                            <Text style={styles.text}>{item.approved_at}</Text>
+                            <View style={styles.interactWrapping}>
+                                <Text style={[styles.text, { paddingRight: 10 }]}>{item.like_count} Likes</Text>
+                                <Text style={styles.text}>{item.comment_count} Comments</Text>
+                            </View>
+                        </Body>
+                    </CardItem>
+                </Card>
+
+            </TouchableOpacity>
+        )
+    };
+
+    handleConcatArticles = async () => {
+        await this.getData();
+    };
+
+    renderTop = () => {
+        const { articles } = this.state;
+        const data = this.props.navigation.getParam("type");
+        return (
+            <DetailMenuHeader
+                isTitle
+                title={data ? uppercase(data) : 'Most viewed'}
+                uri={data ? check(data).icon : type_utils.most_viewed.icon}
+                postingNumber={articles.length}
+            />
         )
     }
 
-    //navigation to another screen
-    handleNavigation = id => {
-        const data = this.props.navigation.getParam('data', '')
-        switch (data.title) {
-            case "Công việc":
-                this.props.navigation.navigate('Job', { data: JobData[id] });
-                break;
-            case "Căn hộ":
-                this.props.navigation.navigate('Apartment', { data: ApartmentData[id] });
-                break;
-            case "Mỹ phẩm":
-                this.props.navigation.navigate('Cosmetic', { data: CosmeticData[id] });
-                break;
-            case "Xã hội":
-                this.props.navigation.navigate('Cosmetic', { data: SocialData[id] });
-                break;
-            case "Nhà thờ":
-                if (data.title === "Nhà thờ") {
-                    this.setState({
-                        display: true,
-                        selectedId: id,
-                    }, () => {
-                        this.handleOpenModel(id)
-                    })
-                }
-                break;
-            case "Sự kiện":
-                this.props.navigation.navigate('Event', { data: EventData[id] });
-                break;
-            default:
-                break;
-        }
-    };
-
-    //list reference of screen
-    renderRef() {
-        const data = this.props.navigation.getParam('data', '')
-        switch (data.title) {
-            case "Công việc":
-                return (
-                    this.renderRefDetail(JobData)
-                );
-            case "Căn hộ":
-                return (
-                    this.renderRefDetail(ApartmentData)
-                );
-            case "Mỹ phẩm":
-                return (
-                    this.renderRefDetail(CosmeticData)
-                );
-            case "Xã hội":
-                return (
-                    this.renderRefDetail(SocialData)
-                );
-            case "Nhà thờ":
-                return (
-                    this.renderRefDetail(ChurchData)
-                );
-            case "Sự kiện":
-                return (
-                    this.renderRefDetail(EventData)
-                );
-            default:
-                return (
-                    alert('Thư mục này vẫn chưa có bài viết')
-                )
-        }
-    };
-
-    renderRefDetail = data => {
-        if (data === null) return;
-        return (
-            data.map(item => {
-                return (
-                    <RefMostPosting
-                        key={item.id}
-                        id={item.id}
-                        title={item.title}
-                        uri={item.image}
-                        onPress={this.handleNavigation}
-                        date={item.datePosting}
-                    />
-                )
-            })
-        )
-    }
 
     render() {
-        const data = this.props.navigation.getParam('data', '');
-        // console.log(data)
-        const { selectedId, periodNumber, postingNumber } = this.state;
-        return (
-            <View style={styles.container}>
-                {/* <Header />
-                <ScrollView style={styles.detailContainer}>
-                    <View style={{ paddingHorizontal: 15, }}>
-                        <DetailMenuHeader
-                            uri={data.uri}
-                            title={data.title}
-                            postingNumber={postingNumber}
-                            periodNumber={periodNumber}
-                            isTitle
-                        />
-                        {this.renderDetailCard()}
-                        <DetailMenuHeader
-                            postingNumber={postingNumber}
-                            periodNumber={periodNumber}
-                        />
-                        <Text style={styles.text}>Bài viết đọc nhiều</Text>
-                        <View style={{ marginBottom: 54 }}>
-                            {this.renderRef()}
-                        </View>
-                    </View>
-                    <Footer />
-                </ScrollView>
-                {this.handleOpenModel(selectedId)} */}
 
-            </View>
+        const { articles } = this.state;
+
+        return (
+            <Container>
+
+                <Content
+                    style={{ flex: 1, }}
+                    contentContainerStyle={{ flex: 1, }}
+                >
+                    <Header />
+
+                    {!articles && (
+                        <View>
+                            <Text>Chưa có bài viết nào</Text>
+                        </View>
+                    )}
+                    {articles && (
+                        <FlatList
+
+                            data={articles}
+                            renderItem={this.renderItem}
+                            keyExtractor={(item, index) => index.toString()}
+                            onEndReached={this.handleConcatArticles}
+                            onEndReachedThreshold={0.5}
+                            ListHeaderComponent={this.renderTop}
+                        />
+                    )}
+                </Content>
+            </Container>
+
+
         );
     }
 };
@@ -227,9 +145,18 @@ const styles = StyleSheet.create({
         flex: 1,
     },
 
+    interactWrapping: {
+        flexDirection: 'row',
+        marginTop: 10,
+        justifyContent: 'space-around',
+    },
+
+    title: {
+        fontSize: 22.5,
+        color: '#333333',
+        marginVertical: 10
+    },
     text: {
-        color: '#e73227',
-        marginBottom: 27,
-        fontSize: 27,
+        color: 'rgba(51, 51, 51, 0.3)',
     }
 });

@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { imageSource } from '../utils/pureFunction';
 
 const { width } = Dimensions.get('window');
-console.log(width)
 
 class DoubleItemInRow extends Component {
     constructor(props) {
@@ -16,13 +15,12 @@ class DoubleItemInRow extends Component {
     }
 
     static propTypes = {
-        screen: PropTypes.string.isRequired,
         info: PropTypes.object.isRequired,
     }
 
     goToAnotherScreen = () => {
-        const { screen, info, } = this.props;
-        this.props.navigation.navigate(screen, { data: info });
+        const { info, } = this.props;
+        this.props.navigation.navigate('Detail', { data: info });
 
     }
 
@@ -41,17 +39,17 @@ class DoubleItemInRow extends Component {
         return (
             <View>
                 <TouchableOpacity
-                    style={[styles.container, half? styles.ahalf: styles.full]}
+                    style={[styles.container, half ? styles.ahalf : styles.full]}
                     activeOpacity={0.9}
                     onPress={this.goToAnotherScreen}
                 >
                     <Image
                         source={imageSource("/storage/" + thumbnail)}
-                        style={[styles.image, half? {height: width/2,} : {height: width,}]}
+                        style={[styles.image, half ? { height: width / 2, } : { height: width, }]}
                     />
                     <View style={styles.shareAndDatePosting}>
-                        <Text style={[styles.textButton, half? {width: 75}: null]} numberOfLines={1}>{category.title}</Text>
-                        <Text style={[styles.datePosting, half? {width: 80,}: null]}>{approved_at}</Text>
+                        <Text style={[styles.textButton, half ? { width: 75 } : null]} numberOfLines={1}>{category.title}</Text>
+                        <Text style={[styles.datePosting, half ? { width: 80, } : null]}>{approved_at}</Text>
                     </View>
                     <Text style={styles.titleStyle}>{title}</Text>
                 </TouchableOpacity>
@@ -66,21 +64,21 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
     },
 
-    ahalf:{
-        width: width/2,
-        height: width/2 + 180,
+    ahalf: {
+        width: width / 2,
+        height: width / 2 + 180,
         flex: 1,
     },
     full: {
         width: "100%",
-        height: width + 145,  
+        height: width + 145,
         flex: 1,
     },
 
     image: {
         width: '100%',
         borderRadius: 10,
-        
+
     },
     shareAndDatePosting:
     {

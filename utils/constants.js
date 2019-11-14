@@ -3,7 +3,18 @@ export const { width, height } = Dimensions.get('window')
 
 export const IPHONE_5S_WIDTH = 320
 
-export const ASPECT_RATIO = width / height
+export const ASPECT_RATIO = width / height;
+
+export const check = data => {
+    if (data === 'job')
+        return type_utils.job;
+    else if (data === 'apartment')
+        return type_utils.apartment;
+    else if (data === 'lifestyle')
+        return type_utils.lifestyle;
+    else if (data === 'cosme')
+        return type_utils.cosme;
+}
 
 export const type_utils = {
     most_viewed: {
