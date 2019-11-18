@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, StyleSheet } from 'react-native';
 import { Container, Content, View, Button, Label } from 'native-base'
 import OpenLinking from '../utils/OpenLinking';
-import MapView, { Marker } from 'react-native-maps'
+import MapView, { Marker } from 'react-native-maps';
 import { Row } from '../utils/commons';
 import { ASPECT_RATIO, width, height } from '../utils/constants';
 

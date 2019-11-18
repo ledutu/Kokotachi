@@ -8,4 +8,11 @@ export const Row = styled(View)`
 
 export const uppercase = text => {
     return text.slice(0, 1).toUpperCase() + text.slice(1, text.length)
-}
+};
+
+export const RedButton = styled(Button)`
+    background-color: #ff2a30; 
+    margin-top: 10;
+    margin-bottom: 10;
+`;
+

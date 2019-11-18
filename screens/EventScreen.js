@@ -8,7 +8,7 @@ import InfoEvent from '../components/EventComponents/InfoEvent';
 import OpenLinking from '../utils/OpenLinking';
 import { type_utils, width } from '../utils/constants';
 import { imageSource } from '../utils/pureFunction';
-import { format } from 'date-fns'
+import { format, parseISO } from 'date-fns';
 import AutoHeightWebView from '../utils/webview-autoheight';
 
 export default class EventScreen extends Component {
@@ -30,7 +30,6 @@ export default class EventScreen extends Component {
     render() {
         const data = this.props.navigation.getParam('data');
         const ownerName = data.event_owners ? data.event_owners[0].name : '';
-        console.log(data);
 
         return (
             <View style={styles.container}>
@@ -45,10 +44,10 @@ export default class EventScreen extends Component {
                         />
                         <ImagePoster
                             source={imageSource(data.image_path)}
-                            day={format(new Date(data.started_at), 'yyyy/MM/dd')}
-                            start={format(new Date(data.started_at), 'HH:mm')}
-                            end={format(new Date(data.ended_at), 'HH:mm')}
-                            timeBegining={format(new Date(data.ended_at), 'HH:mm')}
+                            day={format(parseISO(data.started_at), 'yyyy/MM/dd')}
+                            start={format(parseISO(data.started_at), 'HH:mm')}
+                            end={format(parseISO(data.ended_at), 'HH:mm')}
+                            timeBegining={format(parseISO(data.ended_at), 'HH:mm')}
                             accepted={data.accepted}
                             capacity={data.capacity}
                         />
@@ -56,8 +55,8 @@ export default class EventScreen extends Component {
                             nameCost={data.event_tickets[0].name}
                             totalCost={data.event_tickets[0].price}
                             paymentMethod={data.payment_types[0].name}
-                            registerTime={data.entry_started_at? format(new Date(data.entry_started_at), 'HH:mm'): "From the date of posting job postings"}
-                            registerStoppingTime={format(new Date(data.entry_ended_at), 'HH:mm')}
+                            registerTime={data.entry_started_at? format(parseISO(data.entry_started_at), 'HH:mm'): "From the date of posting job postings"}
+                            registerStoppingTime={format(parseISO(data.entry_ended_at), 'HH:mm')}
                             place={data.place}
                             address={data.address}
                             ageLimited={'Age Limit 20-50'}
