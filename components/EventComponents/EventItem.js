@@ -32,6 +32,7 @@ class EventItem extends Component {
                     title
                 },
             },
+            onPress
         } = this.props;
 
         return (
@@ -46,7 +47,7 @@ class EventItem extends Component {
                         style={styles.image}
                     />
                     <View style={styles.shareAndDatePosting}>
-                        <Text style={styles.textButton} numberOfLines={1}>Sự kiện</Text>
+                        <Text style={styles.textButton} numberOfLines={1} onPress={onPress}>Sự kiện</Text>
                         <Text style={styles.datePosting}>{created_at}</Text>
                     </View>
                     <Text style={styles.titleStyle}>{title}</Text>

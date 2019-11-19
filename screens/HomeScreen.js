@@ -161,11 +161,11 @@ export default class HomeScreen extends Component {
                         readMore={{ type: 'cosme' }}
                     /> */}
 
-                    <ChurchInRow
+                    {/* <ChurchInRow
                         uri={type_utils.church.icon}
                         title={type_utils.church.display}
                         data={churchRes}
-                    />
+                    /> */}
 
                     <EventInRow
                         uri={type_utils.event.icon}

@@ -7,7 +7,7 @@ import ImagePoster from '../components/EventComponents/ImagePoster';
 import InfoEvent from '../components/EventComponents/InfoEvent';
 import OpenLinking from '../utils/OpenLinking';
 import { type_utils, width } from '../utils/constants';
-import { imageSource } from '../utils/pureFunction';
+import { imageSource } from '../utils/pureFunction'; 
 import { format, parseISO } from 'date-fns';
 import AutoHeightWebView from '../utils/webview-autoheight';
 
@@ -54,7 +54,7 @@ export default class EventScreen extends Component {
                         <InfoEvent
                             nameCost={data.event_tickets[0].name}
                             totalCost={data.event_tickets[0].price}
-                            paymentMethod={data.payment_types[0].name}
+                            paymentMethod={data.payment_types.length !== 0? data.payment_types[0].name: ''}
                             registerTime={data.entry_started_at? format(parseISO(data.entry_started_at), 'HH:mm'): "From the date of posting job postings"}
                             registerStoppingTime={format(parseISO(data.entry_ended_at), 'HH:mm')}
                             place={data.place}

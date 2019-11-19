@@ -4,18 +4,19 @@ import DetailMenuHeader from '../components/detailMenuComponent/DetailMenuHeader
 import Header from '../task/Header';
 import Footer from '../task/Footer';
 import { fetchArticles } from '../utils/api';
-import { Container, Content, Card, CardItem, Text, Body, View } from 'native-base';
+import { Container, Content, Card, CardItem, Text, Body, View, Button } from 'native-base';
 import { width, type_utils, check } from '../utils/constants';
 import { imageSource } from '../utils/pureFunction';
 import { uppercase } from '../utils/commons';
 
-var count = 0;
 export default class DetailScreen extends Component {
     state = {
         loading: false,
         error: false,
         articles: [],
-        page: 0
+        page: 0,
+        lastPage: false,
+        loadMoreDisabled: false
     }
 
     static navigationOptions = {
@@ -27,7 +28,7 @@ export default class DetailScreen extends Component {
     };
 
     getData = async () => {
-        this.setState({ loading: true, page: this.state.page + 1, }, async () => {
+        this.setState({ loading: true, page: this.state.page + 1, loadMoreDisabled: true, }, async () => {
             try {
                 const top = this.props.navigation.getParam('order');
                 const artData = this.props.navigation.getParam('type');
@@ -40,6 +41,8 @@ export default class DetailScreen extends Component {
                 this.setState({
                     loading: false,
                     error: false,
+                    lastPage: results.data._data.articles.data.length === 0? true: false,
+                    loadMoreDisabled: false,
                     articles: page === 1 ? results.data._data.articles.data :
                         articles.concat(results.data._data.articles.data)
                 })
@@ -56,8 +59,6 @@ export default class DetailScreen extends Component {
     renderItem = ({ item }) => {
         const { articles } = this.state;
         const data = this.props.navigation.getParam("type");
-
-        count++;
 
         return (
             <TouchableOpacity onPress={() => this.props.navigation.navigate("Detail", { data: item })} activeOpacity={0.9}>
@@ -80,7 +81,7 @@ export default class DetailScreen extends Component {
         )
     };
 
-    handleConcatArticles = async () => {
+    renderNext = async () => {
         await this.getData();
     };
 
@@ -94,6 +95,37 @@ export default class DetailScreen extends Component {
                 uri={data ? check(data).icon : type_utils.most_viewed.icon}
                 postingNumber={articles.length}
             />
+        )
+    };
+
+    renderFooter = () => {
+        const { loadMoreDisabled, loading, error, lastPage } = this.state;
+        return (
+            <View>
+                {loading && <ActivityIndicator style={styles.center} />}
+
+                {error && (
+                    <View style={styles.center}>
+                        <Text>Error</Text>
+                    </View>
+                )}
+
+                {lastPage && (
+                    <View style={[styles.center, { marginVertical: 10 }]}>
+                        <Text>Bạn đã ở cuối bài viết</Text>
+                    </View>
+                )}
+
+                {!loading && !error && !lastPage && (
+                    <View style={[{ width: '100%', marginVertical: 10, }, styles.center]}>
+                        <Button disabled={loadMoreDisabled} rounded bordered small onPress={this.renderNext} style={{ width: '100%' }}>
+                            <Text style={{ textAlign: 'center', width: '100%' }}>Xem thêm</Text>
+                        </Button>
+                    </View>
+                )}
+
+                <Footer />
+            </View>
         )
     }
 
@@ -118,13 +150,11 @@ export default class DetailScreen extends Component {
                     )}
                     {articles && (
                         <FlatList
-
                             data={articles}
                             renderItem={this.renderItem}
                             keyExtractor={(item, index) => index.toString()}
-                            onEndReached={this.handleConcatArticles}
-                            onEndReachedThreshold={0.5}
                             ListHeaderComponent={this.renderTop}
+                            ListFooterComponent={this.renderFooter}
                         />
                     )}
                 </Content>
@@ -158,5 +188,9 @@ const styles = StyleSheet.create({
     },
     text: {
         color: 'rgba(51, 51, 51, 0.3)',
+    },
+    center: {
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 });

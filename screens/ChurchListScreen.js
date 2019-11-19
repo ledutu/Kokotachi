@@ -10,6 +10,7 @@ import { imageSource } from '../utils/pureFunction';
 import { fetchChurchs } from '../utils/api';
 import OpenLinking from '../utils/OpenLinking';
 import Modal from 'react-native-modal';
+import Footer from '../task/Footer';
 
 const Info = ({ icon, image, title, subtitle, button, onPress, backgroundColor, }) => {
     return (
@@ -214,7 +215,11 @@ export default class ChurchListScreen extends Component {
         this.getData(query);
     };
 
-
+    renderFooter = () => {
+        return (
+            <Footer />
+        )
+    }
 
 
     render() {
@@ -249,6 +254,7 @@ export default class ChurchListScreen extends Component {
                             renderItem={this.renderItem}
                             keyExtractor={(item, index) => index.toString()}
                             ListHeaderComponent={churchList.length > 0 ? this.renderTop : null}
+                            ListFooterComponent={churchList.length > 0 ? this.renderFooter: null}
                         />
                     )}
 

@@ -3,8 +3,9 @@ import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import EventItem from './EventItem';
 import SectionItem from '../SectionItem';
+import { withNavigation } from 'react-navigation';
 
-export default class EventInRow extends Component {
+class EventInRow extends Component {
 
     static propTypes = {
         data: PropTypes.array.isRequired,
@@ -24,7 +25,7 @@ export default class EventInRow extends Component {
                     uri={uri}
                     title={title}
                     button="Xem thêm"
-                    onPress={() => onPress(title, uri)}
+                    onPress={() => this.props.navigation.navigate('EventList', { title: 'Event' })}
                 />
 
                 <View style={{ marginTop: 60, flexDirection: 'row', justifyContent: 'space-around', }}>
@@ -37,6 +38,18 @@ export default class EventInRow extends Component {
                                         data={item}
                                         screen={screen}
                                         info={item}
+                                        onPress={
+                                            () => {
+                                                this.props.navigation.navigate(
+                                                    'EventList',
+                                                    {
+                                                        title: item.title,
+                                                        type: item.type,
+                                                        slug: item.slug,
+                                                    }
+                                                )
+                                            }
+                                        }
                                     />
                                 )
                             })
@@ -51,6 +64,18 @@ export default class EventInRow extends Component {
                                         data={item}
                                         screen={screen}
                                         info={item}
+                                        onPress={
+                                            () => {
+                                                this.props.navigation.navigate(
+                                                    'EventList',
+                                                    {
+                                                        title: item.title,
+                                                        type: item.type,
+                                                        slug: item.slug,
+                                                    }
+                                                )
+                                            }
+                                        }
                                     />
                                 )
                             })
@@ -70,4 +95,6 @@ const styles = StyleSheet.create({
         marginBottom: 60,
     },
 
-})
+});
+
+export default withNavigation(EventInRow);
