@@ -111,8 +111,9 @@ class Header extends Component {
                   <MenuModal
                     key={item.id}
                     title={item.title}
-                    uri={item.uri}
+                    screen={item.screen}
                     onPress={this.handleOnPressMenu}
+                    type={item.type}
                   />
                 )
               })
@@ -126,8 +127,8 @@ class Header extends Component {
 
   };
 
-  handleOnPressMenu = (title, uri) => {
-    this.props.navigation.navigate('DetailMore', { data: { title, uri } });
+  handleOnPressMenu = (screen, type) => {
+    this.props.navigation.navigate(screen, { type });
     this.setState({ displayShowMenu: false })
   };
 

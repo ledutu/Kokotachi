@@ -67,6 +67,8 @@ export default class ChurchListScreen extends Component {
         await this.getData();
     };
 
+ 
+
     getData = async (query = null) => {
         try {
             const data = await fetchChurchs(query);
@@ -212,6 +214,8 @@ export default class ChurchListScreen extends Component {
             }
         };
 
+        console.log(query);
+
         this.getData(query);
     };
 
@@ -254,7 +258,8 @@ export default class ChurchListScreen extends Component {
                             renderItem={this.renderItem}
                             keyExtractor={(item, index) => index.toString()}
                             ListHeaderComponent={churchList.length > 0 ? this.renderTop : null}
-                            ListFooterComponent={churchList.length > 0 ? this.renderFooter: null}
+                            ListFooterComponent={churchList.length > 0 ? this.renderFooter : null}
+                            initialNumToRender={3}
                         />
                     )}
 

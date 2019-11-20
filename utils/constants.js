@@ -20,25 +20,25 @@ export const type_utils = {
     most_viewed: {
         icon: require("../assets/images/title-icon-01.png"),
         display: 'Most viewed',
-        list_screen: 'ArticleList',
+        list_screen: 'DetailMore',
         all_message: null
     },
     job: {
         icon: require("../assets/images/title-icon-job.png"),
         display: 'Job',
-        list_screen: 'ArticleList',
+        list_screen: 'DetailMore',
         all_message: 'All articles'
     },
     apartment: {
         icon: require("../assets/images/title-icon-apartment.png"),
         display: 'Apartment',
-        list_screen: 'ArticleList',
+        list_screen: 'DetailMore',
         all_message: 'All articles'
     },
     lifestyle: {
         icon: require("../assets/images/title-icon-lifestyle.png"),
         display: 'Life style',
-        list_screen: 'ArticleList',
+        list_screen: 'DetailMore',
         all_message: null
     },
     event: {
@@ -56,7 +56,7 @@ export const type_utils = {
     cosme: {
         icon: require("../assets/images/title-icon-cosme.png"),
         display: 'Cosmetic',
-        list_screen: 'ArticleList',
+        list_screen: 'DetailMore',
         all_message: 'All articles'
     },
     // date: {

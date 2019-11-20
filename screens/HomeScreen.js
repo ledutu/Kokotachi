@@ -111,15 +111,17 @@ export default class HomeScreen extends Component {
             eventRes,
         } = this.state;
 
+        console.log(topViewArticlesRes);
+
         return (
             <View style={styles.container}>
 
                 <Header />
 
                 <ScrollView>
-                    {/* <Banners banners={banners} /> */}
+                    <Banners banners={banners} />
 
-                    {/* <DoubleRow
+                    <DoubleRow
                         uri={type_utils.most_viewed.icon}
                         title={type_utils.most_viewed.display}
                         data={topViewArticlesRes}
@@ -159,13 +161,13 @@ export default class HomeScreen extends Component {
                         onPress={this.handleOnPress}
                         half
                         readMore={{ type: 'cosme' }}
-                    /> */}
+                    />
 
-                    {/* <ChurchInRow
+                    <ChurchInRow
                         uri={type_utils.church.icon}
                         title={type_utils.church.display}
                         data={churchRes}
-                    /> */}
+                    />
 
                     <EventInRow
                         uri={type_utils.event.icon}

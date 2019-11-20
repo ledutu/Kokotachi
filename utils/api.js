@@ -52,4 +52,66 @@ export function fetchChurchs(query = {}) {
     return axios.get('/v1/church', {
         params
     })
+};
+
+export function fetchPrefectures() {
+    return axios.get('/v1/prefectures', {
+        params: {
+            // language: i18n.language
+        }
+    })
+}
+
+export function fetchCities(prefecture_id) {
+    return axios.get(`/v1/prefectures/${prefecture_id}/cities`, {
+        params: {
+            // language: i18n.language
+        }
+    })
+};
+
+export function fetchEventTypes() {
+    console.log('Api fetchTypeEvents');
+    return axios.get('/v1/categories', {
+        params: {
+            type: 'event',
+            // language: i18n.language
+        }
+    })
+};
+
+export function deleteComment(id) {
+    return axios.delete('/v1/comment/' + id)
+};
+
+export function loginSocial(data) {
+    return axios.post('/v1/login-social', data)
+};
+
+export function likeArticle({ id, user_id }) {
+    return axios.post('/v1/like-article', { id, user_id })
+};
+
+export function authenticate(data) {
+    return axios.post('/v1/login', data)
+}
+
+export function comment(data) {
+    return axios.post('/v1/comment', {
+        ...data,
+        // language: i18n.language
+    })
+}
+
+export function updateComment(id, comment) {
+    return axios.put('/v1/comment/' + id, { comment })
+};
+
+export function getArticleComments(slug_article, page = 1) {
+    return axios.get('/v1/comments', {
+        params: {
+            slug_article, page,
+            // language: i18n.language
+        }
+    })
 }

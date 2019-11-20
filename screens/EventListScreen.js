@@ -7,33 +7,32 @@ import { uppercase, RedButton, CustomPicker } from '../utils/commons';
 import { type_utils, width } from '../utils/constants';
 import PropTypes from 'prop-types';
 import { imageSource } from '../utils/pureFunction';
-import { fetchEvents } from '../utils/api';
+import { fetchEvents, fetchEventTypes, fetchPrefectures } from '../utils/api';
 import OpenLinking from '../utils/OpenLinking';
 import Modal from 'react-native-modal';
 import Footer from '../task/Footer';
 import ScalableImage from 'react-native-scalable-image';
 import { format, parseISO } from 'date-fns';
 import DateTimePicker from "react-native-modal-datetime-picker";
+import EventSearching from '../components/EventComponents/EventSearching';
 
 export default class EventListScreen extends Component {
     state = {
         eventList: [],
+        eventTypes: [],
+        prefectures: [],
         loading: false,
         error: false,
         isShowFormSearch: false,
+
         searchFormOpening: false,
         noQuery: true,
-        paginated: 0,
+        paginated: 1,
         loadMoreDisabled: false,
         last: false,
         searchFormOpen: false,
-        keyword: null,
-        event_id: null,
-        started_at: null,
-        ended_at: null,
-        category_slug: null,
-        isDateTimePickerVisible: false,
-        objActiveTimePicker: 'started_at'
+
+
     };
 
     static navigationOptions = {
@@ -55,28 +54,26 @@ export default class EventListScreen extends Component {
     };
 
     getEvent = async (page = this.state.paginated, query = null) => {
-        const { paginated } = this.state;
-        this.setState({ paginated: paginated + 1, loadMoreDisabled: true, loading: true }, async () => {
-            const { navigation } = this.props;
+        const { paginated, category_slug } = this.state;
+        this.setState({ loadMoreDisabled: true, loading: true }, async () => {
 
-            const category_slug = navigation.getParam('slug');
-            const title = navigation.getParam('title');
             const { eventList } = this.state;
 
             try {
-                const responses = await fetchEvents({ category_slug, page }, query);
-                console.log(responses);
-                const events = responses.data._data.events.data
+                const responses = await fetchEvents({ page, category_slug }, query);
+                
+
+                const events = responses.data._data.events.data;
 
                 this.setState({
                     loading: false,
                     error: false,
                     last: responses.data._data.events.data.length === 0 ? true : false,
-                    eventList: page === 1 ? events :
-                        [...eventList, ...events],
+                    eventList: page === 1 ? events : [...eventList, ...events],
                     isShowFormSearch: responses.data._data.isShowFormSearch,
                     noQuery: query ? false : true,
                     loadMoreDisabled: false,
+                    searchFormOpening: false,
                 });
 
                 if (contentComponent && page == 1) {
@@ -91,13 +88,15 @@ export default class EventListScreen extends Component {
                     error: true,
                     loading: false,
                     loadMoreDisabled: false,
+                    searchFormOpening: false,
                 })
             }
         })
     };
 
     renderNext = async () => {
-        await this.getEvent();
+        const { paginated } = this.state;
+        this.setState({ paginated: paginated + 1 }, async () => await this.getEvent());
     }
 
     renderItem = ({ item }) => {
@@ -124,7 +123,7 @@ export default class EventListScreen extends Component {
                                                     key={one.id}
                                                     style={{ marginBottom: 10 }}
                                                     onPress={() => {
-                                                        pushNavigate('EventList', { title, type, slug })
+                                                        this.props.navigation.navigate('EventList', { title, type, slug })
                                                     }}>
                                                     <Text key={one.id} style={{ textDecorationLine: 'underline' }}>{title}</Text>
                                                 </TouchableOpacity>
@@ -184,10 +183,13 @@ export default class EventListScreen extends Component {
                 <Footer />
             </View>
         )
-    }
+    };
+
+
 
     async componentDidMount() {
         await this.getEvent();
+
     };
 
     openSearchForm = () => {
@@ -202,57 +204,12 @@ export default class EventListScreen extends Component {
         })
     };
 
-    showDateTimePicker = objActiveTimePicker => {
-        this.setState({
-            ...this.state,
-            objActiveTimePicker: objActiveTimePicker,
-            isDateTimePickerVisible: true
-        })
-    };
-
-    hideDateTimePicker = () => {
-        this.setState({
-            ...this.state,
-            isDateTimePickerVisible: false
-        })
-    };
-
-    handleDatePicked = (date) => {
-        let dateFormated = new Date(date).toISOString().slice(0, 10).replace('T', ' ');
-        let key = this.state.objActiveTimePicker;
-
-        let newState = {
-            ...this.state,
-            isDateTimePickerVisible: false,
-        };
-
-        if (key == 'started_at') {
-            newState.started_at = dateFormated;
-        } else {
-            newState.ended_at = dateFormated;
-        }
-
-        this.setState(newState);
-    };
-
-    doSearch = () => {
-        let query = {}
-        for (const state_name in this.state) {
-            if (this.state.hasOwnProperty(state_name)) {
-                const value = this.state[state_name]
-                if (value) {
-                    query[state_name] = value
-                }
-            }
-        }
-        this.getEvent(page = 1, query);
-
-
-    }
-
     render() {
-        const { eventList, isShowFormSearch, searchFormOpening, started_at, ended_at, category_slug, isDateTimePickerVisible } = this.state;
-        // console.log(eventList);
+        const {
+            eventList,
+            isShowFormSearch,
+            searchFormOpening,
+        } = this.state;
 
         return (
             <Container>
@@ -276,6 +233,7 @@ export default class EventListScreen extends Component {
                             keyExtractor={(item, index) => index.toString()}
                             ListHeaderComponent={eventList.length > 0 ? this.renderTop : null}
                             ListFooterComponent={eventList.length > 0 ? this.renderFooter : null}
+                            initialNumToRender={3}
                         />
                     )}
 
@@ -287,101 +245,11 @@ export default class EventListScreen extends Component {
                                 <Icon type="FontAwesome" name="search" />
                             </RedButton>
 
-                            <Modal
+                            <EventSearching
                                 isVisible={searchFormOpening}
-                                animationOut="slideOutDown"
-                                onBackButtonPress={this.handleCloseModal}
-                                onBackdropPress={this.handleCloseModal}
-                                style={styles.modal}
-                                useNativeDriver={true}
-                                scrollHorizontal={false}
-                                children={true}
-                            >
-                                <View style={styles.container}>
-                                    <ScrollView>
-                                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                            <Text>Tìm kiếm sự kiện</Text>
-                                            <TouchableOpacity
-                                                onPress={this.handleCloseModal}>
-                                                <Icon name="close" />
-                                            </TouchableOpacity>
-                                        </View>
-
-                                        <View style={styles.itemForm}>
-                                            <Text>Từ khóa</Text>
-                                            <TextInput style={styles.textInput} value={this.state.keyword} onChangeText={keyword => this.setState({ ...this.state, keyword })} />
-                                        </View>
-
-                                        <View style={styles.itemForm}>
-                                            <Text>ID sự kiện</Text>
-                                            <TextInput style={styles.textInput} value={this.state.event_id} onChangeText={event_id => this.setState({ ...this.state, event_id })} />
-                                        </View>
-
-                                        <View style={styles.itemForm}>
-                                            <Text>Ngày bắt đầu</Text>
-                                            <TouchableOpacity
-                                                style={styles.textInput}
-                                                onPress={() => this.showDateTimePicker('started_at')}>
-                                                <Text>{started_at ? started_at : ''}</Text>
-                                            </TouchableOpacity>
-                                        </View>
-
-                                        <View style={styles.itemForm}>
-                                            <Text>Ngày kết thúc</Text>
-                                            <TouchableOpacity
-                                                style={styles.textInput}
-                                                onPress={() => this.showDateTimePicker('ended_at')}>
-                                                <Text>{ended_at ? ended_at : ''}</Text>
-                                            </TouchableOpacity>
-                                        </View>
-
-                                        {/* <View style={{ marginBottom: 10, marginTop: 20, alignItems: 'flex-start' }}>
-                                            <CustomPicker
-                                                placeholder={'Chọn tỉnh'}
-                                                selectedValue={category_slug}
-                                                onValueChange={category_slug => this.setState({ ...this.state, category_slug })}
-                                                placeholderStyle={{ color: "black", paddingLeft: 0 }}
-                                                textStyle={{ paddingLeft: 0, marginLeft: 0 }}
-                                            >
-                                                <Picker.Item key={1} label={'Choose prefecture'} value="" />
-                                                {prefectures.map(prefecture => (
-                                                    <Picker.Item key={prefecture.id} label={prefecture.title} value={prefecture.id} />
-                                                ))}
-                                            </CustomPicker>
-                                        </View>
-
-                                        Type event
-                                        <View style={{ marginBottom: 10, alignItems: 'flex-start' }}>
-                                            <CustomPicker
-                                                placeholder={'Choose type event'}
-                                                selectedValue={category_slug}
-                                                onValueChange={category_slug => this.setState({ ...this.state, category_slug })}
-                                                placeholderStyle={{ color: "black", paddingLeft: 0 }}
-                                                textStyle={{ paddingLeft: 0, marginLeft: 0 }}
-                                            >
-                                                <Picker.Item key={-1} label={'Choose type event'} value="" />
-                                                {eventTypes.map(item => (
-                                                    <Picker.Item key={item.slug} label={item.title} value={item.slug} />
-                                                ))}
-                                            </CustomPicker>
-                                        </View> */}
-
-
-                                        <View style={styles.flexRowCenter}>
-                                            <RedButton rounded onPress={this.doSearch}>
-                                                <Text style={{ color: '#ffffff', textAlign: 'center', width: '100%' }}>Search</Text>
-                                            </RedButton>
-
-                                        </View>
-
-                                        <DateTimePicker
-                                            isVisible={isDateTimePickerVisible}
-                                            onConfirm={this.handleDatePicked}
-                                            onCancel={this.hideDateTimePicker}
-                                        />
-                                    </ScrollView>
-                                </View>
-                            </Modal>
+                                close={this.handleCloseModal}
+                                search={this.getEvent}
+                            />
                         </>
                     )}
 

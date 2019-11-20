@@ -14,9 +14,10 @@ export default class DetailScreen extends Component {
         loading: false,
         error: false,
         articles: [],
-        page: 0,
+        page: 1,
         lastPage: false,
-        loadMoreDisabled: false
+        loadMoreDisabled: false,
+        type: null,
     }
 
     static navigationOptions = {
@@ -28,7 +29,7 @@ export default class DetailScreen extends Component {
     };
 
     getData = async () => {
-        this.setState({ loading: true, page: this.state.page + 1, loadMoreDisabled: true, }, async () => {
+        this.setState({ loading: true, page: this.state.page, loadMoreDisabled: true, }, async () => {
             try {
                 const top = this.props.navigation.getParam('order');
                 const artData = this.props.navigation.getParam('type');
@@ -41,10 +42,11 @@ export default class DetailScreen extends Component {
                 this.setState({
                     loading: false,
                     error: false,
-                    lastPage: results.data._data.articles.data.length === 0? true: false,
+                    lastPage: results.data._data.articles.data.length === 0 ? true : false,
                     loadMoreDisabled: false,
                     articles: page === 1 ? results.data._data.articles.data :
-                        articles.concat(results.data._data.articles.data)
+                        articles.concat(results.data._data.articles.data),
+                    type: artData,
                 })
             }
             catch (e) {
@@ -54,12 +56,9 @@ export default class DetailScreen extends Component {
                 })
             }
         })
-    }
+    };
 
     renderItem = ({ item }) => {
-        const { articles } = this.state;
-        const data = this.props.navigation.getParam("type");
-
         return (
             <TouchableOpacity onPress={() => this.props.navigation.navigate("Detail", { data: item })} activeOpacity={0.9}>
 
@@ -82,7 +81,8 @@ export default class DetailScreen extends Component {
     };
 
     renderNext = async () => {
-        await this.getData();
+        const { page } = this.state;
+        this.setState({page: page + 1}, async () => await this.getData());
     };
 
     renderTop = () => {
@@ -155,6 +155,7 @@ export default class DetailScreen extends Component {
                             keyExtractor={(item, index) => index.toString()}
                             ListHeaderComponent={this.renderTop}
                             ListFooterComponent={this.renderFooter}
+                            initialNumToRender={3}
                         />
                     )}
                 </Content>

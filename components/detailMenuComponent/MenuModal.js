@@ -4,10 +4,9 @@ import PropTypes from 'prop-types';
 
 export default function MenuModal({ isContain,
     title,
-    onPress,
-    subTitle,
-    numberOfSubMenu,
-    uri,
+    screen,
+    type,
+    onPress
 }) {
 
     if (isContain) {
@@ -18,7 +17,7 @@ export default function MenuModal({ isContain,
     return (
         <TouchableOpacity
             style={styles.titleWrapping}
-            onPress={() => onPress(title, uri)}
+            onPress={() => onPress(screen, type)}
         >
             <Text style={styles.text}>{title}</Text>
         </TouchableOpacity>
@@ -28,9 +27,9 @@ export default function MenuModal({ isContain,
 MenuModal.propTypes = {
     isContain: PropTypes.bool,
     title: PropTypes.string.isRequired,
-    subTitle: PropTypes.string,
     onPress: PropTypes.func,
-    uri: PropTypes.string.isRequired,
+    type: PropTypes.string,
+    screen: PropTypes.string,
 };
 
 const styles = StyleSheet.create({
