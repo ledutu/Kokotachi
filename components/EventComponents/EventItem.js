@@ -50,7 +50,7 @@ class EventItem extends Component {
                         <Text style={styles.textButton} numberOfLines={1} onPress={onPress}>Sự kiện</Text>
                         <Text style={styles.datePosting}>{created_at}</Text>
                     </View>
-                    <Text style={styles.titleStyle}>{title}</Text>
+                    <Text style={styles.titleStyle} numberOfLines={6}>{title}</Text>
                 </TouchableOpacity>
 
             </View>
@@ -61,15 +61,17 @@ class EventItem extends Component {
 const styles = StyleSheet.create({
     container: {
         padding: 15,
-        width: width/2,
-        height: 380,
-        alignItems: 'center'
+        width: width / 2,
+        height: width / 2 + 200,
+        // justifyContent: 'space-around',
+        flex: 1,
     },
 
     image: {
-        height: width/2,
+        height: width / 2,
         width: '100%',
-        borderRadius: 10
+        borderRadius: 10,
+        // flex: 1,
     },
     shareAndDatePosting:
     {

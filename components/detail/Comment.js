@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 import { getArticleComments } from '../../utils/api';
-import { ListItem, Left, Thumbnail, Body } from 'native-base';
+import { ListItem, Left, Thumbnail, Body, CardItem, Card } from 'native-base';
+import styled from 'styled-components/native';
+import { avatarSource } from '../../utils/pureFunction';
 
 const TransparentCardItem = styled(CardItem)`
     background-color: transparent;
@@ -93,10 +95,18 @@ export default class Comment extends Component {
         return (
             <CommentItem
                 item={item}
-                user={user}
-                deleteCommentConfirm={deleteCommentConfirm}
-                editComment={editComment} />
+                // user={user}
+                deleteCommentConfirm={this.deleteCommentConfirm}
+                editComment={this.editComment} />
         );
+    };
+
+    deleteCommentConfirm = () => {
+
+    };
+
+    editComment = () => {
+        
     }
 
     render() {
@@ -152,7 +162,7 @@ export default class Comment extends Component {
                     </Card>
                 ) : (
                         <View style={{ alignItems: 'center', marginBottom: 20 }}>
-                            <PangolinText note>Bài này chưa có bình luận</PangolinText>
+                            <Text note>Bài này chưa có bình luận</Text>
                         </View>
                     )
                 }
