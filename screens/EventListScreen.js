@@ -218,8 +218,7 @@ export default class EventListScreen extends Component {
                     contentContainerStyle={{ flex: 1, }}
                     ref={c => contentComponent = c}
                 >
-                    <Header />
-
+                    
                     {eventList.length === 0 && (
                         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                             <Text style={{ fontSize: 20 }}>Chưa có bài viết nào được lưu</Text>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
-import Header from '../task/Header';
+import AppHeader from '../task/Header';
 import Footer from '../task/Footer';
 import FabButton from '../components/FabButton';
 import DoubleRow from '../components/DoubleRow';
@@ -146,7 +146,7 @@ const HomeScreen = connect(mapStateToProps)(function ({ navigation, homeProps, d
     return (
         <Container style={styles.container}>
 
-            <Header />
+            <AppHeader logoPressed={logoPressed} />
 
             <Content ref={c => contentComponent = c}>
                 <Banners banners={homeProps.banners} />

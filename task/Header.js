@@ -1,472 +1,91 @@
-import React, { Component } from 'react';
-import {
-  View,
-  TouchableOpacity,
-  Image,
-  StyleSheet,
-  ScrollView,
-  Text
-} from 'react-native';
+import React, { useState } from 'react'
+import { TouchableOpacity, Image } from 'react-native'
+import { Header, Left, Body, Right, Icon, View, List, ListItem } from 'native-base'
+import Modal from 'react-native-modal'
+import { withNavigation } from 'react-navigation'
+import { connect } from 'react-redux'
+import styled from 'styled-components'
+import styles from './../styles'
+import { language_utils } from '../utils/constants'
+import { useTranslation } from 'react-i18next'
+import { setLanguage } from '../actions/language'
+import { PangolinText } from '../utils/commons';
 
-import AsyncStorage from '@react-native-community/async-storage';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import AccountLoginBox from '../components/account/AccountLoginBox';
-import { withNavigation } from 'react-navigation';
-import PropTypes from 'prop-types';
-import LogoImages from '../utils/LogoImages';
-import MenuModal from '../components/detailMenuComponent/MenuModal';
-import AccountFotgotBox from '../components/account/AccountFotgotBox';
+const FlagImage = styled(Image)`
+    width: 30px;
+    height: 20px;
+    border-radius: 5
+`
 
-import {
-  AccessToken,
-  LoginManager,
-  GraphRequest,
-  GraphRequestManager,
-} from 'react-native-fbsdk';
-import LogoutBox from '../components/account/LogoutBox';
+const AppHeader = ({ navigation, language, dispatch, logoPressed }) => {
+  const { t } = useTranslation()
+  const [state, setState] = useState({
+    modalVisible: false
+  })
+  const { modalVisible } = state
 
-const KEY = "KEY";
+  const closeModal = () => setState({ ...state, modalVisible: false })
+  const openModal = () => setState({ ...state, modalVisible: true })
 
-class Header extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      display: false,
-      displayForgot: false,
-      displayShowMenu: false,
-      name: '',
-      image: '',
-      isLogin: false,
-      isLoginMenu: false,
-      isLogoutBox: false,
-    };
+  const setApplanguage = (language) => {
+    dispatch(setLanguage(language));
+    closeModal();
   };
 
-  //to open a login box
-  handleOpenAccount = () => {
-    this.setState({
-      display: true
-    })
-  };
+  return (
+    <Header androidStatusBarColor={styles.header.backgroundColor} style={styles.header}>
+      <Left style={{ flex: 1 }}>
+        <TouchableOpacity onPress={() => navigation.openDrawer()}>
+          <Icon name="md-menu" style={{ color: 'white', marginRight: 15 }} />
+        </TouchableOpacity>
+      </Left>
 
-  //to swtich forgot username and password screen
-  handleOpenForgot = () => {
-    this.setState({ 
-      displayForgot: true,
-      display: false,
-    })
-  };
+      <Body style={{ flex: 1, alignItems: 'center' }}>
+        <TouchableOpacity onPress={logoPressed}>
+          <Image
+            source={require('../assets/images/logo.png')}
+            style={{ width: 100, height: 30 }}
+          />
+        </TouchableOpacity>
+      </Body>
 
-  //to close forgotScreen
-  handleCloseForgotModal = () => {
-    this.setState({ displayForgot: false })
-  };
+      <Right style={{ flex: 1, paddingTop: 5 }}>
+        <TouchableOpacity onPress={openModal}>
+          <FlagImage source={language_utils[language].source} />
+        </TouchableOpacity>
+      </Right>
 
+      {/* Modal for selecting language (Currently no used) */}
+      <Modal
+        transparent={true}
+        isVisible={modalVisible}
+        onBackdropPress={closeModal}
+        onBackButtonPress={closeModal}>
 
-  handleOpenRegisterScreen = () => {
-    this.setState({ display: false })
-    this.props.navigation.navigate('Register');
-  };
+        <View style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)', padding: 20, bottom: 0, right: 0, left: 0, position: 'absolute' }}>
+          <List style={{ marginLeft: 50, marginRight: 50 }}>
+            <ListItem onPress={() => setApplanguage('vi')}>
+              <Left>
+                <FlagImage source={language_utils.vi.source} />
+                <PangolinText style={{ marginLeft: 5 }}>{t(language_utils.vi.title)}</PangolinText>
+              </Left>
+            </ListItem>
 
-  //To close a login box
-  handleCloseLoginModal = () => {
-    this.setState({
-      display: false,
-    })
-  };
-
-  //to return a HomeScreen
-  handleBackToHome = () => {
-    this.props.navigation.navigate('Home')
-  };
-
-  //To close a menu
-  dismissRender = () => {
-    this.setState({
-      displayShowMenu: false,
-    })
-  };
-
-  handleOpenMenu = () => {
-    const { displayShowMenu } = this.state;
-    if (displayShowMenu === true) {
-      this.setState({ displayShowMenu: false })
-    }
-
-    else {
-      this.setState({ displayShowMenu: true })
-    }
-  };
-
-  //return a menu with a lot of option
-  renderMenu = () => {
-    const { displayShowMenu } = this.state;
-    if (displayShowMenu) {
-      return (
-        <View style={styles.fullScreen}>
-          <ScrollView>
-            {
-              LogoImages.map(item => {
-                return (
-                  <MenuModal
-                    key={item.id}
-                    title={item.title}
-                    screen={item.screen}
-                    onPress={this.handleOnPressMenu}
-                    type={item.type}
-                  />
-                )
-              })
-            }
-          </ScrollView>
+            <ListItem noBorder onPress={() => setApplanguage('en')}>
+              <Left>
+                <FlagImage source={language_utils.en.source} />
+                <PangolinText style={{ marginLeft: 5 }}>{t(language_utils.en.title)}</PangolinText>
+              </Left>
+            </ListItem>
+          </List>
         </View>
-      )
-    };
-
-    return null;
-
-  };
-
-  handleOnPressMenu = (screen, type) => {
-    this.props.navigation.navigate(screen, { type });
-    this.setState({ displayShowMenu: false })
-  };
-
-  //to Get info user of facebook login
-  requestInfo = accessToken => {
-    const infoRequest = new GraphRequest(
-      '/me',
-      {
-        accessToken,
-        parameters: {
-          fields: {
-            string: 'email, name, picture',
-          }
-        }
-      },
-      this.responseCallback,
-    );
-    new GraphRequestManager().addRequest(infoRequest).start();
-  }
-
-  //to Get info user of facebook login
-  responseCallback = (error, result) => {
-    if (error) {
-      console.log('Error fetching data: ' + error.toString());
-    } else {
-      infoData = JSON.parse(JSON.stringify(result));
-      const { name, picture } = infoData;
-      this.setState({
-        name,
-        image: picture.data.url,
-        isLogin: true,
-      }, () => {
-        const { name, image, isLogin } = this.state;
-
-        this.storeData({ name, image, isLogin });
-
-      });
-
-
-    }
-  };
-
-  //Store data to display that no need to get info user again
-  storeData = async ({ name, image, isLogin }) => {
-
-    const user = {
-      name: name,
-      image: image,
-      isLogin
-    };
-
-    try {
-      await AsyncStorage.setItem(KEY, JSON.stringify(user));
-    }
-    catch (e) {
-      console.log(e)
-    }
-  };
-
-  //to get data from storage
-  getData = async () => {
-    try {
-      const value = await AsyncStorage.getItem(KEY);
-
-      if (value !== null) {
-        const user = JSON.parse(value)
-        const { name, image, isLogin } = user
-        this.setState({
-          name,
-          image,
-          isLogin,
-        })
-      }
-    }
-    catch (e) {
-      console.log(e)
-    }
-  };
-
-  //call every app run
-  UNSAFE_componentWillMount() {
-    this.getData();
-  };
-
-
-
-  handleLoginFacebook = () => {
-    LoginManager.logInWithPermissions(["public_profile"]).then(
-      (result) => {
-        if (result.isCancelled) {
-          console.log("Login cancelled");
-        } else {
-          AccessToken.getCurrentAccessToken()
-            .then(data => {
-              let accessToken = data.accessToken;
-
-              this.requestInfo(accessToken);
-
-            })
-
-        }
-      },
-      function (error) {
-        console.log("Login fail with error: " + error);
-      }
-    );
-    this.handleCloseLoginModal();
-  };
-
-  //Open menu in Avatar
-  handleOpenMenuLogin = () => {
-    const { isLoginMenu } = this.state;
-
-    this.setState({
-      isLoginMenu: !isLoginMenu,
-    })
-  };
-
-  handleLogout = () => {
-    this.setState({
-      isLogoutBox: true,
-      isLoginMenu: false,
-    });
-  }
-
-  //return a menu of login
-  renderLoginMenu = () => {
-    const { isLoginMenu } = this.state;
-    if (isLoginMenu) {
-      return (
-        <View
-          style={styles.picker}
-        >
-          <TouchableOpacity onPress={this.handleOpenMoreInfo} activeOpacity={0.8}>
-            <Text
-              style={[styles.text, styles.textBorder]}>Thông tin tài khoản</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={this.handleLogout} activeOpacity={0.8}>
-            <Text style={styles.text}>Đăng xuất</Text>
-          </TouchableOpacity>
-        </View>
-      )
-    }
-    return;
-  };
-
-  //To go to user infomation detail screen
-  handleOpenMoreInfo = () => {
-    this.setState({
-      isLoginMenu: false,
-    })
-    const { image, name } = this.state;
-    this.props.navigation.navigate('Register', { data: { image, name } });
-  }
-
-  handleCloseLogoutBox = () => {
-    this.setState({
-      isLogoutBox: false,
-    })
-  };
-
-  //Logout facebook
-  handleLogoutFacebook = () => {
-    LoginManager.logOut();
-
-    this.setState({
-      isLogoutBox: false,
-      isLogin: false,
-    })
-
-    this.storeData({
-      name: '',
-      image: '',
-      isLogin: false,
-    });
-  }
-
-  //return a modal to ask exit
-  renderModal = () => {
-    const { isLogoutBox } = this.state;
-    return (
-      <LogoutBox
-        visible={isLogoutBox}
-        onRequestClose={this.handleCloseLogoutBox}
-        logoutPress={this.handleLogoutFacebook}
-      />
-    )
-  };
-
-  handleBackToLogin = () => {
-    this.setState({
-      display: true,
-      displayForgot: false,
-    })
-  }
-
-
-
-  render() {
-
-    const { isLogin, image, display, displayForgot } = this.state;
-
-    return (
-      <View style={styles.container}>
-        <View style={styles.detailContainer}>
-          <TouchableOpacity onPress={this.handleOpenMenu}>
-            <Image
-              source={require('../kokotachi_image/menu.png')}
-              style={styles.menuIcon}
-            />
-          </TouchableOpacity>
-
-
-          <TouchableOpacity onPress={this.handleBackToHome}>
-            <Image
-              source={require('../kokotachi_image/logo.png')}
-              style={styles.logoImage}
-            />
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={isLogin ? this.handleOpenMenuLogin : this.handleOpenAccount}
-          >
-            {isLogin ? (
-              <Image source={{ uri: image }} style={styles.image} />
-            ) : (
-                <Icon
-                  name="user"
-                  color="white"
-                  size={30}
-                  style={styles.loginAccount}
-                />
-              )}
-          </TouchableOpacity>
-
-        </View>
-        <AccountLoginBox
-          display={display}
-          close={this.handleCloseLoginModal}
-          onPress={this.handleOpenRegisterScreen}
-          facebookLogin={this.handleLoginFacebook}
-          openAnotherModel={this.handleOpenForgot}
-        />
-        <AccountFotgotBox
-          display={displayForgot}
-          close={this.handleCloseForgotModal}
-          back={this.handleBackToLogin}
-        />
-        {this.renderLoginMenu()}
-
-        {this.renderMenu()}
-
-        {this.renderModal()}
-
-
-      </View>
-    );
-  }
+      </Modal>
+    </Header>
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
+const mapStatetoProps = (state) => ({
+  language: state.language
+})
 
-  },
-
-  nothing: {
-
-  },
-
-  image: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-  },
-
-  detailContainer: {
-    backgroundColor: "#ff2a30",
-    height: 100,
-    flexDirection: "row",
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-  },
-
-  menuIcon: {
-    width: 35,
-    height: 50,
-  },
-
-  logoImage: {
-    width: 200,
-    resizeMode: 'contain',
-    flex: 1,
-  },
-
-  loginAccount: {
-    paddingVertical: 10,
-    paddingHorizontal: 15,
-    borderWidth: 1,
-    borderColor: 'white',
-    borderRadius: 50,
-  },
-
-  fullScreen: {
-    ...StyleSheet.absoluteFillObject,
-    zIndex: 2,
-    backgroundColor: 'white',
-    top: 100,
-    padding: 20,
-    height: 550
-  },
-  fullScreenText: {
-  },
-
-  picker: {
-    position: 'absolute',
-    zIndex: 2,
-    backgroundColor: 'white',
-    top: 75,
-    right: 20,
-    justifyContent: 'space-around',
-    borderWidth: 1,
-    borderColor: 'rgba(0,0,0,.15)',
-  },
-
-  text: {
-    fontWeight: '400',
-    color: '#212529',
-    fontSize: 17,
-    paddingVertical: 13.5,
-    paddingHorizontal: 27
-  },
-
-  textBorder: {
-    borderBottomWidth: 1,
-    borderBottomColor: 'rgba(0,0,0,.15)',
-  }
-
-});
-
-export default withNavigation(Header);
+export default connect(mapStatetoProps)(withNavigation(AppHeader))

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import Header from '../task/Header';
 import DetailHeader from '../components/detail/DetailHeader';
 import Footer from '../task/Footer';
 import ImagePoster from '../components/EventComponents/ImagePoster';
@@ -33,7 +32,6 @@ export default class EventScreen extends Component {
 
         return (
             <View style={styles.container}>
-                <Header />
                 <ScrollView
                     showsVerticalScrollIndicator={false}
                 >

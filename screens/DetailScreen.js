@@ -141,7 +141,6 @@ export default class DetailScreen extends Component {
                     style={{ flex: 1, }}
                     contentContainerStyle={{ flex: 1, }}
                 >
-                    <Header />
 
                     {!articles && (
                         <View>

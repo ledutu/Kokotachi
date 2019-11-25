@@ -47,28 +47,57 @@ export const type_utils = {
         list_screen: 'EventList',
         all_message: 'All events'
     },
-    // sim: {
-    //     icon: require("../assets/images/title-icon-sim.png"),
-    //     display: 'SIM',
-    //     list_screen: null,
-    //     all_message: null
-    // },
+    sim: {
+        icon: require("../assets/images/title-icon-sim.png"),
+        display: 'SIM',
+        list_screen: null,
+        all_message: null
+    },
     cosme: {
         icon: require("../assets/images/title-icon-cosme.png"),
         display: 'Cosmetic',
         list_screen: 'DetailMore',
         all_message: 'All articles'
     },
-    // date: {
-    //     icon: require("../assets/images/title-icon-date.png"),
-    //     display: 'Date',
-    //     list_screen: null,
-    //     all_message: null
-    // },
+    date: {
+        icon: require("../assets/images/title-icon-date.png"),
+        display: 'Date',
+        list_screen: null,
+        all_message: null
+    },
     church: {
         icon: require("../assets/images/title-icon-church.png"),
         display: 'Church',
         list_screen: 'ChurchList',
         all_message: null
     }
+};
+
+/**
+ * Language utilities
+ */
+export const language_utils = {
+    vi: {
+        title: 'Vietnamese',
+        source: require('../assets/images/lan-vi.png'),
+        slogan_source: require('../assets/images/slogan-vi.png')
+    },
+    en: {
+        title: 'English',
+        source: require('../assets/images/lan-en.png'),
+        slogan_source: require('../assets/images/slogan-en.png')
+    }
 }
+
+export const static_page = {
+    terms_and_conditions: {
+        ref_id: 3,
+        title: 'Terms and conditions'
+    },
+    privacy_policy: {
+        ref_id: 1,
+        title: 'Policy'
+    }
+}
+
+export const genders = ['Male', 'Female']

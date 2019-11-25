@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
-import Header from '../task/Header';
 import { Container, Content, Icon, Card, CardItem, Body, ListItem } from 'native-base';
 import DetailMenuHeader from '../components/detailMenuComponent/DetailMenuHeader';
 import { uppercase, RedButton } from '../utils/commons';
@@ -244,8 +243,6 @@ export default class ChurchListScreen extends Component {
                     style={{ flex: 1, }}
                     contentContainerStyle={{ flex: 1, }}
                 >
-                    <Header />
-
                     {churchList.length === 0 && (
                         <View style={styles.noArticles}>
                             <Text style={{ fontSize: 20 }}>Chưa có bài viết nào</Text>
