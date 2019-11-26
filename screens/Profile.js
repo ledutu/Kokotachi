@@ -20,8 +20,8 @@ function Profile({ dispatch }) {
     const { form_status, randomly, form_errors } = state;
 
     const saveChanges = async formData => {
+        console.log(formData);
         
-        console.log(profileRes);
         try {
             const profileRes = await saveProfile(formData);
             console.log(profileRes);
@@ -49,8 +49,6 @@ function Profile({ dispatch }) {
         if (randomly && contentComponent) {
             contentComponent._root.scrollToPosition(0, 0)
         }
-
-        console.log(form_errors);
 
     }, [randomly])
 

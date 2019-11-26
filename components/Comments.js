@@ -159,10 +159,10 @@ const Comments = connect(mapStateToProps)(function ({ user, slug_article }) {
 
     const postComment = async text => {
         try {
-            await comment({ comment: text, slug_article })
-            getComments()
+            await comment({ comment: text, slug_article });
+            await getComments();
         } catch (error) {
-            console.log("ERROR", error)
+            console.log("ERROR", error);
         }
     }
 

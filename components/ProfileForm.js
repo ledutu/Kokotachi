@@ -61,7 +61,7 @@ const ProfileForm = connect(mapStateToProps)(function ({
 }) {
     const { t } = useTranslation()
     const birthday = user && user.birthday
-    const birthday_date = format(parseISO(birthday || "1990-01-01"), 'yyyy-MM-dd');
+    const birthday_date = parseISO(birthday || "1990-01-01");
 
     const [state, setState] = useState({
         id: user && user.id,

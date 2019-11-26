@@ -76,7 +76,7 @@ export function MayYouLike({ except_article }) {
         }
     }, [])
 
-    return <DoubleRow title="May you like" data={articles} half/>
+    return <DoubleRow title="May you like" data={articles} half />
 
 }
 
@@ -135,17 +135,17 @@ const Detail = connect(mapStateToProps)(function ({ user, navigation }) {
                 })
             }
         } catch (error) {
-            // Some error happen...
+            console.log(error);
         }
     }
 
     const { cancelTokenSource } = state;
 
     async function getContentArticle() {
-        
+
         try {
-            const articleRes = await fetchContentArticle(id)
-            const result = articleRes.data._data
+            const articleRes = await fetchContentArticle(id);
+            const result = articleRes.data._data;
 
             setState({
                 ...state,
@@ -153,7 +153,7 @@ const Detail = connect(mapStateToProps)(function ({ user, navigation }) {
             })
 
         } catch (error) {
-            console.log("ERROR", error)
+            console.log("ERROR", error);
         }
     }
 
@@ -281,34 +281,37 @@ const Detail = connect(mapStateToProps)(function ({ user, navigation }) {
                 </View>
 
                 {/* Introducing about the author */}
-                <Card style={{ marginLeft: 10, marginRight: 10 }}>
-                    <CardItem>
-                        <Left>
-                            <Thumbnail source={avatarSource(author.avatar)} />
-                            <Body>
-                                <PangolinText style={{ fontSize: 20 }}>{author.name}</PangolinText>
-                                <View>
-                                    {
-                                        author.id != 2 && (
-                                            <PangolinText note>{t('Gender')}: {t(genders[author.gender])}</PangolinText>
-                                        )
-                                    }
+                {author && (
+                    <Card style={{ marginLeft: 10, marginRight: 10 }}>
+                        <CardItem>
+                            <Left>
+                                <Thumbnail source={avatarSource(author.avatar)} />
+                                <Body>
+                                    <PangolinText style={{ fontSize: 20 }}>{author.name}</PangolinText>
+                                    <View>
+                                        {
+                                            author.id != 2 && (
+                                                <PangolinText note>{t('Gender')}: {t(genders[author.gender])}</PangolinText>
+                                            )
+                                        }
 
-                                    {author.roles.find(role => role.name !== 'Admin') && (
-                                        <PangolinText note>{t('Joined date')}: {format(parseISO(author.created_at), 'yyyy/MM/dd')}</PangolinText>
-                                    )}
+                                        {author.roles.find(role => role.name !== 'Admin') && (
+                                            <PangolinText note>{t('Joined date')}: {format(parseISO(author.created_at), 'yyyy/MM/dd')}</PangolinText>
+                                        )}
 
-                                    <Button transparent small onPress={() => navigation.push('ArticleList', { author_id: author.id, title: t('View articles wrote by') + ' ' + author.name })}>
-                                        <PangolinText style={{ paddingLeft: 0 }}>{t('View all articles')}</PangolinText>
-                                    </Button>
-                                </View>
-                            </Body>
-                        </Left>
-                    </CardItem>
-                </Card>
+                                        <Button transparent small onPress={() => navigation.push('ArticleList', { author_id: author.id, title: t('View articles wrote by') + ' ' + author.name })}>
+                                            <PangolinText style={{ paddingLeft: 0 }}>{t('View all articles')}</PangolinText>
+                                        </Button>
+                                    </View>
+                                </Body>
+                            </Left>
+                        </CardItem>
+                    </Card>
+                )}
+
 
                 {/* Comments */}
-                <Comments slug_article={slug} />
+                <Comments slug_article={slug} user={user}/>
 
                 {/* May you like */}
                 <MayYouLike except_article={slug} />

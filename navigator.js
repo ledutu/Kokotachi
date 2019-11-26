@@ -14,6 +14,8 @@ import AppDrawerContent from './components/AppDrawerContent';
 import SignInScreen from './screens/SignInScreen';
 import Profile from './screens/Profile';
 import SignUpScreen from './screens/SignUpScreen';
+import Contact from './screens/Contact';
+import AboutUs from './screens/AboutUs';
 
 
 const DrawerConfig = {
@@ -39,6 +41,8 @@ const screens = {
     SignIn: SignInScreen,
     Profile: Profile,
     SignUp: SignUpScreen,
+    Contact: Contact,
+    AboutUs: AboutUs,
 };
 
 const AppStack = Platform.OS === 'android'? createStackNavigator(screens, {

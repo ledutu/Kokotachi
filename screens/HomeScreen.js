@@ -211,7 +211,7 @@ const HomeScreen = connect(mapStateToProps)(function ({ navigation, homeProps, d
 
             </Content>
 
-            <FabButton />
+            {/* <FabButton /> */}
 
         </Container>
     );
