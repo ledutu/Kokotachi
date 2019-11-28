@@ -58,7 +58,7 @@ class ChurchItem extends Component {
                         <Text style={styles.textButton} numberOfLines={1}>{gallery.type}</Text>
                         <Text style={styles.datePosting}>{article.created_at}</Text>
                     </View>
-                    <Text style={styles.titleStyle}>{title}</Text>
+                    <Text style={styles.titleStyle} numberOfLines={5}>{title}</Text>
                 </TouchableOpacity>
             </View>
         );

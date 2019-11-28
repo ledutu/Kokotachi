@@ -51,7 +51,7 @@ class DoubleItemInRow extends Component {
                         <Text style={[styles.textButton, half ? { width: 75 } : null]} numberOfLines={1}>{category.title}</Text>
                         <Text style={[styles.datePosting, half ? { width: 80, } : null]}>{approved_at}</Text>
                     </View>
-                    <Text style={styles.titleStyle}>{title}</Text>
+                    <Text style={styles.titleStyle} numberOfLines={3}>{title}</Text>
                 </TouchableOpacity>
             </View>
         );
@@ -64,9 +64,9 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
     },
 
-    ahalf: {
+    ahalf: {    
         width: width / 2,
-        height: width / 2 + 180,
+        height: width / 2 + 200,
         flex: 1,
     },
     full: {
